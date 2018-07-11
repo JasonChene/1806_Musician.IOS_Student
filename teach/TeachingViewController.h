@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AgoraRtcEngineKit/AgoraRtcEngineKit.h>
 
-@interface TeachingViewController : UIViewController
-
+@interface TeachingViewController : UIViewController<AgoraRtcEngineDelegate>
+@property (strong, nonatomic) AgoraRtcEngineKit *agoraKit;
+@property (strong, nonatomic) UIView *videoLocalView;
 @end

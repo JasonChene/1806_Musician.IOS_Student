@@ -20,6 +20,31 @@
     self.title = @"张老师";
     self.view.backgroundColor = [UIColor whiteColor];
     [self layoutView];
+    
+    
+    
+    //初始化 AgoraRtcEngineKit
+    self.agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:@"fa60d121c1c2452389543dbaf2ffb01e" delegate:self];
+    [self.agoraKit enableVideo];
+    //设置本地视频视图
+    self.videoLocalView = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 85, 64, 85, 136)];
+    self.videoLocalView.backgroundColor = [UIColor greenColor];
+    [self setUpVideo:self.videoLocalView :9999];
+    [self.view addSubview:self.videoLocalView];
+    
+}
+- (void)setUpVideo :(UIView *)view :(NSUInteger)uid
+{
+    [self.agoraKit enableVideo];
+    AgoraRtcVideoCanvas *videoCanvas = [[AgoraRtcVideoCanvas alloc] init];
+    videoCanvas.uid = uid;
+    videoCanvas.view = view;
+    videoCanvas.renderMode = AgoraRtc_Render_Fit;
+    [self.agoraKit setupLocalVideo:videoCanvas];
+    
+    [self.agoraKit setVideoProfile:AgoraRtc_VideoProfile_DEFAULT swapWidthAndHeight:NO];
+    //创建并加入频道
+    [self.agoraKit joinChannelByKey:nil channelName:@"channelName" info:nil uid:uid joinSuccess:nil];
 }
 - (void)layoutView
 {
@@ -63,15 +88,30 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - AgoraRtcEngineDelegate
+/**
+ *  Event of the first local frame starts rendering on the screen.
+ *
+ *  @param engine  The engine kit
+ *  @param size    The size of local video stream
+ *  @param elapsed The elapsed time(ms) from the beginning of the session.
+ */
+- (void)rtcEngine:(AgoraRtcEngineKit *)engine firstLocalVideoFrameWithSize:(CGSize)size elapsed:(NSInteger)elapsed
+{
+    
 }
-*/
+
+/**
+ *  Event of the first frame of remote user is decoded successfully.
+ *
+ *  @param engine  The engine kit
+ *  @param uid     The remote user id
+ *  @param size    The size of video stream
+ *  @param elapsed The elapsed time(ms) from the beginning of the session.
+ */
+- (void)rtcEngine:(AgoraRtcEngineKit *)engine firstRemoteVideoDecodedOfUid:(NSUInteger)uid size:(CGSize)size elapsed:(NSInteger)elapsed
+{
+    
+}
 
 @end
