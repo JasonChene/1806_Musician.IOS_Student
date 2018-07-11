@@ -76,7 +76,7 @@
     UILabel *label = [[UILabel alloc]initWithFrame:frame];
     label.textAlignment = NSTextAlignmentLeft;
     label.text = title;
-    label.font = [UIFont fontWithName:@"Arial" size:size];
+    label.font = [UIFont systemFontOfSize:size];
     [self.view addSubview:label];
     return label;
 }
