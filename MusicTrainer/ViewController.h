@@ -1,0 +1,19 @@
+//
+//  ViewController.h
+//  MusicTrainer
+//
+//  Created by macbookpro on 2018/6/26.
+//  Copyright © 2018年 macbookpro. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "LoginNavigationController.h"
+#import <AVOSCloud/AVOSCloud.h>
+#import <AgoraRtcEngineKit/AgoraRtcEngineKit.h>
+#import "TeachingViewController.h"
+
+@interface ViewController : UIViewController
+
+
+@end
+
