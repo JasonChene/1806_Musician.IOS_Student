@@ -10,6 +10,11 @@
 #import <AgoraRtcEngineKit/AgoraRtcEngineKit.h>
 
 @interface TeachingViewController : UIViewController<AgoraRtcEngineDelegate>
+{
+    int mNavBarAndStatusBarHeight;
+    UIButton *closeVideoBtn;
+}
 @property (strong, nonatomic) AgoraRtcEngineKit *agoraKit;
 @property (strong, nonatomic) UIView *videoLocalView;
+@property (strong, nonatomic) UIView *videoRemoteView;
 @end
