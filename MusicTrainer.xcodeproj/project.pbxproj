@@ -24,6 +24,16 @@
 		5288A06120F0B675005741B1 /* VerificationCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288A06020F0B675005741B1 /* VerificationCodeView.m */; };
 		5288A06720F3665F005741B1 /* PathAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288A06620F3665F005741B1 /* PathAPI.m */; };
 		5288A06A20F3681D005741B1 /* TeachingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288A06920F3681D005741B1 /* TeachingViewController.m */; };
+		5288A56A20FAD6CD005741B1 /* AgoraRtcEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5288A56920FAD6CD005741B1 /* AgoraRtcEngineKit.framework */; };
+		5288A56C20FAD6F3005741B1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5288A56B20FAD6F3005741B1 /* SystemConfiguration.framework */; };
+		5288A56E20FAD6FF005741B1 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5288A56D20FAD6FF005741B1 /* CoreTelephony.framework */; };
+		5288A57020FAD70F005741B1 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5288A56F20FAD70F005741B1 /* VideoToolbox.framework */; };
+		5288A57220FAD71B005741B1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5288A57120FAD71A005741B1 /* AudioToolbox.framework */; };
+		5288A57420FAD726005741B1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5288A57320FAD726005741B1 /* CoreMotion.framework */; };
+		5288A57620FAD732005741B1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5288A57520FAD732005741B1 /* CoreMedia.framework */; };
+		5288A57820FAD73F005741B1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5288A57720FAD73F005741B1 /* AVFoundation.framework */; };
+		5288A57A20FAD752005741B1 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5288A57920FAD752005741B1 /* libresolv.tbd */; };
+		5288A57C20FAD763005741B1 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5288A57B20FAD763005741B1 /* libc++.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +89,16 @@
 		5288A06620F3665F005741B1 /* PathAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathAPI.m; sourceTree = "<group>"; };
 		5288A06820F3681D005741B1 /* TeachingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeachingViewController.h; sourceTree = "<group>"; };
 		5288A06920F3681D005741B1 /* TeachingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeachingViewController.m; sourceTree = "<group>"; };
+		5288A56920FAD6CD005741B1 /* AgoraRtcEngineKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AgoraRtcEngineKit.framework; sourceTree = "<group>"; };
+		5288A56B20FAD6F3005741B1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		5288A56D20FAD6FF005741B1 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		5288A56F20FAD70F005741B1 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		5288A57120FAD71A005741B1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		5288A57320FAD726005741B1 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		5288A57520FAD732005741B1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		5288A57720FAD73F005741B1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		5288A57920FAD752005741B1 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		5288A57B20FAD763005741B1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		A1D82745FF57B233BD4DBCB6 /* libPods-MusicTrainer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MusicTrainer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -87,6 +107,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5288A57C20FAD763005741B1 /* libc++.tbd in Frameworks */,
+				5288A57A20FAD752005741B1 /* libresolv.tbd in Frameworks */,
+				5288A57820FAD73F005741B1 /* AVFoundation.framework in Frameworks */,
+				5288A57620FAD732005741B1 /* CoreMedia.framework in Frameworks */,
+				5288A57420FAD726005741B1 /* CoreMotion.framework in Frameworks */,
+				5288A57220FAD71B005741B1 /* AudioToolbox.framework in Frameworks */,
+				5288A57020FAD70F005741B1 /* VideoToolbox.framework in Frameworks */,
+				5288A56E20FAD6FF005741B1 /* CoreTelephony.framework in Frameworks */,
+				5288A56C20FAD6F3005741B1 /* SystemConfiguration.framework in Frameworks */,
+				5288A56A20FAD6CD005741B1 /* AgoraRtcEngineKit.framework in Frameworks */,
 				20B620858777214DED06E76B /* libPods-MusicTrainer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,6 +141,16 @@
 		1C14BD79320FD0607D27349E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5288A57B20FAD763005741B1 /* libc++.tbd */,
+				5288A57920FAD752005741B1 /* libresolv.tbd */,
+				5288A57720FAD73F005741B1 /* AVFoundation.framework */,
+				5288A57520FAD732005741B1 /* CoreMedia.framework */,
+				5288A57320FAD726005741B1 /* CoreMotion.framework */,
+				5288A57120FAD71A005741B1 /* AudioToolbox.framework */,
+				5288A56F20FAD70F005741B1 /* VideoToolbox.framework */,
+				5288A56D20FAD6FF005741B1 /* CoreTelephony.framework */,
+				5288A56B20FAD6F3005741B1 /* SystemConfiguration.framework */,
+				5288A56920FAD6CD005741B1 /* AgoraRtcEngineKit.framework */,
 				A1D82745FF57B233BD4DBCB6 /* libPods-MusicTrainer.a */,
 			);
 			name = Frameworks;
@@ -581,6 +621,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CKZBA4PSC7;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MusicTrainer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -601,6 +645,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CKZBA4PSC7;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MusicTrainer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = (

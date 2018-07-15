@@ -434,11 +434,6 @@ THE SOFTWARE.
    limitations under the License.
 
 
-## AgoraRtcEngine_iOS
-
-Copyright 2017 agora.io. All rights reserved.
-
-
 ## FLKAutoLayout
 
 Copyright (c) 2013 Florian Kugler <mail@floriankugler.de>

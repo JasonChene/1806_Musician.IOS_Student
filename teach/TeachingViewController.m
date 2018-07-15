@@ -11,7 +11,7 @@
 @interface TeachingViewController ()
 
 @end
-static int UID = 9999;
+static int UID = 9998;
 @implementation TeachingViewController
 
 - (void)viewDidLoad {
@@ -24,14 +24,14 @@ static int UID = 9999;
     
     
     
-    
-    
     //初始化 AgoraRtcEngineKit
     self.agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:@"fa60d121c1c2452389543dbaf2ffb01e" delegate:self];
-    [self.agoraKit enableAudio];
+    [self.agoraKit disableVideo];
      [self.agoraKit setEnableSpeakerphone:YES];
     //创建并加入频道
-    [self.agoraKit joinChannelByKey:nil channelName:@"channelName" info:nil uid:UID joinSuccess:nil];
+    [self.agoraKit joinChannelByToken:nil channelId:@"channelName" info:nil uid:UID joinSuccess:nil];
+    
+//    [self.agoraKit joinChannelByKey:nil channelName:@"channelName" info:nil uid:UID joinSuccess:nil];
     
     
     //设置本地视频视图
@@ -72,9 +72,9 @@ static int UID = 9999;
     AgoraRtcVideoCanvas *videoCanvas = [[AgoraRtcVideoCanvas alloc] init];
     videoCanvas.uid = uid;
     videoCanvas.view = view;
-    videoCanvas.renderMode = AgoraRtc_Render_Fit;
+    videoCanvas.renderMode = AgoraVideoRenderModeHidden;
     [self.agoraKit setupLocalVideo:videoCanvas];
-    [self.agoraKit setVideoProfile:AgoraRtc_VideoProfile_DEFAULT swapWidthAndHeight:NO];
+    [self.agoraKit setVideoProfile:AgoraVideoProfilePortrait360P swapWidthAndHeight:NO];
     
 }
 - (void)layoutView
@@ -147,11 +147,29 @@ static int UID = 9999;
 - (void)rtcEngine:(AgoraRtcEngineKit *)engine firstRemoteVideoDecodedOfUid:(NSUInteger)uid size:(CGSize)size elapsed:(NSInteger)elapsed
 {
 //    [self setupRemoteVideo:self.videoRemoteView :uid];
-    [self setUpLocalVideo:self.videoLocalView :UID];
+//    [self setUpLocalVideo:self.videoLocalView :UID];
     [self addRomoteViewInViewWithUID:uid :self.videoRemoteView];
     self.videoRemoteView.hidden = NO;
     self.videoLocalView.hidden = NO;
     closeVideoBtn.hidden = NO;
+}
+
+/**
+ *  Event of remote user video enabled or disabled
+ *
+ *  @param engine The engine kit
+ *  @param enabled  Enabled or disabled
+ *  @param uid    The remote user id
+ */
+- (void)rtcEngine:(AgoraRtcEngineKit *)engine didVideoEnabled:(BOOL)enabled byUid:(NSUInteger)uid
+{
+    if (enabled == true) {
+        [self setUpLocalVideo:self.videoLocalView :UID];
+        [self addRomoteViewInViewWithUID:uid :self.videoRemoteView];
+        self.videoRemoteView.hidden = NO;
+        self.videoLocalView.hidden = NO;
+        closeVideoBtn.hidden = NO;
+    }
 }
 
 
@@ -160,7 +178,7 @@ static int UID = 9999;
     AgoraRtcVideoCanvas *videoCanvas = [[AgoraRtcVideoCanvas alloc] init];
     videoCanvas.uid = uid;
     videoCanvas.view = remoteView;
-    videoCanvas.renderMode = AgoraRtc_Render_Fit;
+    videoCanvas.renderMode = AgoraVideoRenderModeHidden;
     [self.agoraKit setupRemoteVideo:videoCanvas];
 }
 //- (void)setupRemoteVideo :(UIView *)view :(NSUInteger)uid
