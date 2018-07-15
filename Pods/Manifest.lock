@@ -20,7 +20,6 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - AgoraRtcEngine_iOS (1.9.0)
   - AVOSCloud (4.2.0)
   - AVOSCloudIM (4.2.0):
     - AVOSCloud (= 4.2.0)
@@ -37,7 +36,6 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.6)
-  - AgoraRtcEngine_iOS
   - AVOSCloud
   - AVOSCloudIM
   - ORStackView (~> 3.0)
@@ -45,7 +43,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://git.coding.net/cocoapods/specs.git:
     - AFNetworking
-    - AgoraRtcEngine_iOS
     - AVOSCloud
     - AVOSCloudIM
     - FLKAutoLayout
@@ -53,12 +50,11 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  AgoraRtcEngine_iOS: fadcd9f2659b983efdbaf4fe0951a718198151cd
   AVOSCloud: 5446ad0320f4942cce1a036d131992cd1115db99
   AVOSCloudIM: 69df8e8517247f3c2585e321f24e777d5b398843
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   ORStackView: a1bb52748cd0ae29891c140baf22ff8972fb363c
 
-PODFILE CHECKSUM: a876cbe41dfe8adb235d6fcf1b965f61500187c5
+PODFILE CHECKSUM: db1e20fb71c0db79478275f8e39b2605fb9557b4
 
 COCOAPODS: 1.5.3
