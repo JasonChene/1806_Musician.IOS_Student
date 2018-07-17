@@ -11,7 +11,7 @@
 @interface TeachingViewController ()
 
 @end
-static int UID = 9998;
+static int UID = 9999;
 @implementation TeachingViewController
 
 - (void)viewDidLoad {
@@ -22,23 +22,20 @@ static int UID = 9998;
     self.view.backgroundColor = [UIColor whiteColor];
     [self layoutView];
     
-    
-    
     //初始化 AgoraRtcEngineKit
     self.agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:@"fa60d121c1c2452389543dbaf2ffb01e" delegate:self];
     [self.agoraKit disableVideo];
-     [self.agoraKit setEnableSpeakerphone:YES];
+    [self.agoraKit setEnableSpeakerphone:YES];
     //创建并加入频道
     [self.agoraKit joinChannelByToken:nil channelId:@"channelName" info:nil uid:UID joinSuccess:nil];
     
-//    [self.agoraKit joinChannelByKey:nil channelName:@"channelName" info:nil uid:UID joinSuccess:nil];
     
     
     //设置本地视频视图
     self.videoLocalView = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 85, mNavBarAndStatusBarHeight, 85, 136)];
     self.videoLocalView.hidden = YES;
     [self.view addSubview:self.videoLocalView];
-//    [self setUpVideo:self.videoLocalView :9998];
+    //    [self setUpVideo:self.videoLocalView :9998];
     
     //添加远程试图
     self.videoRemoteView = [[UIView alloc]initWithFrame:CGRectMake(0, mNavBarAndStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - mNavBarAndStatusBarHeight)];
@@ -62,11 +59,10 @@ static int UID = 9998;
     self.videoRemoteView.hidden = YES;
     closeVideoBtn.hidden = YES;
     [self.agoraKit disableVideo];
-    [self.agoraKit enableAudio];
     [self.agoraKit setEnableSpeakerphone:YES];
 }
 //开启本地视频功能
-- (void)setUpLocalVideo :(UIView *)view :(NSUInteger)uid
+- (void)setUpLocalVideoInScreen :(UIView *)view :(NSUInteger)uid
 {
     [self.agoraKit enableVideo];
     AgoraRtcVideoCanvas *videoCanvas = [[AgoraRtcVideoCanvas alloc] init];
@@ -114,7 +110,7 @@ static int UID = 9998;
 - (void)handup:(id)sender
 {
     NSLog(@"handup");
-    [self setUpLocalVideo:self.videoLocalView :UID];
+    [self setUpLocalVideoInScreen:self.videoLocalView :UID];
     self.videoRemoteView.hidden = NO;
     self.videoLocalView.hidden = NO;
     closeVideoBtn.hidden = NO;
@@ -146,8 +142,6 @@ static int UID = 9998;
  */
 - (void)rtcEngine:(AgoraRtcEngineKit *)engine firstRemoteVideoDecodedOfUid:(NSUInteger)uid size:(CGSize)size elapsed:(NSInteger)elapsed
 {
-//    [self setupRemoteVideo:self.videoRemoteView :uid];
-//    [self setUpLocalVideo:self.videoLocalView :UID];
     [self addRomoteViewInViewWithUID:uid :self.videoRemoteView];
     self.videoRemoteView.hidden = NO;
     self.videoLocalView.hidden = NO;
@@ -164,11 +158,18 @@ static int UID = 9998;
 - (void)rtcEngine:(AgoraRtcEngineKit *)engine didVideoEnabled:(BOOL)enabled byUid:(NSUInteger)uid
 {
     if (enabled == true) {
-        [self setUpLocalVideo:self.videoLocalView :UID];
+        [self setUpLocalVideoInScreen:self.videoLocalView :UID];
         [self addRomoteViewInViewWithUID:uid :self.videoRemoteView];
         self.videoRemoteView.hidden = NO;
         self.videoLocalView.hidden = NO;
         closeVideoBtn.hidden = NO;
+    }
+    else
+    {
+        [self.agoraKit disableVideo];
+        self.videoLocalView.hidden = YES;
+        self.videoRemoteView.hidden = YES;
+        closeVideoBtn.hidden = YES;
     }
 }
 
@@ -181,13 +182,5 @@ static int UID = 9998;
     videoCanvas.renderMode = AgoraVideoRenderModeHidden;
     [self.agoraKit setupRemoteVideo:videoCanvas];
 }
-//- (void)setupRemoteVideo :(UIView *)view :(NSUInteger)uid
-//{
-//    AgoraRtcVideoCanvas *videoCanvas = [[AgoraRtcVideoCanvas alloc] init];
-//    videoCanvas.uid = uid;
-//    videoCanvas.view = view;
-//    videoCanvas.renderMode = AgoraRtc_Render_Fit;
-//    [self.agoraKit setupLocalVideo:videoCanvas];
-//}
 
 @end
