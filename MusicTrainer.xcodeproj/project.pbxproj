@@ -618,8 +618,8 @@
 			baseConfigurationReference = 3C5097D075B0BAC31DCA6CAF /* Pods-MusicTrainer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: chenyue1@bigeggai.com (AP3WB3CYGV)";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2YNXV35PZJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -634,8 +634,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bigegg.com.MusicTrainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2f565888-e7fe-47be-9410-1aebfea3dfd1";
-				PROVISIONING_PROFILE_SPECIFIER = "mt-test-in-x";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -645,8 +645,8 @@
 			baseConfigurationReference = 11221248BC3DCBD95E8B00D4 /* Pods-MusicTrainer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: chenyue1@bigeggai.com (AP3WB3CYGV)";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2YNXV35PZJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -661,8 +661,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bigegg.com.MusicTrainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "da27716c-d00f-4c4c-ac62-cd9b26f0828c";
-				PROVISIONING_PROFILE_SPECIFIER = "mt-test-in-x";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
