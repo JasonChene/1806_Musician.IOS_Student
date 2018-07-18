@@ -27,7 +27,7 @@ static int UID = 9999;
     [self.agoraKit disableVideo];
     [self.agoraKit setEnableSpeakerphone:YES];
     //创建并加入频道
-    [self.agoraKit joinChannelByToken:nil channelId:@"channelName" info:nil uid:UID joinSuccess:nil];
+    [self.agoraKit joinChannelByToken:nil channelId:@"demoChannel1" info:nil uid:UID joinSuccess:nil];
     
     
     

@@ -104,15 +104,17 @@
 }
 - (void)loginWithStudent:(id)sender
 {
-   //向后台发送手机号和验证码strValidate，返回得到登陆结果
-    [AVOSCloud verifySmsCode:strValidate mobilePhoneNumber:mPhoneNumber callback:^(BOOL succeeded, NSError *error) {
-        if(succeeded){
+    [AVUser signUpOrLoginWithMobilePhoneNumberInBackground:mPhoneNumber smsCode:strValidate block:^(AVUser * _Nullable user, NSError * _Nullable error) {
+        if(error == nil)
+        {
             //验证成功
             [self.navigationController dismissViewControllerAnimated:YES completion:^{
-                NSDictionary *dicUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:self->mPhoneNumber,@"phoneNum", nil];
-                [PathAPI saveUserInfoInLocal:dicUserInfo];
+                NSDictionary *dicUserInfomation = [NSDictionary dictionaryWithObjectsAndKeys:user.mobilePhoneNumber,@"mobilePhoneNumber",user.mobilePhoneVerified,@"mobilePhoneVerified",user.objectId,@"objectId",user.username,@"username", nil];
+                [PathAPI saveUserInfoInLocal:dicUserInfomation];
+                NSLog(@"=======保存到本地的数据：%@",dicUserInfomation);
             }];
         }
+        
     }];
     
 }

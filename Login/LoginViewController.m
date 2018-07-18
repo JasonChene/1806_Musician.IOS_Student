@@ -45,12 +45,15 @@
 }
 - (void)next:(id)sender
 {
-    [AVOSCloud requestSmsCodeWithPhoneNumber:mUserTextField.text callback:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            ValidateViewController *validate = [[ValidateViewController alloc]initWithPhoneNumber:mUserTextField.text];
-            [self.navigationController pushViewController:validate animated:YES];
-        }
-    }];
+//    [AVOSCloud requestSmsCodeWithPhoneNumber:mUserTextField.text callback:^(BOOL succeeded, NSError *error) {
+//        if (succeeded) {
+//            ValidateViewController *validate = [[ValidateViewController alloc]initWithPhoneNumber:mUserTextField.text];
+//            [self.navigationController pushViewController:validate animated:YES];
+//        }
+//    }];
+    
+    ValidateViewController *validate = [[ValidateViewController alloc]initWithPhoneNumber:mUserTextField.text];
+    [self.navigationController pushViewController:validate animated:YES];
     
 }
 

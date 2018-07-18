@@ -23,7 +23,7 @@
     NSDictionary *dicUserInfo = [[NSDictionary alloc]initWithContentsOfFile:path];
     if (dicUserInfo == nil)
     {
-//        [self showLoginViewController];
+        [self showLoginViewController];
     }
     UIButton *login_button = [[UIButton alloc]initWithFrame:CGRectMake(0, 200, self.view.frame.size.width, 40)];
     [login_button setTitle:@"进入教学页面" forState:UIControlStateNormal];
