@@ -115,6 +115,7 @@
                 if ([[role objectForKey:@"name"] isEqualToString:@"teacher"])
                 {
                     isCorrectRole = true;
+                    break;
                 }
             }
             if (isCorrectRole) {
