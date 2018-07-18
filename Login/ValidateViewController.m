@@ -134,7 +134,6 @@
         NSDictionary *dicUserInfomation = [[NSDictionary alloc]initWithObjectsAndKeys:user.mobilePhoneNumber,@"mobilePhoneNumber",user.objectId,@"objectId",user.username,@"username", nil];
         [PathAPI saveUserInfoInLocal:dicUserInfomation];
         NSLog(@"=======保存到本地的数据：%@",dicUserInfomation);
-        
     }];
 }
 - (void)didReceiveMemoryWarning {
