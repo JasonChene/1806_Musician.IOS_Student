@@ -21,7 +21,8 @@
     
     NSString *path = [PathAPI get_str_user_list_file_path :@"userInfo.plist"];
     NSDictionary *dicUserInfo = [[NSDictionary alloc]initWithContentsOfFile:path];
-    if (dicUserInfo == nil)
+    NSLog(@"====:%@",[AVUser currentUser]);
+    if ([AVUser currentUser] == nil)
     {
         [self showLoginViewController];
     }
