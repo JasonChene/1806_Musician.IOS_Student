@@ -19,8 +19,6 @@
     // Do any additional setup after loading the view, typically from a nib.
     self.title = @"学生课程表";
     
-    NSString *path = [PathAPI get_str_user_list_file_path :@"userInfo.plist"];
-    NSDictionary *dicUserInfo = [[NSDictionary alloc]initWithContentsOfFile:path];
     NSLog(@"====:%@",[AVUser currentUser]);
     if ([AVUser currentUser] == nil)
     {
