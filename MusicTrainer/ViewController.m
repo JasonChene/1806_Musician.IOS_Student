@@ -43,8 +43,8 @@
     [self.navigationController pushViewController:teachingViewController animated:YES];
     
     //修改导航栏的返回按钮的颜色和内容
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationController.navigationBar.tintColor = [UIColor redColor];
+//    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+//    self.navigationController.navigationBar.tintColor = [UIColor redColor];
 }
 
 - (void)didReceiveMemoryWarning {

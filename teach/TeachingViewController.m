@@ -29,8 +29,6 @@ static int UID = 9999;
     //创建并加入频道
     [self.agoraKit joinChannelByToken:nil channelId:@"demoChannel1" info:nil uid:UID joinSuccess:nil];
     
-    
-    
     //设置本地视频视图
     self.videoLocalView = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 85, mNavBarAndStatusBarHeight, 85, 136)];
     self.videoLocalView.hidden = YES;
@@ -52,7 +50,19 @@ static int UID = 9999;
     titleDescription.text = @"张老师正在和你视频教学";
     titleDescription.font = [UIFont systemFontOfSize:18];
     [self.videoRemoteView addSubview:titleDescription];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<返回" style:UIBarButtonItemStylePlain target:self action:@selector(leaveChannel)];
+    
 }
+
+- (void)leaveChannel
+{
+    NSLog(@"leaveChannel");
+    [self.agoraKit leaveChannel:^(AgoraChannelStats * _Nonnull stat) {
+    }];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)closeVideoTeaching:(id)sender
 {
     self.videoLocalView.hidden = YES;
