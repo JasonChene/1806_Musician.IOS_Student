@@ -29,6 +29,20 @@
     login_button.backgroundColor = [UIColor redColor];
     [self.view addSubview:login_button];
     [login_button addTarget:self action:@selector(showTeachViewControlle) forControlEvents:UIControlEventTouchUpInside];
+    
+    //liguangsong123  e10adc3949ba59abbe56e057f20f883e
+    //登录网易云信
+    [[[NIMSDK sharedSDK] loginManager] login:@"122333444455555" token:@"3354045a397621cd92406f1f98cde292" completion:^(NSError * _Nullable error) {
+        NSLog(@"err:%@",error);
+        if (error == nil) {
+            //打开乐谱
+            NSLog(@"成功登录网易云信");
+            
+        }
+        else{
+        }
+        
+    }];
 }
 - (void)showLoginViewController
 {

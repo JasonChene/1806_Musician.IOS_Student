@@ -10,6 +10,8 @@
 #import <CoreData/CoreData.h>
 #import "ViewController.h"
 #import <AVOSCloud/AVOSCloud.h>
+#import <NIMSDK/NIMSDK.h>
+#import <NIMSDK/NIMSDKOption.h>
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

@@ -31,6 +31,7 @@ PODS:
   - AVOSCloudIM/_NOARC (4.2.0):
     - AVOSCloud (= 4.2.0)
   - FLKAutoLayout (0.2.1)
+  - NIMSDK (5.4.0)
   - ORStackView (3.0.1):
     - FLKAutoLayout (~> 0.2)
 
@@ -38,14 +39,16 @@ DEPENDENCIES:
   - AFNetworking (~> 2.6)
   - AVOSCloud
   - AVOSCloudIM
+  - NIMSDK (~> 5.4.0)
   - ORStackView (~> 3.0)
 
 SPEC REPOS:
-  https://git.coding.net/cocoapods/specs.git:
+  https://github.com/cocoapods/specs.git:
     - AFNetworking
     - AVOSCloud
     - AVOSCloudIM
     - FLKAutoLayout
+    - NIMSDK
     - ORStackView
 
 SPEC CHECKSUMS:
@@ -53,8 +56,9 @@ SPEC CHECKSUMS:
   AVOSCloud: 5446ad0320f4942cce1a036d131992cd1115db99
   AVOSCloudIM: 69df8e8517247f3c2585e321f24e777d5b398843
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
+  NIMSDK: b96577d4f892a606e644eeba55837ab5cf5de071
   ORStackView: a1bb52748cd0ae29891c140baf22ff8972fb363c
 
-PODFILE CHECKSUM: db1e20fb71c0db79478275f8e39b2605fb9557b4
+PODFILE CHECKSUM: d493b469ccb4a3168479a2bc5c93cedb46b8d09d
 
 COCOAPODS: 1.5.3

@@ -53,6 +53,8 @@ static int UID = 9999;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<返回" style:UIBarButtonItemStylePlain target:self action:@selector(leaveChannel)];
     
+    [[NIMAVChatSDK sharedSDK].rtsManager addDelegate:self];
+    
 }
 
 - (void)leaveChannel
@@ -115,8 +117,24 @@ static int UID = 9999;
 }
 - (void)openMusicBook:(id)sender
 {
-    NSLog(@"openMusicBook");
+    AVUser *user = [AVUser currentUser];
+    NSLog(@"openMusicBook:%@",user.username);
+    
+    NIMRTSOption *option = [[NIMRTSOption alloc] init];
+    option.extendMessage = @"ext msg example";
+    
+    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"122333444455555"]
+                                                                    services:NIMRTSServiceAudio | NIMRTSServiceReliableTransfer
+                                                                      option:nil
+                                                                  completion:^(NSError *error, NSString *sessionID, UInt64 channelID)
+                              {
+                                  NSLog(@"=====%@,\n=====:%@",error,sessionID);
+                                  if (error && (sessionID == theSessionID)) {
+                                      //error handling
+                                  }
+                              }];
 }
+
 - (void)handup:(id)sender
 {
     NSLog(@"handup");
@@ -191,6 +209,15 @@ static int UID = 9999;
     videoCanvas.view = remoteView;
     videoCanvas.renderMode = AgoraVideoRenderModeHidden;
     [self.agoraKit setupRemoteVideo:videoCanvas];
+}
+# pragma mark - NIMRTSManagerDelegate
+
+- (void)onRTSRequest:(NSString *)sessionID
+                from:(NSString *)caller
+            services:(NSUInteger)types
+             message:(nullable NSString *)extendMessage
+{
+    NSLog(@"========%@ \n=======:%@\n=======:%lu:\n=======%@",sessionID,caller,(unsigned long)types,extendMessage);
 }
 
 @end

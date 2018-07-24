@@ -11,6 +11,8 @@
 #import <AVOSCloud/AVOSCloud.h>
 #import <AgoraRtcEngineKit/AgoraRtcEngineKit.h>
 #import "TeachingViewController.h"
+#import <NIMSDK/NIMSDK.h>
+
 
 @interface ViewController : UIViewController
 

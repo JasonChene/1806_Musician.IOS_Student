@@ -30,6 +30,14 @@
     [AVOSCloud setApplicationId:@"dqozOWhkl50Xh5HQyfeFkDxV-gzGzoHsz" clientKey:@"S6kknLSdUpaztxebGuLUMDUT"];
     [AVOSCloud setAllLogsEnabled:YES];
     
+    //推荐在程序启动的时候初始化 NIMSDK
+//    NSString *appKey = @"34b421cf05779d2ddcfe1a1ae66035d1";
+    NSString *appKey = @"1ee5a51b7d008254cd73b1d4369a9494";
+    NIMSDKOption *option    = [NIMSDKOption optionWithAppKey:appKey];
+//    option.apnsCername      = @"your APNs cer name";
+//    option.pkCername        = @"your pushkit cer name";
+    [[NIMSDK sharedSDK] registerWithOption:option];
+    
     return YES;
 }
 

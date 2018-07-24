@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <AgoraRtcEngineKit/AgoraRtcEngineKit.h>
+#import <NIMSDK/NIMSDK.h>
+#import <AVOSCloud/AVOSCloud.h>
+#import <NIMAVChat/NIMAVChat.h>
 
-@interface TeachingViewController : UIViewController<AgoraRtcEngineDelegate>
+
+
+@interface TeachingViewController : UIViewController<AgoraRtcEngineDelegate,NIMRTSManagerDelegate>
 {
     int mNavBarAndStatusBarHeight;
     UIButton *closeVideoBtn;
