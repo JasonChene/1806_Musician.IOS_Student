@@ -58,27 +58,19 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     
     [[NIMAVChatSDK sharedSDK].rtsManager addDelegate:self];
     
-    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"122333444455555"]
-                                                                    services:NIMRTSServiceReliableTransfer
-                                                                      option:nil
-                                                                  completion:^(NSError *error, NSString *sessionID, UInt64 channelID)
-                              {
-                                  NSLog(@"=====%@,\n=====:%@",error,sessionID);
-                                  self.sessionID = sessionID;
-                                  if (error && (sessionID == theSessionID)) {
-                                      //error handling
-                                  }
-                              }];
-    NSLog(@"theSessionID:%@",theSessionID);
+//    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"122333444455555"]
+//                                                                    services:NIMRTSServiceReliableTransfer
+//                                                                      option:nil
+//                                                                  completion:^(NSError *error, NSString *sessionID, UInt64 channelID)
+//                              {
+//                                  NSLog(@"=====%@,\n=====:%@",error,sessionID);
+//                                  self.sessionID = sessionID;
+//                                  if (error && (sessionID == theSessionID)) {
+//                                      //error handling
+//                                  }
+//                              }];
+//    NSLog(@"theSessionID:%@",theSessionID);
     
-    
-    
-//    CGRect frame = self.view.bounds;
-//    _myDrawView = [[NTESWhiteboardDrawView alloc] initWithFrame:frame];
-//    _myDrawView.backgroundColor = [UIColor grayColor];
-//    [_myDrawView setLineColor:[UIColor redColor]];
-//    [self.view insertSubview:_myDrawView belowSubview:closeMusicBtn];
-//    _myDrawView.layer.borderWidth = 0.5;
     [self showDrawView:closeMusicBtn];
     
 }
@@ -89,14 +81,14 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     _myDrawView = [[NTESWhiteboardDrawView alloc] initWithFrame:frame];
     _myDrawView.backgroundColor = [UIColor whiteColor];
     [_myDrawView setLineColor:[UIColor redColor]];
-    [self.view addSubview:_myDrawView];
-//     [self.view insertSubview:_myDrawView belowSubview:closeMusicBtn];
+//    [self.view addSubview:_myDrawView];
+     [self.view insertSubview:_myDrawView belowSubview:closeMusicBtn];
     
     _peerDrawView = [[NTESWhiteboardDrawView alloc] initWithFrame:frame];
     _peerDrawView.backgroundColor = [UIColor clearColor];
     [_peerDrawView setLineColor:[UIColor greenColor]];
-    [self.view addSubview:_peerDrawView];
-//    [self.view insertSubview:_peerDrawView belowSubview:closeMusicBtn];
+//    [self.view addSubview:_peerDrawView];
+    [self.view insertSubview:_peerDrawView belowSubview:closeMusicBtn];
 }
 
 - (UIButton *)createButtonWithFrame:(CGRect)frame :(NSString *)title :(SEL)event
