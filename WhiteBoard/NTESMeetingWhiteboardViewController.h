@@ -13,5 +13,6 @@
 
 @interface NTESMeetingWhiteboardViewController : UIViewController<NIMRTSManagerDelegate>
 - (instancetype)initWithSessionID:(NSString *)sessionID :(NSString *)peerID;
+- (instancetype)initWithImage :(UIImage *)musicImage;
 
 @end

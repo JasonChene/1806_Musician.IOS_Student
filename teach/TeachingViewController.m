@@ -116,18 +116,29 @@ static int UID = 9999;
 {
     AVUser *user = [AVUser currentUser];
     NSLog(@"openMusicBook:%@",user.username);
-    [self setupChildViewController];
+    
+    //选择照片
+    
+    //初始化UIImagePickerController类
+    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+    //判断数据来源为相册
+    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    //设置代理
+    picker.delegate = self;
+    //打开相册
+    [self presentViewController:picker animated:YES completion:nil];
 }
-- (void)setupChildViewController
-{
-    [self makeChildViewControllers];
-    [self.view addSubview:self.whiteboardVC.view];
-}
+//- (void)setupChildViewController :(UIImage *)musicImage
+//{
+//    [self makeChildViewControllers];
+//
+//}
 #pragma mark - Private
-- (void)makeChildViewControllers{
-    self.whiteboardVC = [[NTESMeetingWhiteboardViewController alloc] init];
+- (void)setupChildViewController :(UIImage *)musicImage{
+    self.whiteboardVC = [[NTESMeetingWhiteboardViewController alloc] initWithImage :musicImage];
     [self.whiteboardVC.view setFrame:CGRectMake(0, mNavBarAndStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - mNavBarAndStatusBarHeight)];
     [self addChildViewController:self.whiteboardVC];
+    [self.view addSubview:self.whiteboardVC.view];
 }
 
 - (void)handup:(id)sender
@@ -205,6 +216,19 @@ static int UID = 9999;
     videoCanvas.renderMode = AgoraVideoRenderModeHidden;
     [self.agoraKit setupRemoteVideo:videoCanvas];
 }
+# pragma mark - UIImagePickerControllerDelegate
+//选择完成回调函数
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    //获取图片
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    [self setupChildViewController :image];
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    myImageView.image = image;
+}
+ //用户取消选择
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+     [self dismissViewControllerAnimated:YES completion:nil];
+ }
 
 
 @end

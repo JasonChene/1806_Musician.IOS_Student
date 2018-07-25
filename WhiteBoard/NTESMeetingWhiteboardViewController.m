@@ -29,11 +29,19 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 @property (assign, nonatomic) UInt64 refPacketID;
 @property (copy, nonatomic) NSString *sessionID;
 @property (copy, nonatomic) NSString *peerID;
+@property (copy, nonatomic) UIImage *musicImage;
 //@property (strong, nonatomic) NTESTimerHolder *sendCmdsTimer;
 @end
 
 @implementation NTESMeetingWhiteboardViewController
-
+- (instancetype)initWithImage :(UIImage *)musicImage
+{
+    self = [super init];
+    if (self) {
+        _musicImage = musicImage;
+    }
+    return self;
+}
 - (instancetype)initWithSessionID:(NSString *)sessionID :(NSString *)peerID
 {
     self = [super init];
@@ -74,20 +82,25 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     [self showDrawView:closeMusicBtn];
     
 }
-
+-(UIImage *)compressOriginalImage:(UIImage *)image toSize:(CGSize)size{
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage * scaleImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return scaleImage;
+}
 - (void)showDrawView :(UIButton *)closeMusicBtn
 {
     CGRect frame = self.view.bounds;
     _myDrawView = [[NTESWhiteboardDrawView alloc] initWithFrame:frame];
-    _myDrawView.backgroundColor = [UIColor whiteColor];
+//    _myDrawView.backgroundColor = [UIColor whiteColor];
     [_myDrawView setLineColor:[UIColor redColor]];
-//    [self.view addSubview:_myDrawView];
+    _myDrawView.backgroundColor = [UIColor colorWithPatternImage:[self compressOriginalImage:_musicImage toSize:frame.size]];
      [self.view insertSubview:_myDrawView belowSubview:closeMusicBtn];
     
     _peerDrawView = [[NTESWhiteboardDrawView alloc] initWithFrame:frame];
     _peerDrawView.backgroundColor = [UIColor clearColor];
     [_peerDrawView setLineColor:[UIColor greenColor]];
-//    [self.view addSubview:_peerDrawView];
     [self.view insertSubview:_peerDrawView belowSubview:closeMusicBtn];
 }
 

@@ -15,7 +15,7 @@
 
 
 
-@interface TeachingViewController : UIViewController<AgoraRtcEngineDelegate>
+@interface TeachingViewController : UIViewController<AgoraRtcEngineDelegate,UIImagePickerControllerDelegate>
 {
     int mNavBarAndStatusBarHeight;
     UIButton *closeVideoBtn;
