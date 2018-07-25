@@ -30,9 +30,9 @@
     [self.view addSubview:login_button];
     [login_button addTarget:self action:@selector(showTeachViewControlle) forControlEvents:UIControlEventTouchUpInside];
     
-    //  。122333444455555   3354045a397621cd92406f1f98cde292
+    //liguangsong123   e10adc3949ba59abbe56e057f20f883e。
     //登录网易云信
-    [[[NIMSDK sharedSDK] loginManager] login:@"liguangsong123" token:@"e10adc3949ba59abbe56e057f20f883e" completion:^(NSError * _Nullable error) {
+    [[[NIMSDK sharedSDK] loginManager] login:@"122333444455555" token:@"3354045a397621cd92406f1f98cde292" completion:^(NSError * _Nullable error) {
         NSLog(@"err:%@",error);
         if (error == nil) {
             //打开乐谱

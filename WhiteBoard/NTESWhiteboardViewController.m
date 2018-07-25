@@ -8,7 +8,7 @@
 
 #import "NTESWhiteboardViewController.h"
 #import "NTESWhiteboardDrawView.h"
-//#import "NTESTimerHolder.h"
+#import "NTESTimerHolder.h"
 #import "UIView+Toast.h"
 #import "UIActionSheet+NTESBlock.h"
 //#import "NIMAvatarImageView.h"
@@ -63,7 +63,7 @@ static const NSTimeInterval SendCmdIntervalSeconds = 0.06;
 
 @property (strong, nonatomic) NSMutableString *cmds;
 @property (strong, nonatomic) NSLock *cmdsLock;
-//@property (strong, nonatomic) NTESTimerHolder *sendCmdsTimer;
+@property (strong, nonatomic) NTESTimerHolder *sendCmdsTimer;
 @property (assign, nonatomic) NSUInteger drawViewWidth;
 
 //@property (strong, nonatomic) NTESTimerHolder *callerWaitingTimer;
@@ -284,7 +284,7 @@ static const NSTimeInterval SendCmdIntervalSeconds = 0.06;
     if (type == NIMRTSServiceReliableTransfer) {
         if (status == NIMRTSStatusConnect) {
             [self switchToConnectedView];
-//            [_sendCmdsTimer startTimer:SendCmdIntervalSeconds delegate:self repeats:YES];
+            [_sendCmdsTimer startTimer:SendCmdIntervalSeconds delegate:self repeats:YES];
         }
         else {
 //            DDLogInfo(@"已断开连接: %zd", error.code);

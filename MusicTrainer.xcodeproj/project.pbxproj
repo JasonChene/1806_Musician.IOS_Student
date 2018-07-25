@@ -43,6 +43,7 @@
 		52E1735821083A2F00DA33DC /* NTESDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E1735621083A2F00DA33DC /* NTESDevice.m */; };
 		52E1735B21083A8C00DA33DC /* NTESCADisplayLinkHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E1735A21083A8C00DA33DC /* NTESCADisplayLinkHolder.m */; };
 		52E1735E21083B0F00DA33DC /* NTESBundleSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E1735C21083B0F00DA33DC /* NTESBundleSetting.m */; };
+		52E173612108542600DA33DC /* NTESTimerHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E173602108542600DA33DC /* NTESTimerHolder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +126,8 @@
 		52E1735A21083A8C00DA33DC /* NTESCADisplayLinkHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESCADisplayLinkHolder.m; sourceTree = "<group>"; };
 		52E1735C21083B0F00DA33DC /* NTESBundleSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESBundleSetting.m; sourceTree = "<group>"; };
 		52E1735D21083B0F00DA33DC /* NTESBundleSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESBundleSetting.h; sourceTree = "<group>"; };
+		52E1735F2108542600DA33DC /* NTESTimerHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESTimerHolder.h; sourceTree = "<group>"; };
+		52E173602108542600DA33DC /* NTESTimerHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESTimerHolder.m; sourceTree = "<group>"; };
 		A1D82745FF57B233BD4DBCB6 /* libPods-MusicTrainer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MusicTrainer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -293,6 +296,8 @@
 		52E172B72107203500DA33DC /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				52E1735F2108542600DA33DC /* NTESTimerHolder.h */,
+				52E173602108542600DA33DC /* NTESTimerHolder.m */,
 				52E1735D21083B0F00DA33DC /* NTESBundleSetting.h */,
 				52E1735C21083B0F00DA33DC /* NTESBundleSetting.m */,
 				52E1735921083A8C00DA33DC /* NTESCADisplayLinkHolder.h */,
@@ -544,6 +549,7 @@
 				5288A02F20E1EF46005741B1 /* main.m in Sources */,
 				52E173552108390200DA33DC /* UIActionSheet+NTESBlock.m in Sources */,
 				5288A01E20E1EF45005741B1 /* AppDelegate.m in Sources */,
+				52E173612108542600DA33DC /* NTESTimerHolder.m in Sources */,
 				52E173492108109F00DA33DC /* NTESMeetingWhiteboardViewController.m in Sources */,
 				5288A05420E1F0D8005741B1 /* LoginViewController.m in Sources */,
 				5288A05D20F0B415005741B1 /* CodeTextField.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "NTESMeetingWhiteboardViewController.h"
 #import "NTESWhiteboardDrawView.h"
+#import "NTESTimerHolder.h"
 
 typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     WhiteBoardCmdTypePointStart    = 1,
@@ -23,14 +24,32 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 @interface NTESMeetingWhiteboardViewController ()
 @property (strong, nonatomic) NTESWhiteboardDrawView *myDrawView;
 @property (strong, nonatomic) NTESWhiteboardDrawView *peerDrawView;
+@property (strong, nonatomic) NSLock *cmdsLock;
+@property (strong, nonatomic) NSMutableString *cmds;
+@property (assign, nonatomic) UInt64 refPacketID;
+@property (copy, nonatomic) NSString *sessionID;
+@property (copy, nonatomic) NSString *peerID;
+//@property (strong, nonatomic) NTESTimerHolder *sendCmdsTimer;
 @end
 
 @implementation NTESMeetingWhiteboardViewController
 
+- (instancetype)initWithSessionID:(NSString *)sessionID :(NSString *)peerID
+{
+    self = [super init];
+    if (self) {
+        _sessionID = sessionID;
+        _peerID = peerID;
+        _cmds = [[NSMutableString alloc]initWithCapacity:1];
+//        _sendCmdsTimer = [[NTESTimerHolder alloc] init];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    UIButton *closeMusicBtn = [self createButtonWithFrame:CGRectMake((self.view.frame.size.width - 100)/2, self.view.frame.size.height - 100 - 7, 100, 30) :@"关闭乐谱" :@selector(closeMusic:)];
+    UIButton *closeMusicBtn = [self createButtonWithFrame:CGRectMake((self.view.frame.size.width - 100)/2, self.view.frame.size.height - 150 - 7, 100, 30) :@"关闭乐谱" :@selector(closeMusic:)];
     [self.view addSubview:closeMusicBtn];
     
     
@@ -39,24 +58,47 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     
     [[NIMAVChatSDK sharedSDK].rtsManager addDelegate:self];
     
-    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"122333444455555"]
-                                                                    services:NIMRTSServiceReliableTransfer
-                                                                      option:nil
-                                                                  completion:^(NSError *error, NSString *sessionID, UInt64 channelID)
-                              {
-                                  NSLog(@"=====%@,\n=====:%@",error,sessionID);
-                                  if (error && (sessionID == theSessionID)) {
-                                      //error handling
-                                  }
-                              }];
+//    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"122333444455555"]
+//                                                                    services:NIMRTSServiceReliableTransfer
+//                                                                      option:nil
+//                                                                  completion:^(NSError *error, NSString *sessionID, UInt64 channelID)
+//                              {
+//                                  NSLog(@"=====%@,\n=====:%@",error,sessionID);
+//                                  self.sessionID = sessionID;
+//                                  if (error && (sessionID == theSessionID)) {
+//                                      //error handling
+//                                  }
+//                              }];
+//    NSLog(@"theSessionID:%@",theSessionID);
     
-    CGRect frame = self.view.bounds;
-    _myDrawView = [[NTESWhiteboardDrawView alloc] initWithFrame:frame];
-    _myDrawView.backgroundColor = [UIColor grayColor];
-    [self.view insertSubview:_myDrawView belowSubview:closeMusicBtn];
-    _myDrawView.layer.borderWidth = 0.5;
+    
+    
+//    CGRect frame = self.view.bounds;
+//    _myDrawView = [[NTESWhiteboardDrawView alloc] initWithFrame:frame];
+//    _myDrawView.backgroundColor = [UIColor grayColor];
+//    [_myDrawView setLineColor:[UIColor redColor]];
+//    [self.view insertSubview:_myDrawView belowSubview:closeMusicBtn];
+//    _myDrawView.layer.borderWidth = 0.5;
+    [self showDrawView:closeMusicBtn];
     
 }
+
+- (void)showDrawView :(UIButton *)closeMusicBtn
+{
+    CGRect frame = self.view.bounds;
+    _myDrawView = [[NTESWhiteboardDrawView alloc] initWithFrame:frame];
+    _myDrawView.backgroundColor = [UIColor whiteColor];
+    [_myDrawView setLineColor:[UIColor redColor]];
+    [self.view addSubview:_myDrawView];
+//     [self.view insertSubview:_myDrawView belowSubview:closeMusicBtn];
+    
+    _peerDrawView = [[NTESWhiteboardDrawView alloc] initWithFrame:frame];
+    _peerDrawView.backgroundColor = [UIColor clearColor];
+    [_peerDrawView setLineColor:[UIColor greenColor]];
+    [self.view addSubview:_peerDrawView];
+//    [self.view insertSubview:_peerDrawView belowSubview:closeMusicBtn];
+}
+
 - (UIButton *)createButtonWithFrame:(CGRect)frame :(NSString *)title :(SEL)event
 {
     UIButton *button = [[UIButton alloc]initWithFrame:frame];
@@ -91,17 +133,20 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
             services:(NSUInteger)types
              message:(nullable NSString *)extendMessage
 {
+    _sessionID = sessionID;
+    _peerID = caller;
+    _cmds = [[NSMutableString alloc]initWithCapacity:1];
+    
+    
     NSLog(@"========%@ \n=======:%@\n=======:%lu:\n=======%@",sessionID,caller,(unsigned long)types,extendMessage);
     [[NIMAVChatSDK sharedSDK].rtsManager responseRTS:sessionID accept:YES option:nil completion:^(NSError * _Nullable error, NSString * _Nullable sessionID, UInt64 channelID) {
         NSLog(@"========%@ \n=======:%@\n=======%llu",error,sessionID,channelID);
         if (!error) {
-            //error handling
-//            NTESWhiteboardViewController *vc = [[NTESWhiteboardViewController alloc] initWithSessionID:sessionID
-//                                                                                                peerID:caller
-//                                                                                                 types:types
-//                                                                                                  info:extendMessage];
-//            [self addChildViewController:vc];
-            
+            NSLog(@"接收成功");
+        }
+        else
+        {
+            NSLog(@"接受失败");
         }
     }];
     
@@ -119,7 +164,14 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
                  from:(NSString *)callee
              accepted:(BOOL)accepted
 {
+    _sessionID = sessionID;
+    _peerID = callee;
+     _cmds = [[NSMutableString alloc]initWithCapacity:1];
     
+    if (accepted) {
+        NSLog(@"====是否接听:%d",accepted);
+//        [[NIMAVChatSDK sharedSDK].rtsManager terminateRTS:sessionID];
+    }
 }
 
 /**
@@ -137,19 +189,15 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 {
     if (type == NIMRTSServiceReliableTransfer) {
         if (status == NIMRTSStatusConnect) {
-            //            [self switchToConnectedView];
+//            [self showDrawView];
+            NSLog(@"数据传输成功: %@", _cmds);
+//            [_sendCmdsTimer startTimer:SendCmdIntervalSeconds delegate:self repeats:YES];
         }
         else {
             NSLog(@"已断开数据传输: %zd", error.code);
-            //            [self termimateRTS];
+           
         }
     }
-    //    else if (type == NIMRTSServiceAudio) {
-    //        _audioConnected = (status == NIMRTSStatusConnect) ? YES : NO;
-    //        if (!_audioConnected) {
-    //            NSLog(@"已断开音频服务: %zd", error.code);
-    //        }
-    //    }
 }
 #pragma mark UIResponder
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -172,22 +220,120 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 - (void)onPointCollected:(CGPoint)p type:(WhiteBoardCmdType)type
 {
     //send to peer
-//    NSString *cmd = [NSString stringWithFormat:@"%zd:%.3f,%.3f;", type, p.x/_drawViewWidth, p.y/_drawViewWidth];
-//    [self addCmd:cmd];
+    NSString *cmd = [NSString stringWithFormat:@"%zd:%.3f,%.3f;", type, p.x/self.view.bounds.size.width, p.y/self.view.bounds.size.height];
+    [self addCmd:cmd];
     
     //local render
     NSArray *point = [NSArray arrayWithObjects:@(p.x), @(p.y), nil];
     [_myDrawView addPoints:[NSMutableArray arrayWithObjects:point, nil]
                  isNewLine:(type == WhiteBoardCmdTypePointStart)];
 }
-//- (void)addCmd:(NSString *)aCmd
-//{
-//    [_cmdsLock lock];
-//    [_cmds appendString:aCmd];
-//    [_cmdsLock unlock];
-//
-//    if ([_cmds length] >= 30000) {
-//        [self sendCmds];
-//    }
-//}
+- (void)addCmd:(NSString *)aCmd
+{
+    [_cmdsLock lock];
+    [_cmds appendString:aCmd];
+    [_cmdsLock unlock];
+
+    if ([_cmds length] >= 0) {
+        [self sendCmds];
+    }
+}
+- (void)sendCmds
+{
+    [_cmdsLock lock];
+    if ([_cmds length] > 0) {
+        //        DDLogDebug(@"++++++send cmd id %llu", _refPacketID);
+        NSString *cmd = [NSString stringWithFormat:@"%zd:%llu,0;", WhiteBoardCmdTypePacketID, _refPacketID ++];
+        [_cmds appendString:cmd];
+        
+        [self sendRTSData:_cmds];
+        [_cmds setString:@""];
+    }
+    [_cmdsLock unlock];
+}
+
+- (void)sendRTSData:(NSString *)data
+{
+    BOOL success = [[NIMAVChatSDK sharedSDK].rtsManager sendRTSData:[data dataUsingEncoding:NSUTF8StringEncoding]
+                                                               from:_sessionID
+                                                                 to:_peerID //单播和广播发送示例
+                                                               with:NIMRTSServiceReliableTransfer];
+    if (!success) {
+        NSLog(@"======数据发送失败=======");
+    }
+}
+
+/**
+ *  收到实时会话数据
+ *
+ *  @param sessionID 实时会话ID
+ *  @param data 收到的实时会话数据
+ *  @param user 发送实时会话数据的用户
+ *  @param channel 收发实时数据的服务通道
+ */
+- (void)onRTSReceive:(NSString *)sessionID
+                data:(NSData *)data
+                from:(NSString *)user
+              withIn:(NIMRTSService)channel
+{
+    NSString *cmdString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    //    DDLogDebug(@"receive app data:%@", cmdString);
+    NSArray *cmds = [cmdString componentsSeparatedByString:@";"];
+    BOOL newLine = NO;
+    NSMutableArray *points = [[NSMutableArray alloc] init];
+    for (NSString *cmdString in cmds) {
+        if ([cmdString rangeOfString:@":"].length == 0) {
+            continue;
+        }
+        NSArray *cmd = [cmdString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":,"]];
+        NSAssert(cmd.count == 3, @"Invalid cmd");
+        
+        NSInteger c = [cmd[0] integerValue];
+        NSArray *point = [NSArray arrayWithObjects:
+                          @([cmd[1] floatValue] * self.view.bounds.size.width),
+                          @([cmd[2] floatValue] * self.view.bounds.size.width), nil];
+        switch (c) {
+            case WhiteBoardCmdTypePointStart:
+                if ([points count] > 0) {
+                    [_peerDrawView addPoints:points isNewLine:newLine];
+                    points = [[NSMutableArray alloc] init];
+                }
+                newLine = YES;
+            case WhiteBoardCmdTypePointMove:
+            case WhiteBoardCmdTypePointEnd:
+                [points addObject:point];
+                break;
+            case WhiteBoardCmdTypeCancelLine:
+                [_peerDrawView deleteLastLine];
+                break;
+                //            case WhiteBoardCmdTypePacketID:
+                //                DDLogDebug(@"------receive cmd id %@", cmd[1]);
+                //                break;
+            case WhiteBoardCmdTypeClearLines:
+                [self clearWhiteboard];
+                [self sendWhiteboardCmd:WhiteBoardCmdTypeClearLinesAck];
+                break;
+            case WhiteBoardCmdTypeClearLinesAck:
+                [self clearWhiteboard];
+                break;
+            default:
+                break;
+        }
+    }
+    if ([points count] > 0) {
+        [_peerDrawView addPoints:points isNewLine:newLine];
+    }
+}
+
+- (void)clearWhiteboard
+{
+    [_myDrawView clear];
+    [_peerDrawView clear];
+}
+- (void)sendWhiteboardCmd:(WhiteBoardCmdType)cmd
+{
+    NSString *cmdString = [NSString stringWithFormat:@"%zd:0,0;", cmd];
+    [self addCmd:cmdString];
+}
+
 @end

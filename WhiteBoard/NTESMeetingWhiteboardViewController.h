@@ -10,6 +10,8 @@
 #import <NIMAVChat/NIMAVChat.h>
 #import "NTESWhiteboardViewController.h"
 
+
 @interface NTESMeetingWhiteboardViewController : UIViewController<NIMRTSManagerDelegate>
+- (instancetype)initWithSessionID:(NSString *)sessionID :(NSString *)peerID;
 
 @end
