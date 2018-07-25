@@ -10,6 +10,8 @@ def pods
 #  pod 'AgoraRtcEngine_iOS'      # 声网插件
 
   pod 'NIMSDK', '~> 5.4.0'
+  pod 'Toast', '~> 3.0'
+  pod 'Reachability', '~> 3.2'
 end
 target 'MusicTrainer' do
   pods

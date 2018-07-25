@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0536FB0030CC89BA0553A9BFEE587340"
-               BlueprintName = "Pods-MusicTrainer"
+               BlueprintIdentifier = "FC33A443AE668C1C98B1B87CC79F198D"
+               BlueprintName = "Toast"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libPods-MusicTrainer.a">
+               BuildableName = "libToast.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

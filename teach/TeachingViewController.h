@@ -10,11 +10,12 @@
 #import <AgoraRtcEngineKit/AgoraRtcEngineKit.h>
 #import <NIMSDK/NIMSDK.h>
 #import <AVOSCloud/AVOSCloud.h>
-#import <NIMAVChat/NIMAVChat.h>
+#import "NTESMeetingWhiteboardViewController.h"
 
 
 
-@interface TeachingViewController : UIViewController<AgoraRtcEngineDelegate,NIMRTSManagerDelegate>
+
+@interface TeachingViewController : UIViewController<AgoraRtcEngineDelegate>
 {
     int mNavBarAndStatusBarHeight;
     UIButton *closeVideoBtn;
@@ -22,4 +23,6 @@
 @property (strong, nonatomic) AgoraRtcEngineKit *agoraKit;
 @property (strong, nonatomic) UIView *videoLocalView;
 @property (strong, nonatomic) UIView *videoRemoteView;
+@property (nonatomic, strong) NTESMeetingWhiteboardViewController *whiteboardVC;
+@property (nonatomic, copy)   NIMChatroom *chatroom;
 @end

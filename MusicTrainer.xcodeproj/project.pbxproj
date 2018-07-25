@@ -34,6 +34,15 @@
 		5288A57820FAD73F005741B1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5288A57720FAD73F005741B1 /* AVFoundation.framework */; };
 		5288A57A20FAD752005741B1 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5288A57920FAD752005741B1 /* libresolv.tbd */; };
 		5288A57C20FAD763005741B1 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5288A57B20FAD763005741B1 /* libc++.tbd */; };
+		52E172BA2107203600DA33DC /* UIView+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E172B82107203600DA33DC /* UIView+NTES.m */; };
+		52E173492108109F00DA33DC /* NTESMeetingWhiteboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E173482108109F00DA33DC /* NTESMeetingWhiteboardViewController.m */; };
+		52E17350210837B600DA33DC /* NTESWhiteboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E1734A210837B500DA33DC /* NTESWhiteboardViewController.xib */; };
+		52E17351210837B600DA33DC /* NTESWhiteboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E1734C210837B600DA33DC /* NTESWhiteboardViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		52E17352210837B600DA33DC /* NTESWhiteboardDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E1734E210837B600DA33DC /* NTESWhiteboardDrawView.m */; };
+		52E173552108390200DA33DC /* UIActionSheet+NTESBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E173532108390200DA33DC /* UIActionSheet+NTESBlock.m */; };
+		52E1735821083A2F00DA33DC /* NTESDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E1735621083A2F00DA33DC /* NTESDevice.m */; };
+		52E1735B21083A8C00DA33DC /* NTESCADisplayLinkHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E1735A21083A8C00DA33DC /* NTESCADisplayLinkHolder.m */; };
+		52E1735E21083B0F00DA33DC /* NTESBundleSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E1735C21083B0F00DA33DC /* NTESBundleSetting.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +108,23 @@
 		5288A57720FAD73F005741B1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5288A57920FAD752005741B1 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		5288A57B20FAD763005741B1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		52E172B82107203600DA33DC /* UIView+NTES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NTES.m"; sourceTree = "<group>"; };
+		52E172B92107203600DA33DC /* UIView+NTES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NTES.h"; sourceTree = "<group>"; };
+		52E173472108109F00DA33DC /* NTESMeetingWhiteboardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NTESMeetingWhiteboardViewController.h; sourceTree = "<group>"; };
+		52E173482108109F00DA33DC /* NTESMeetingWhiteboardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NTESMeetingWhiteboardViewController.m; sourceTree = "<group>"; };
+		52E1734A210837B500DA33DC /* NTESWhiteboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NTESWhiteboardViewController.xib; sourceTree = "<group>"; };
+		52E1734B210837B600DA33DC /* NTESWhiteboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESWhiteboardViewController.h; sourceTree = "<group>"; };
+		52E1734C210837B600DA33DC /* NTESWhiteboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESWhiteboardViewController.m; sourceTree = "<group>"; };
+		52E1734E210837B600DA33DC /* NTESWhiteboardDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESWhiteboardDrawView.m; sourceTree = "<group>"; };
+		52E1734F210837B600DA33DC /* NTESWhiteboardDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESWhiteboardDrawView.h; sourceTree = "<group>"; };
+		52E173532108390200DA33DC /* UIActionSheet+NTESBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+NTESBlock.m"; sourceTree = "<group>"; };
+		52E173542108390200DA33DC /* UIActionSheet+NTESBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+NTESBlock.h"; sourceTree = "<group>"; };
+		52E1735621083A2F00DA33DC /* NTESDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESDevice.m; sourceTree = "<group>"; };
+		52E1735721083A2F00DA33DC /* NTESDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESDevice.h; sourceTree = "<group>"; };
+		52E1735921083A8C00DA33DC /* NTESCADisplayLinkHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESCADisplayLinkHolder.h; sourceTree = "<group>"; };
+		52E1735A21083A8C00DA33DC /* NTESCADisplayLinkHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESCADisplayLinkHolder.m; sourceTree = "<group>"; };
+		52E1735C21083B0F00DA33DC /* NTESBundleSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESBundleSetting.m; sourceTree = "<group>"; };
+		52E1735D21083B0F00DA33DC /* NTESBundleSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESBundleSetting.h; sourceTree = "<group>"; };
 		A1D82745FF57B233BD4DBCB6 /* libPods-MusicTrainer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MusicTrainer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -168,6 +194,8 @@
 		5288A01020E1EF45005741B1 = {
 			isa = PBXGroup;
 			children = (
+				52E173462108107800DA33DC /* WhiteBoard */,
+				52E172B72107203500DA33DC /* Category */,
 				5288A06420F3665F005741B1 /* local */,
 				5288A06320F361C8005741B1 /* teach */,
 				5288A05120E1F0B6005741B1 /* Login */,
@@ -260,6 +288,45 @@
 				5288A06620F3665F005741B1 /* PathAPI.m */,
 			);
 			path = local;
+			sourceTree = "<group>";
+		};
+		52E172B72107203500DA33DC /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				52E1735D21083B0F00DA33DC /* NTESBundleSetting.h */,
+				52E1735C21083B0F00DA33DC /* NTESBundleSetting.m */,
+				52E1735921083A8C00DA33DC /* NTESCADisplayLinkHolder.h */,
+				52E1735A21083A8C00DA33DC /* NTESCADisplayLinkHolder.m */,
+				52E1735721083A2F00DA33DC /* NTESDevice.h */,
+				52E1735621083A2F00DA33DC /* NTESDevice.m */,
+				52E173542108390200DA33DC /* UIActionSheet+NTESBlock.h */,
+				52E173532108390200DA33DC /* UIActionSheet+NTESBlock.m */,
+				52E172B82107203600DA33DC /* UIView+NTES.m */,
+				52E172B92107203600DA33DC /* UIView+NTES.h */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		52E173462108107800DA33DC /* WhiteBoard */ = {
+			isa = PBXGroup;
+			children = (
+				52E1734D210837B600DA33DC /* View */,
+				52E1734B210837B600DA33DC /* NTESWhiteboardViewController.h */,
+				52E1734C210837B600DA33DC /* NTESWhiteboardViewController.m */,
+				52E1734A210837B500DA33DC /* NTESWhiteboardViewController.xib */,
+				52E173472108109F00DA33DC /* NTESMeetingWhiteboardViewController.h */,
+				52E173482108109F00DA33DC /* NTESMeetingWhiteboardViewController.m */,
+			);
+			path = WhiteBoard;
+			sourceTree = "<group>";
+		};
+		52E1734D210837B600DA33DC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52E1734E210837B600DA33DC /* NTESWhiteboardDrawView.m */,
+				52E1734F210837B600DA33DC /* NTESWhiteboardDrawView.h */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,6 +442,7 @@
 			files = (
 				5288A02C20E1EF46005741B1 /* LaunchScreen.storyboard in Resources */,
 				5288A02920E1EF46005741B1 /* Assets.xcassets in Resources */,
+				52E17350210837B600DA33DC /* NTESWhiteboardViewController.xib in Resources */,
 				5288A02420E1EF45005741B1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,17 +531,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52E17352210837B600DA33DC /* NTESWhiteboardDrawView.m in Sources */,
 				5288A02120E1EF45005741B1 /* ViewController.m in Sources */,
+				52E1735821083A2F00DA33DC /* NTESDevice.m in Sources */,
 				5288A02720E1EF45005741B1 /* MusicTrainer.xcdatamodeld in Sources */,
+				52E1735B21083A8C00DA33DC /* NTESCADisplayLinkHolder.m in Sources */,
+				52E172BA2107203600DA33DC /* UIView+NTES.m in Sources */,
 				5288A05A20F073F5005741B1 /* ValidateViewController.m in Sources */,
 				5288A06720F3665F005741B1 /* PathAPI.m in Sources */,
 				5288A06A20F3681D005741B1 /* TeachingViewController.m in Sources */,
 				5288A06120F0B675005741B1 /* VerificationCodeView.m in Sources */,
 				5288A02F20E1EF46005741B1 /* main.m in Sources */,
+				52E173552108390200DA33DC /* UIActionSheet+NTESBlock.m in Sources */,
 				5288A01E20E1EF45005741B1 /* AppDelegate.m in Sources */,
+				52E173492108109F00DA33DC /* NTESMeetingWhiteboardViewController.m in Sources */,
 				5288A05420E1F0D8005741B1 /* LoginViewController.m in Sources */,
 				5288A05D20F0B415005741B1 /* CodeTextField.m in Sources */,
 				5288A05720E210D0005741B1 /* LoginNavigationController.m in Sources */,
+				52E1735E21083B0F00DA33DC /* NTESBundleSetting.m in Sources */,
+				52E17351210837B600DA33DC /* NTESWhiteboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

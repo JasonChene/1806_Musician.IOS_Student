@@ -34,6 +34,8 @@ PODS:
   - NIMSDK (5.4.0)
   - ORStackView (3.0.1):
     - FLKAutoLayout (~> 0.2)
+  - Reachability (3.2)
+  - Toast (3.1.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.6)
@@ -41,6 +43,8 @@ DEPENDENCIES:
   - AVOSCloudIM
   - NIMSDK (~> 5.4.0)
   - ORStackView (~> 3.0)
+  - Reachability (~> 3.2)
+  - Toast (~> 3.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -50,6 +54,8 @@ SPEC REPOS:
     - FLKAutoLayout
     - NIMSDK
     - ORStackView
+    - Reachability
+    - Toast
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
@@ -58,7 +64,9 @@ SPEC CHECKSUMS:
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   NIMSDK: b96577d4f892a606e644eeba55837ab5cf5de071
   ORStackView: a1bb52748cd0ae29891c140baf22ff8972fb363c
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  Toast: 14a93686d6c8bfe2727afd342414e35660a8a1f3
 
-PODFILE CHECKSUM: d493b469ccb4a3168479a2bc5c93cedb46b8d09d
+PODFILE CHECKSUM: 41a31baa3035ea273ac24162180bba169624a45e
 
 COCOAPODS: 1.5.3

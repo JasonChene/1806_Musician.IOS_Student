@@ -52,9 +52,6 @@ static int UID = 9999;
     [self.videoRemoteView addSubview:titleDescription];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<返回" style:UIBarButtonItemStylePlain target:self action:@selector(leaveChannel)];
-    
-    [[NIMAVChatSDK sharedSDK].rtsManager addDelegate:self];
-    
 }
 
 - (void)leaveChannel
@@ -119,20 +116,18 @@ static int UID = 9999;
 {
     AVUser *user = [AVUser currentUser];
     NSLog(@"openMusicBook:%@",user.username);
-    
-    NIMRTSOption *option = [[NIMRTSOption alloc] init];
-    option.extendMessage = @"ext msg example";
-    
-    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"122333444455555"]
-                                                                    services:NIMRTSServiceAudio | NIMRTSServiceReliableTransfer
-                                                                      option:nil
-                                                                  completion:^(NSError *error, NSString *sessionID, UInt64 channelID)
-                              {
-                                  NSLog(@"=====%@,\n=====:%@",error,sessionID);
-                                  if (error && (sessionID == theSessionID)) {
-                                      //error handling
-                                  }
-                              }];
+    [self setupChildViewController];
+}
+- (void)setupChildViewController
+{
+    [self makeChildViewControllers];
+    [self.view addSubview:self.whiteboardVC.view];
+}
+#pragma mark - Private
+- (void)makeChildViewControllers{
+    self.whiteboardVC = [[NTESMeetingWhiteboardViewController alloc] init];
+    [self.whiteboardVC.view setFrame:CGRectMake(0, mNavBarAndStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - mNavBarAndStatusBarHeight)];
+    [self addChildViewController:self.whiteboardVC];
 }
 
 - (void)handup:(id)sender
@@ -210,14 +205,6 @@ static int UID = 9999;
     videoCanvas.renderMode = AgoraVideoRenderModeHidden;
     [self.agoraKit setupRemoteVideo:videoCanvas];
 }
-# pragma mark - NIMRTSManagerDelegate
 
-- (void)onRTSRequest:(NSString *)sessionID
-                from:(NSString *)caller
-            services:(NSUInteger)types
-             message:(nullable NSString *)extendMessage
-{
-    NSLog(@"========%@ \n=======:%@\n=======:%lu:\n=======%@",sessionID,caller,(unsigned long)types,extendMessage);
-}
 
 @end

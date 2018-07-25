@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0536FB0030CC89BA0553A9BFEE587340"
-               BlueprintName = "Pods-MusicTrainer"
+               BlueprintIdentifier = "677E6383935D8E3A9667018064A95F16"
+               BlueprintName = "Reachability"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libPods-MusicTrainer.a">
+               BuildableName = "libReachability.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
