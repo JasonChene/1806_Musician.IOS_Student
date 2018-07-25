@@ -58,18 +58,18 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     
     [[NIMAVChatSDK sharedSDK].rtsManager addDelegate:self];
     
-//    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"122333444455555"]
-//                                                                    services:NIMRTSServiceReliableTransfer
-//                                                                      option:nil
-//                                                                  completion:^(NSError *error, NSString *sessionID, UInt64 channelID)
-//                              {
-//                                  NSLog(@"=====%@,\n=====:%@",error,sessionID);
-//                                  self.sessionID = sessionID;
-//                                  if (error && (sessionID == theSessionID)) {
-//                                      //error handling
-//                                  }
-//                              }];
-//    NSLog(@"theSessionID:%@",theSessionID);
+    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"122333444455555"]
+                                                                    services:NIMRTSServiceReliableTransfer
+                                                                      option:nil
+                                                                  completion:^(NSError *error, NSString *sessionID, UInt64 channelID)
+                              {
+                                  NSLog(@"=====%@,\n=====:%@",error,sessionID);
+                                  self.sessionID = sessionID;
+                                  if (error && (sessionID == theSessionID)) {
+                                      //error handling
+                                  }
+                              }];
+    NSLog(@"theSessionID:%@",theSessionID);
     
     [self showDrawView:closeMusicBtn];
     
