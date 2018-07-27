@@ -296,6 +296,9 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 {
     
     AVFile * file = [AVFile fileWithData:data name:@"music.png"];
+    [file uploadWithCompletionHandler:^(BOOL succeeded, NSError * _Nullable error) {
+        NSLog(@"返回一个唯一的 Url 地址:%@", file.url);//返回一个唯一的 Url 地址
+    }];
     //AVFile *imageFile = [AVFile fileWithName:@"music.png" data:data];
     
 //    imageFile
