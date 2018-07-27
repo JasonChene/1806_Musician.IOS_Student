@@ -119,7 +119,9 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 }
 - (void)closeMusic:(id)sender
 {
+    [[NIMAVChatSDK sharedSDK].rtsManager terminateRTS:_sessionID];
     [self.view removeFromSuperview];
+    [[NIMAVChatSDK sharedSDK].rtsManager removeDelegate:self];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -317,15 +319,10 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
                 from:(NSString *)user
               withIn:(NIMRTSService)channel
 {
-//    if (_isSendImage == YES)
-//    {
-//        UIImage *bgImage = [UIImage imageWithData:data];
-//        self->_myDrawView.backgroundColor = [UIColor colorWithPatternImage:[self compressOriginalImage:bgImage toSize:self->_myDrawView.frame.size]];
-//    }
-//    else{
-        NSString *cmdString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSString *cmdString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
         NSArray *cmds = [cmdString componentsSeparatedByString:@";"];
-        
+
         BOOL newLine = NO;
         NSMutableArray *points = [[NSMutableArray alloc] init];
         for (NSString *cmdString in cmds) {
@@ -334,7 +331,7 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
             }
             NSArray *cmd = [cmdString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":,"]];
             NSAssert(cmd.count == 3, @"Invalid cmd");
-            
+
             NSInteger c = [cmd[0] integerValue];
             NSArray *point = [NSArray arrayWithObjects:
                               @([cmd[1] floatValue] * self.view.bounds.size.width),
@@ -353,9 +350,6 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
                 case WhiteBoardCmdTypeCancelLine:
                     [_peerDrawView deleteLastLine];
                     break;
-                    //            case WhiteBoardCmdTypePacketID:
-                    //                DDLogDebug(@"------receive cmd id %@", cmd[1]);
-                    //                break;
                 case WhiteBoardCmdTypeClearLines:
                     [self clearWhiteboard];
                     [self sendWhiteboardCmd:WhiteBoardCmdTypeClearLinesAck];
@@ -370,7 +364,7 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
         if ([points count] > 0) {
             [_peerDrawView addPoints:points isNewLine:newLine];
         }
-//    }
+
 }
 
 - (void)clearWhiteboard
