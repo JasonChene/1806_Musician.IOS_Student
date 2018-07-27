@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <NIMAVChat/NIMAVChat.h>
-#import "NTESWhiteboardViewController.h"
+//#import "NTESWhiteboardViewController.h"
 
 
 @interface NTESMeetingWhiteboardViewController : UIViewController<NIMRTSManagerDelegate>

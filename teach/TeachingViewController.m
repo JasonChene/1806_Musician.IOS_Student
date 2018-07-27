@@ -117,6 +117,11 @@ static int UID = 9999;
     AVUser *user = [AVUser currentUser];
     NSLog(@"openMusicBook:%@",user.username);
     
+//    self.whiteboardVC = [[NTESMeetingWhiteboardViewController alloc] init];
+//    [self.whiteboardVC.view setFrame:CGRectMake(0, mNavBarAndStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - mNavBarAndStatusBarHeight)];
+//    [self addChildViewController:self.whiteboardVC];
+//    [self.view addSubview:self.whiteboardVC.view];
+//    
     //选择照片
     
     //初始化UIImagePickerController类
@@ -128,11 +133,7 @@ static int UID = 9999;
     //打开相册
     [self presentViewController:picker animated:YES completion:nil];
 }
-//- (void)setupChildViewController :(UIImage *)musicImage
-//{
-//    [self makeChildViewControllers];
-//
-//}
+
 #pragma mark - Private
 - (void)setupChildViewController :(UIImage *)musicImage{
     self.whiteboardVC = [[NTESMeetingWhiteboardViewController alloc] initWithImage :musicImage];

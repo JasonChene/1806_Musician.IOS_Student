@@ -8,7 +8,8 @@
 
 #import "NTESMeetingWhiteboardViewController.h"
 #import "NTESWhiteboardDrawView.h"
-#import "NTESTimerHolder.h"
+//#import "NTESTimerHolder.h"
+#import <AVOSCloud/AVOSCloud.h>
 
 typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     WhiteBoardCmdTypePointStart    = 1,
@@ -30,6 +31,7 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 @property (copy, nonatomic) NSString *sessionID;
 @property (copy, nonatomic) NSString *peerID;
 @property (copy, nonatomic) UIImage *musicImage;
+@property (assign, nonatomic) Boolean isSendImage;
 //@property (strong, nonatomic) NTESTimerHolder *sendCmdsTimer;
 @end
 
@@ -73,8 +75,9 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
                               {
                                   NSLog(@"=====%@,\n=====:%@",error,sessionID);
                                   self.sessionID = sessionID;
-                                  if (error && (sessionID == theSessionID)) {
-                                      //error handling
+                                  
+                                  if (!error) {
+                                      self->_myDrawView.backgroundColor = [UIColor colorWithPatternImage:[self compressOriginalImage:self->_musicImage toSize:self->_myDrawView.frame.size]];
                                   }
                               }];
     NSLog(@"theSessionID:%@",theSessionID);
@@ -93,9 +96,9 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 {
     CGRect frame = self.view.bounds;
     _myDrawView = [[NTESWhiteboardDrawView alloc] initWithFrame:frame];
-//    _myDrawView.backgroundColor = [UIColor whiteColor];
+    _myDrawView.backgroundColor = [UIColor whiteColor];
     [_myDrawView setLineColor:[UIColor redColor]];
-    _myDrawView.backgroundColor = [UIColor colorWithPatternImage:[self compressOriginalImage:_musicImage toSize:frame.size]];
+    
      [self.view insertSubview:_myDrawView belowSubview:closeMusicBtn];
     
     _peerDrawView = [[NTESWhiteboardDrawView alloc] initWithFrame:frame];
@@ -175,9 +178,28 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     
     if (accepted) {
         NSLog(@"====是否接听:%d",accepted);
+        NSData *imageData = [self compressImageToSize:[self compressOriginalImage:_musicImage toSize:_myDrawView.frame.size]];
+        [self sendRTSImageData:imageData];
 //        [[NIMAVChatSDK sharedSDK].rtsManager terminateRTS:sessionID];
+        
     }
 }
+
+- (NSData *) compressImageToSize :(UIImage *)image
+{
+    CGFloat compression = 0.9f;
+    int maxFileSize = 50*1024;
+    
+    NSData *imageData = UIImageJPEGRepresentation(image, compression);
+    
+    while ([imageData length] > maxFileSize)
+    {
+        compression *= 0.5;
+        imageData = UIImageJPEGRepresentation(image, compression);
+    }
+    return imageData;
+}
+
 
 /**
  *  互动白板状态反馈
@@ -265,7 +287,18 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
                                                                with:NIMRTSServiceReliableTransfer];
     if (!success) {
         NSLog(@"======数据发送失败=======");
+    }else
+    {
+        _isSendImage = NO;
     }
+}
+- (void)sendRTSImageData:(NSData *)data
+{
+    
+    AVFile * file = [AVFile fileWithData:data name:@"music.png"];
+    //AVFile *imageFile = [AVFile fileWithName:@"music.png" data:data];
+    
+//    imageFile
 }
 
 /**
@@ -281,53 +314,60 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
                 from:(NSString *)user
               withIn:(NIMRTSService)channel
 {
-    NSString *cmdString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    //    DDLogDebug(@"receive app data:%@", cmdString);
-    NSArray *cmds = [cmdString componentsSeparatedByString:@";"];
-    BOOL newLine = NO;
-    NSMutableArray *points = [[NSMutableArray alloc] init];
-    for (NSString *cmdString in cmds) {
-        if ([cmdString rangeOfString:@":"].length == 0) {
-            continue;
-        }
-        NSArray *cmd = [cmdString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":,"]];
-        NSAssert(cmd.count == 3, @"Invalid cmd");
+//    if (_isSendImage == YES)
+//    {
+//        UIImage *bgImage = [UIImage imageWithData:data];
+//        self->_myDrawView.backgroundColor = [UIColor colorWithPatternImage:[self compressOriginalImage:bgImage toSize:self->_myDrawView.frame.size]];
+//    }
+//    else{
+        NSString *cmdString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSArray *cmds = [cmdString componentsSeparatedByString:@";"];
         
-        NSInteger c = [cmd[0] integerValue];
-        NSArray *point = [NSArray arrayWithObjects:
-                          @([cmd[1] floatValue] * self.view.bounds.size.width),
-                          @([cmd[2] floatValue] * self.view.bounds.size.height), nil];
-        switch (c) {
-            case WhiteBoardCmdTypePointStart:
-                if ([points count] > 0) {
-                    [_peerDrawView addPoints:points isNewLine:newLine];
-                    points = [[NSMutableArray alloc] init];
-                }
-                newLine = YES;
-            case WhiteBoardCmdTypePointMove:
-            case WhiteBoardCmdTypePointEnd:
-                [points addObject:point];
-                break;
-            case WhiteBoardCmdTypeCancelLine:
-                [_peerDrawView deleteLastLine];
-                break;
-                //            case WhiteBoardCmdTypePacketID:
-                //                DDLogDebug(@"------receive cmd id %@", cmd[1]);
-                //                break;
-            case WhiteBoardCmdTypeClearLines:
-                [self clearWhiteboard];
-                [self sendWhiteboardCmd:WhiteBoardCmdTypeClearLinesAck];
-                break;
-            case WhiteBoardCmdTypeClearLinesAck:
-                [self clearWhiteboard];
-                break;
-            default:
-                break;
+        BOOL newLine = NO;
+        NSMutableArray *points = [[NSMutableArray alloc] init];
+        for (NSString *cmdString in cmds) {
+            if ([cmdString rangeOfString:@":"].length == 0) {
+                continue;
+            }
+            NSArray *cmd = [cmdString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":,"]];
+            NSAssert(cmd.count == 3, @"Invalid cmd");
+            
+            NSInteger c = [cmd[0] integerValue];
+            NSArray *point = [NSArray arrayWithObjects:
+                              @([cmd[1] floatValue] * self.view.bounds.size.width),
+                              @([cmd[2] floatValue] * self.view.bounds.size.height), nil];
+            switch (c) {
+                case WhiteBoardCmdTypePointStart:
+                    if ([points count] > 0) {
+                        [_peerDrawView addPoints:points isNewLine:newLine];
+                        points = [[NSMutableArray alloc] init];
+                    }
+                    newLine = YES;
+                case WhiteBoardCmdTypePointMove:
+                case WhiteBoardCmdTypePointEnd:
+                    [points addObject:point];
+                    break;
+                case WhiteBoardCmdTypeCancelLine:
+                    [_peerDrawView deleteLastLine];
+                    break;
+                    //            case WhiteBoardCmdTypePacketID:
+                    //                DDLogDebug(@"------receive cmd id %@", cmd[1]);
+                    //                break;
+                case WhiteBoardCmdTypeClearLines:
+                    [self clearWhiteboard];
+                    [self sendWhiteboardCmd:WhiteBoardCmdTypeClearLinesAck];
+                    break;
+                case WhiteBoardCmdTypeClearLinesAck:
+                    [self clearWhiteboard];
+                    break;
+                default:
+                    break;
+            }
         }
-    }
-    if ([points count] > 0) {
-        [_peerDrawView addPoints:points isNewLine:newLine];
-    }
+        if ([points count] > 0) {
+            [_peerDrawView addPoints:points isNewLine:newLine];
+        }
+//    }
 }
 
 - (void)clearWhiteboard

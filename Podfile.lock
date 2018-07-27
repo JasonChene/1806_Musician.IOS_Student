@@ -20,16 +20,6 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - AVOSCloud (4.2.0)
-  - AVOSCloudIM (4.2.0):
-    - AVOSCloud (= 4.2.0)
-    - AVOSCloudIM/_ARC (= 4.2.0)
-    - AVOSCloudIM/_NOARC (= 4.2.0)
-  - AVOSCloudIM/_ARC (4.2.0):
-    - AVOSCloud (= 4.2.0)
-    - AVOSCloudIM/_NOARC (= 4.2.0)
-  - AVOSCloudIM/_NOARC (4.2.0):
-    - AVOSCloud (= 4.2.0)
   - FLKAutoLayout (0.2.1)
   - NIMSDK (5.4.0)
   - ORStackView (3.0.1):
@@ -39,8 +29,6 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.6)
-  - AVOSCloud
-  - AVOSCloudIM
   - NIMSDK (~> 5.4.0)
   - ORStackView (~> 3.0)
   - Reachability (~> 3.2)
@@ -49,8 +37,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
-    - AVOSCloud
-    - AVOSCloudIM
     - FLKAutoLayout
     - NIMSDK
     - ORStackView
@@ -59,14 +45,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  AVOSCloud: 5446ad0320f4942cce1a036d131992cd1115db99
-  AVOSCloudIM: 69df8e8517247f3c2585e321f24e777d5b398843
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   NIMSDK: b96577d4f892a606e644eeba55837ab5cf5de071
   ORStackView: a1bb52748cd0ae29891c140baf22ff8972fb363c
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Toast: 14a93686d6c8bfe2727afd342414e35660a8a1f3
 
-PODFILE CHECKSUM: 41a31baa3035ea273ac24162180bba169624a45e
+PODFILE CHECKSUM: 59cf82716fb9f48e5f0477d762358b670374c0a4
 
 COCOAPODS: 1.5.3
