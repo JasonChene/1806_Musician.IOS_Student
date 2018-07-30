@@ -107,21 +107,48 @@
     [AVUser signUpOrLoginWithMobilePhoneNumberInBackground:mPhoneNumber smsCode:strValidate block:^(AVUser * _Nullable user, NSError * _Nullable error) {
         if(error == nil)
         {
-            NSArray *allRoles = [user getRoles:nil];
-            NSLog(@"%@",allRoles);
-            BOOL isCorrectRole = false;
-            for (int i = 0; i < allRoles.count; i ++) {
-                AVRole *role = [allRoles objectAtIndex:i];
-                if ([[role objectForKey:@"name"] isEqualToString:@"teacher"])
-                {
-                    isCorrectRole = true;
-                    break;
-                }
-            }
-            if (isCorrectRole) {
-                //验证成功
-                [self performSelectorOnMainThread:@selector(jumpToIndex:) withObject:user waitUntilDone:YES];
+            NSLog(@"====%@",user);
+            if ([user objectForKey:@"netEaseUserInfo"] == nil)
+            {
+                NSDictionary *dicParameters = [NSDictionary dictionaryWithObject:@"teacher"
+                                                                          forKey:@"role"];
+                // 调用指定名称的云函数 averageStars，并且传递参数
+                [AVCloud callFunctionInBackground:@"mobileSetRole"
+                                   withParameters:dicParameters
+                                            block:^(id object, NSError *error) {
+                                                if(error == nil && [[object objectForKey:@"status"]integerValue] == 200){
+                                                    // 处理结果
+                                                    NSLog(@"==============:%@",object);
+                                                    [self performSelectorOnMainThread:@selector(jumpToIndex:) withObject:user waitUntilDone:YES];
+                                                    [user setObject:[object objectForKey:@"data"] forKey:@"netEaseUserInfo"];
+                                                    [AVUser changeCurrentUser:user save:YES];
+//                                                    changeCurrentUser
+                                                    
+                                                } else {
+                                                    // 处理报错
+                                                     NSLog(@"error:%@",error);
+                                                }
+                                            }];
                 
+            }else
+            {
+                NSArray *allRoles = [user getRoles:nil];
+                NSLog(@"%@",allRoles);
+                BOOL isCorrectRole = false;
+                for (int i = 0; i < allRoles.count; i ++) {
+                    AVRole *role = [allRoles objectAtIndex:i];
+                    if ([[role objectForKey:@"name"] isEqualToString:@"student"])
+                    {
+                        isCorrectRole = true;
+                        break;
+                    }
+                }
+                if (isCorrectRole) {
+                    //验证成功
+                    [self performSelectorOnMainThread:@selector(jumpToIndex:) withObject:user waitUntilDone:YES];
+                    
+                }
+
             }
         }
         

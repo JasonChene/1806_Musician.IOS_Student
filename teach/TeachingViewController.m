@@ -101,6 +101,26 @@ static int UID = 9999;
     [self.view addSubview:openMusicBtn];
     UIButton *handupBtn = [self createButtonWithFrame:CGRectMake(openMusicBtn.frame.origin.x + 100 + 12, openMusicBtn.frame.origin.y, 100, 30) :@"举手（视频）" :@selector(handup:)];
     [self.view addSubview:handupBtn];
+//    UIImage *image = [UIImage imageWithContentsOfFile:@"http://lc-dqozOWhk.cn-n1.lcfile.com/s8vX4aPQn7lO7D7xVQLkBRB.png"];
+//    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+//    dispatch_queue_t globalQueue = dispatch_get_global_queue(0, 0);
+//    dispatch_async(globalQueue, ^{
+//        
+//        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://lc-dqozOWhk.cn-n1.lcfile.com/s8vX4aPQn7lO7D7xVQLkBRB.png"]];
+//        UIImage *image = [UIImage imageWithData:data]; // 取得图片
+//        
+//        // 本地沙盒目录
+//        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+//        // 得到本地沙盒中名为"MyImage"的路径，"MyImage"是保存的图片名
+//        NSString *imageFilePath = [path stringByAppendingPathComponent:@"adGuideImage"];
+//        // 将取得的图片写入本地的沙盒中，其中0.5表示压缩比例，1表示不压缩，数值越小压缩比例越大
+//        BOOL success = [UIImageJPEGRepresentation(image, 0.5) writeToFile:imageFilePath atomically:YES];
+//        if (success){
+//            NSLog(@"图片保存成功");
+//        }else{
+//            NSLog(@"图片保存失败");
+//        }
+//    });
 }
 - (UIButton *)createButtonWithFrame:(CGRect)frame :(NSString *)title :(SEL)event
 {

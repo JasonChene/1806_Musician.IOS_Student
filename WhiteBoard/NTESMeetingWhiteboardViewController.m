@@ -8,7 +8,6 @@
 
 #import "NTESMeetingWhiteboardViewController.h"
 #import "NTESWhiteboardDrawView.h"
-//#import "NTESTimerHolder.h"
 #import <AVOSCloud/AVOSCloud.h>
 
 typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
@@ -32,7 +31,6 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 @property (copy, nonatomic) NSString *peerID;
 @property (copy, nonatomic) UIImage *musicImage;
 @property (assign, nonatomic) Boolean isSendImage;
-//@property (strong, nonatomic) NTESTimerHolder *sendCmdsTimer;
 @end
 
 @implementation NTESMeetingWhiteboardViewController
@@ -180,10 +178,7 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     
     if (accepted) {
         NSLog(@"====是否接听:%d",accepted);
-        NSData *imageData = [self compressImageToSize:[self compressOriginalImage:_musicImage toSize:_myDrawView.frame.size]];
-        [self sendRTSImageData:imageData];
-//        [[NIMAVChatSDK sharedSDK].rtsManager terminateRTS:sessionID];
-        
+        [self sendRTSImageData:UIImagePNGRepresentation(self->_musicImage)];
     }
 }
 
@@ -299,7 +294,13 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     
     AVFile * file = [AVFile fileWithData:data name:@"music.png"];
     [file uploadWithCompletionHandler:^(BOOL succeeded, NSError * _Nullable error) {
-        NSLog(@"返回一个唯一的 Url 地址:%@", file.url);//返回一个唯一的 Url 地址
+        if (succeeded) {
+            NSLog(@"返回一个唯一的 Url 地址:%@", file.url);//返回一个唯一的 Url 地址
+//            self->_myDrawView.backgroundColor = [UIColor colorWithPatternImage:[self compressOriginalImage:[UIImage imageWithContentsOfFile:file.url] toSize:self->_myDrawView.frame.size]];
+            NSString *strImageUrl = [NSString stringWithFormat:@"0:%@",file.url];
+            [self sendRTSData:strImageUrl];
+            
+        }
     }];
     //AVFile *imageFile = [AVFile fileWithName:@"music.png" data:data];
     
