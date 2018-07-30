@@ -110,7 +110,7 @@
             NSLog(@"====%@",user);
             if ([user objectForKey:@"netEaseUserInfo"] == nil)
             {
-                NSDictionary *dicParameters = [NSDictionary dictionaryWithObject:@"teacher"
+                NSDictionary *dicParameters = [NSDictionary dictionaryWithObject:@"student"
                                                                           forKey:@"role"];
                 // 调用指定名称的云函数 averageStars，并且传递参数
                 [AVCloud callFunctionInBackground:@"mobileSetRole"
