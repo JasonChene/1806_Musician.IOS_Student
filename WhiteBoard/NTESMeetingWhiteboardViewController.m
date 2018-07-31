@@ -34,11 +34,12 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 @end
 
 @implementation NTESMeetingWhiteboardViewController
-- (instancetype)initWithImage :(UIImage *)musicImage
+- (instancetype)initWithImage :(UIImage *)musicImage musicSize :(CGSize)size
 {
     self = [super init];
     if (self) {
         _musicImage = musicImage;
+        mMusicImageSize = size;
     }
     return self;
 }
@@ -60,13 +61,12 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     UIButton *closeMusicBtn = [self createButtonWithFrame:CGRectMake((self.view.frame.size.width - 100)/2, self.view.frame.size.height - 150 - 7, 100, 30) :@"关闭乐谱" :@selector(closeMusic:)];
     [self.view addSubview:closeMusicBtn];
     
-    
     NIMRTSOption *option = [[NIMRTSOption alloc] init];
     option.extendMessage = @"ext msg example";
     
     [[NIMAVChatSDK sharedSDK].rtsManager addDelegate:self];
     
-    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"122333444455555"]
+    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"5b5af3a82f301e00394c7c98"]
                                                                     services:NIMRTSServiceReliableTransfer
                                                                       option:nil
                                                                   completion:^(NSError *error, NSString *sessionID, UInt64 channelID)
@@ -92,7 +92,7 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 }
 - (void)showDrawView :(UIButton *)closeMusicBtn
 {
-    CGRect frame = self.view.bounds;
+    CGRect frame = CGRectMake(0, 0, mMusicImageSize.width, mMusicImageSize.height);
     _myDrawView = [[NTESWhiteboardDrawView alloc] initWithFrame:frame];
     _myDrawView.backgroundColor = [UIColor whiteColor];
     [_myDrawView setLineColor:[UIColor redColor]];

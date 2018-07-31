@@ -156,7 +156,8 @@ static int UID = 9999;
 
 #pragma mark - Private
 - (void)setupChildViewController :(UIImage *)musicImage{
-    self.whiteboardVC = [[NTESMeetingWhiteboardViewController alloc] initWithImage :musicImage];
+    self.whiteboardVC = [[NTESMeetingWhiteboardViewController alloc] initWithImage :musicImage musicSize: CGSizeMake(self.view.frame.size.width, self.view.frame.size.height - mNavBarAndStatusBarHeight)];
+    
     [self.whiteboardVC.view setFrame:CGRectMake(0, mNavBarAndStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - mNavBarAndStatusBarHeight)];
     [self addChildViewController:self.whiteboardVC];
     [self.view addSubview:self.whiteboardVC.view];
