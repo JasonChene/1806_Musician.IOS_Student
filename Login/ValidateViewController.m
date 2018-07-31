@@ -53,9 +53,6 @@
 - (void)verificationCodeDidFinishedInput :(VerificationCodeView *)verificationCodeView :(NSString *)code
 {
     NSLog(@"====:%@",code);
-//    if (![code isEqualToString:@"111111"]) {
-//        [verificationCodeView cleanVerificationCodeView];
-//    }
     if (code.length == 6) {
         strValidate = code;
     }

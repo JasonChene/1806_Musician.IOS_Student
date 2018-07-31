@@ -65,8 +65,8 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     option.extendMessage = @"ext msg example";
     
     [[NIMAVChatSDK sharedSDK].rtsManager addDelegate:self];
-    
-    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"5b5af3a82f301e00394c7c98"]
+    //liguangsong的手机账号对应的accid
+    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"5b5ed006808ca4003c895580"]
                                                                     services:NIMRTSServiceReliableTransfer
                                                                       option:nil
                                                                   completion:^(NSError *error, NSString *sessionID, UInt64 channelID)
@@ -321,7 +321,10 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
               withIn:(NIMRTSService)channel
 {
     NSString *cmdString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    
+    if ([cmdString isEqualToString:@"clear"]) {
+        [self clearWhiteboard];
+        return;
+    }
         NSArray *cmds = [cmdString componentsSeparatedByString:@";"];
 
         BOOL newLine = NO;

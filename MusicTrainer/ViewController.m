@@ -48,6 +48,14 @@
         
     }];
 }
+- (void)dealloc
+{
+    [[[NIMSDK sharedSDK]loginManager]logout:^(NSError * _Nullable error) {
+        if (error == nil) {
+            NSLog(@"成功推出网易云信");
+        }
+    }];
+}
 - (void)showLoginViewController
 {
     LoginNavigationController *login = [[LoginNavigationController alloc]init];
