@@ -122,8 +122,6 @@
                                                     [self performSelectorOnMainThread:@selector(jumpToIndex:) withObject:user waitUntilDone:YES];
                                                     [user setObject:[object objectForKey:@"data"] forKey:@"netEaseUserInfo"];
                                                     [AVUser changeCurrentUser:user save:YES];
-//                                                    changeCurrentUser
-                                                    
                                                 } else {
                                                     // 处理报错
                                                      NSLog(@"error:%@",error);
