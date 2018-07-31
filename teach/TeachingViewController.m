@@ -93,6 +93,7 @@ static int UID = 9999;
     //添加“张老师正在和你乐谱教学”
     UITextView *titleDescription = [[UITextView alloc]initWithFrame:CGRectMake(10, mNavBarAndStatusBarHeight, self.view.frame.size.width - 20, 40)];
     titleDescription.text = @"张老师正在和你乐谱教学";
+    [titleDescription setEditable:NO];
     titleDescription.font = [UIFont systemFontOfSize:18];
     [self.view addSubview:titleDescription];
     
