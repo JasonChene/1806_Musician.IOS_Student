@@ -188,6 +188,16 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
         [self closeMusicPress];
     }
 }
+//-(void)showAllTextDialog:(NSString *)str{
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    hud.mode = MBProgressHUDModeText;
+//    hud.label.text = str;
+//    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [hud hideAnimated:YES afterDelay:1];
+//        });
+//    });
+//}
 
 /**
  *  互动白板状态反馈

@@ -19,6 +19,7 @@
 @interface TeachingViewController : UIViewController<AgoraRtcEngineDelegate,UIImagePickerControllerDelegate>
 {
     int mNavBarAndStatusBarHeight;
+    Boolean isJoinInRoom;
 }
 @property (strong, nonatomic) AgoraRtcEngineKit *agoraKit;
 @property (strong, nonatomic) UIView *videoLocalView;

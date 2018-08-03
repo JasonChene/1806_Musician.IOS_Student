@@ -59,21 +59,21 @@ static int UID = 9999;
     }
     else if(self.videoRemoteView.hidden == NO)
     {
-        [self showAllTextDialog:@"正在跟老师远程视频..."];
+        [self showAllTextDialog:@"正在跟老师远程视频..." :1];
     }
     else if( [self.whiteboardVC.view.superview isEqual:self.view] == YES)
     {
-        [self showAllTextDialog:@"正在跟老师进行乐谱指导教学..."];
+        [self showAllTextDialog:@"正在跟老师进行乐谱指导教学..." :1];
     }
 }
 
--(void)showAllTextDialog:(NSString *)str{
+-(void)showAllTextDialog:(NSString *)info :(NSTimeInterval)delay{
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
-    hud.label.text = str;
+    hud.label.text = info;
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            [hud hideAnimated:YES afterDelay:1];
+            [hud hideAnimated:YES afterDelay:delay];
         });
     });
 }
@@ -129,19 +129,33 @@ static int UID = 9999;
     button.layer.cornerRadius = 5;
     return button;
 }
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    if (isFromWhiteBoard == YES)
+//    {
+//        [self showAllTextDialog:@"打开乐谱失败，请确认老师是否接受你的乐谱教学请求..." :2];
+//        isFromWhiteBoard = NO;
+//    }
+//}
 - (void)openMusicBook:(id)sender
 {
-    AVUser *user = [AVUser currentUser];
-    NSLog(@"openMusicBook:%@",user.username);
-    //选择照片
-    //初始化UIImagePickerController类
-    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-    //判断数据来源为相册
-    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    //设置代理
-    picker.delegate = self;
-    //打开相册
-    [self presentViewController:picker animated:YES completion:nil];
+    if (isJoinInRoom == YES) {
+        AVUser *user = [AVUser currentUser];
+        NSLog(@"openMusicBook:%@",user.username);
+        //选择照片
+        //初始化UIImagePickerController类
+        UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+        //判断数据来源为相册
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        //设置代理
+        picker.delegate = self;
+        //打开相册
+        [self presentViewController:picker animated:YES completion:nil];
+    }else
+    {
+        [self showAllTextDialog:@"打开乐谱失败，请确认老师是否接受你的乐谱教学请求..." :1];
+    }
+    
 }
 
 #pragma mark - Private
@@ -176,7 +190,28 @@ static int UID = 9999;
 {
     
 }
-
+/**
+ *  Event of remote user offlined
+ *
+ *  @param engine The engine kit
+ *  @param uid    The remote user id
+ *  @param reason Reason of user offline, quit, drop or became audience
+ */
+- (void)rtcEngine:(AgoraRtcEngineKit * _Nonnull)engine didOfflineOfUid:(NSUInteger)uid reason:(AgoraUserOfflineReason)reason
+{
+    isJoinInRoom = NO;
+}
+/**
+ *  Event of the first audio frame from remote user is received.
+ *
+ *  @param engine  The engine kit
+ *  @param uid     The remote user id
+ *  @param elapsed The elapsed time(ms) from the beginning of the session.
+ */
+- (void)rtcEngine:(AgoraRtcEngineKit * _Nonnull)engine firstRemoteAudioFrameOfUid:(NSUInteger)uid elapsed:(NSInteger)elapsed
+{
+    isJoinInRoom = YES;
+}
 /**
  *  Event of the first frame of remote user is decoded successfully.
  *
