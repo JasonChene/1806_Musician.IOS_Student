@@ -43,8 +43,6 @@
 		52D721A3210AEA4600D2BDC3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D721A2210AEA4600D2BDC3 /* CoreLocation.framework */; };
 		52E172BA2107203600DA33DC /* UIView+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E172B82107203600DA33DC /* UIView+NTES.m */; };
 		52E173492108109F00DA33DC /* NTESMeetingWhiteboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E173482108109F00DA33DC /* NTESMeetingWhiteboardViewController.m */; };
-		52E17350210837B600DA33DC /* NTESWhiteboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E1734A210837B500DA33DC /* NTESWhiteboardViewController.xib */; };
-		52E17351210837B600DA33DC /* NTESWhiteboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E1734C210837B600DA33DC /* NTESWhiteboardViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		52E17352210837B600DA33DC /* NTESWhiteboardDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E1734E210837B600DA33DC /* NTESWhiteboardDrawView.m */; };
 		52E173552108390200DA33DC /* UIActionSheet+NTESBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E173532108390200DA33DC /* UIActionSheet+NTESBlock.m */; };
 		52E1735821083A2F00DA33DC /* NTESDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E1735621083A2F00DA33DC /* NTESDevice.m */; };
@@ -210,9 +208,6 @@
 		52E172B92107203600DA33DC /* UIView+NTES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NTES.h"; sourceTree = "<group>"; };
 		52E173472108109F00DA33DC /* NTESMeetingWhiteboardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NTESMeetingWhiteboardViewController.h; sourceTree = "<group>"; };
 		52E173482108109F00DA33DC /* NTESMeetingWhiteboardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NTESMeetingWhiteboardViewController.m; sourceTree = "<group>"; };
-		52E1734A210837B500DA33DC /* NTESWhiteboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NTESWhiteboardViewController.xib; sourceTree = "<group>"; };
-		52E1734B210837B600DA33DC /* NTESWhiteboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESWhiteboardViewController.h; sourceTree = "<group>"; };
-		52E1734C210837B600DA33DC /* NTESWhiteboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESWhiteboardViewController.m; sourceTree = "<group>"; };
 		52E1734E210837B600DA33DC /* NTESWhiteboardDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESWhiteboardDrawView.m; sourceTree = "<group>"; };
 		52E1734F210837B600DA33DC /* NTESWhiteboardDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESWhiteboardDrawView.h; sourceTree = "<group>"; };
 		52E173532108390200DA33DC /* UIActionSheet+NTESBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+NTESBlock.m"; sourceTree = "<group>"; };
@@ -445,9 +440,6 @@
 			isa = PBXGroup;
 			children = (
 				52E1734D210837B600DA33DC /* View */,
-				52E1734B210837B600DA33DC /* NTESWhiteboardViewController.h */,
-				52E1734C210837B600DA33DC /* NTESWhiteboardViewController.m */,
-				52E1734A210837B500DA33DC /* NTESWhiteboardViewController.xib */,
 				52E173472108109F00DA33DC /* NTESMeetingWhiteboardViewController.h */,
 				52E173482108109F00DA33DC /* NTESMeetingWhiteboardViewController.m */,
 			);
@@ -669,7 +661,6 @@
 			files = (
 				5288A02C20E1EF46005741B1 /* LaunchScreen.storyboard in Resources */,
 				5288A02920E1EF46005741B1 /* Assets.xcassets in Resources */,
-				52E17350210837B600DA33DC /* NTESWhiteboardViewController.xib in Resources */,
 				5288A02420E1EF45005741B1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -775,7 +766,6 @@
 				5288A05D20F0B415005741B1 /* CodeTextField.m in Sources */,
 				5288A05720E210D0005741B1 /* LoginNavigationController.m in Sources */,
 				52E1735E21083B0F00DA33DC /* NTESBundleSetting.m in Sources */,
-				52E17351210837B600DA33DC /* NTESWhiteboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

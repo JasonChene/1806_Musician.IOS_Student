@@ -51,11 +51,28 @@ static int UID = 9999;
 
 - (void)leaveChannel
 {
-    NSLog(@"leaveChannel");
-    [self.agoraKit leaveChannel:^(AgoraChannelStats * _Nonnull stat) {
-    }];
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.videoRemoteView.hidden == YES) {
+        [self.agoraKit leaveChannel:^(AgoraChannelStats * _Nonnull stat) {
+        }];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        [self showAllTextDialog:@"正在跟老师远程视频..."];
+    }
 }
+
+-(void)showAllTextDialog:(NSString *)str{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.label.text = str;
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [hud hideAnimated:YES afterDelay:1];
+        });
+    });
+}
+
 
 - (void)closeVideoTeaching:(id)sender
 {

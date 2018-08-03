@@ -65,8 +65,8 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     option.extendMessage = @"ext msg example";
     
     [[NIMAVChatSDK sharedSDK].rtsManager addDelegate:self];
-    //liguangsong的手机账号对应的accid 5b5af3a82f301e00394c7c98
-    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"5b5ed006808ca4003c895580"]
+    //liguangsong的手机账号对应的accid  5b5ed006808ca4003c895580
+    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"5b5af3a82f301e00394c7c98"]
                                                                     services:NIMRTSServiceReliableTransfer
                                                                       option:nil
                                                                   completion:^(NSError *error, NSString *sessionID, UInt64 channelID)

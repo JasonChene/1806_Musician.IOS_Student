@@ -11,6 +11,7 @@
 #import <NIMSDK/NIMSDK.h>
 #import <AVOSCloud/AVOSCloud.h>
 #import "NTESMeetingWhiteboardViewController.h"
+#import "MBProgressHUD.h"
 
 
 
