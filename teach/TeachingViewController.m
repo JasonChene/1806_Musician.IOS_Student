@@ -51,14 +51,19 @@ static int UID = 9999;
 
 - (void)leaveChannel
 {
-    if (self.videoRemoteView.hidden == YES) {
+    if (self.videoRemoteView.hidden == YES && [self.whiteboardVC.view.superview isEqual:self.view] == NO) {
+        
         [self.agoraKit leaveChannel:^(AgoraChannelStats * _Nonnull stat) {
         }];
         [self.navigationController popViewControllerAnimated:YES];
     }
-    else
+    else if(self.videoRemoteView.hidden == NO)
     {
         [self showAllTextDialog:@"正在跟老师远程视频..."];
+    }
+    else if( [self.whiteboardVC.view.superview isEqual:self.view] == YES)
+    {
+        [self showAllTextDialog:@"正在跟老师进行乐谱指导教学..."];
     }
 }
 
@@ -128,14 +133,7 @@ static int UID = 9999;
 {
     AVUser *user = [AVUser currentUser];
     NSLog(@"openMusicBook:%@",user.username);
-    
-//    self.whiteboardVC = [[NTESMeetingWhiteboardViewController alloc] init];
-//    [self.whiteboardVC.view setFrame:CGRectMake(0, mNavBarAndStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - mNavBarAndStatusBarHeight)];
-//    [self addChildViewController:self.whiteboardVC];
-//    [self.view addSubview:self.whiteboardVC.view];
-//    
     //选择照片
-    
     //初始化UIImagePickerController类
     UIImagePickerController * picker = [[UIImagePickerController alloc] init];
     //判断数据来源为相册
