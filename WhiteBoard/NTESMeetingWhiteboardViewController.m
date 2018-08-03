@@ -58,20 +58,20 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    UIButton *closeMusicBtn = [self createButtonWithFrame:CGRectMake((self.view.frame.size.width - 100)/2, self.view.frame.size.height - 150 - 7, 100, 30) :@"关闭乐谱" :@selector(closeMusic:)];
+    UIButton *closeMusicBtn = [self createButtonWithFrame:CGRectMake((self.view.frame.size.width - 100)/2, self.view.frame.size.height - 150 - 7, 100, 30) :@"关闭乐谱" :@selector(closeMusicPress)];
     [self.view addSubview:closeMusicBtn];
     
     NIMRTSOption *option = [[NIMRTSOption alloc] init];
     option.extendMessage = @"ext msg example";
     
     [[NIMAVChatSDK sharedSDK].rtsManager addDelegate:self];
-    //liguangsong的手机账号对应的accid
+    //liguangsong的手机账号对应的accid 5b5af3a82f301e00394c7c98
     NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"5b5ed006808ca4003c895580"]
                                                                     services:NIMRTSServiceReliableTransfer
                                                                       option:nil
                                                                   completion:^(NSError *error, NSString *sessionID, UInt64 channelID)
                               {
-                                  NSLog(@"=====%@,\n=====:%@",error,sessionID);
+                                  NSLog(@"=========+==========%@,\n=====:%@",error,sessionID);
                                   self.sessionID = sessionID;
                                   
                                   if (!error) {
@@ -82,6 +82,11 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     
     [self showDrawView:closeMusicBtn];
     
+    alertController = [UIAlertController alertControllerWithTitle:@"提示框" message:@"消息" preferredStyle:UIAlertControllerStyleAlert];
+    alertController.view.backgroundColor = [UIColor purpleColor];
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+    [alertController addAction:confirmAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 -(UIImage *)compressOriginalImage:(UIImage *)image toSize:(CGSize)size{
     UIGraphicsBeginImageContext(size);
@@ -115,7 +120,7 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     button.layer.cornerRadius = 5;
     return button;
 }
-- (void)closeMusic:(id)sender
+- (void)closeMusicPress
 {
     [[NIMAVChatSDK sharedSDK].rtsManager terminateRTS:_sessionID];
     [self.view removeFromSuperview];
@@ -144,9 +149,6 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     _sessionID = sessionID;
     _peerID = caller;
     _cmds = [[NSMutableString alloc]initWithCapacity:1];
-    
-    
-    NSLog(@"========%@ \n=======:%@\n=======:%lu:\n=======%@",sessionID,caller,(unsigned long)types,extendMessage);
     [[NIMAVChatSDK sharedSDK].rtsManager responseRTS:sessionID accept:YES option:nil completion:^(NSError * _Nullable error, NSString * _Nullable sessionID, UInt64 channelID) {
         NSLog(@"========%@ \n=======:%@\n=======%llu",error,sessionID,channelID);
         if (!error) {
@@ -159,6 +161,7 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     }];
     
 }
+
 /**
  *  主叫收到被叫互动白板响应
  *
@@ -180,23 +183,11 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
         NSLog(@"====是否接听:%d",accepted);
         [self sendRTSImageData:UIImagePNGRepresentation(self->_musicImage)];
     }
-}
-
-- (NSData *) compressImageToSize :(UIImage *)image
-{
-    CGFloat compression = 0.9f;
-    int maxFileSize = 50*1024;
-    
-    NSData *imageData = UIImageJPEGRepresentation(image, compression);
-    
-    while ([imageData length] > maxFileSize)
+    else
     {
-        compression *= 0.5;
-        imageData = UIImageJPEGRepresentation(image, compression);
+        [self closeMusicPress];
     }
-    return imageData;
 }
-
 
 /**
  *  互动白板状态反馈

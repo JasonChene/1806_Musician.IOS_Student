@@ -14,6 +14,7 @@
 @interface NTESMeetingWhiteboardViewController : UIViewController<NIMRTSManagerDelegate>
 {
     CGSize mMusicImageSize;
+    UIAlertController *alertController ;
 }
 - (instancetype)initWithSessionID:(NSString *)sessionID :(NSString *)peerID;
 - (instancetype)initWithImage :(UIImage *)musicImage musicSize :(CGSize)size;

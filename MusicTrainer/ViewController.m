@@ -36,16 +36,21 @@
     //登录网易云信
     NSString *accountID = [[user objectForKey:@"netEaseUserInfo"]objectForKey:@"accid"];
     NSString *token = [[user objectForKey:@"netEaseUserInfo"]objectForKey:@"token"];
+//    NSString *strAccount = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+//    if ([strAccount isEqualToString:@""]) {
+//         [[[NIMSDK sharedSDK] loginManager] autoLogin:accountID token:token];
+//    }
+   
     [[[NIMSDK sharedSDK] loginManager] login:accountID token:token completion:^(NSError * _Nullable error) {
         NSLog(@"err:%@",error);
         if (error == nil) {
             //打开乐谱
             NSLog(@"成功登录网易云信");
-            
+
         }
         else{
         }
-        
+
     }];
 }
 - (void)dealloc
