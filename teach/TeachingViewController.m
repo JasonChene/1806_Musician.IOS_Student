@@ -40,11 +40,6 @@ static int UID = 9999;
     self.videoRemoteView.backgroundColor = [UIColor whiteColor];
     self.videoRemoteView.hidden = YES;
     [self.view insertSubview:self.videoRemoteView belowSubview:self.videoLocalView];
-    closeVideoBtn = [self createButtonWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, 400, 150, 30) :@"关闭视频教学" :@selector(closeVideoTeaching:)];
-    closeVideoBtn.hidden = YES;
-    [self.view insertSubview:closeVideoBtn aboveSubview:self.videoRemoteView];
-    
-    
     
     UITextView *titleDescription = [[UITextView alloc]initWithFrame:CGRectMake(10, 0, self.view.frame.size.width - 20, 40)];
     titleDescription.text = @"张老师正在和你视频教学";
@@ -66,7 +61,6 @@ static int UID = 9999;
 {
     self.videoLocalView.hidden = YES;
     self.videoRemoteView.hidden = YES;
-    closeVideoBtn.hidden = YES;
     [self.agoraKit disableVideo];
     [self.agoraKit setEnableSpeakerphone:YES];
 }
@@ -150,7 +144,6 @@ static int UID = 9999;
     [self setUpLocalVideoInScreen:self.videoLocalView :UID];
     self.videoRemoteView.hidden = NO;
     self.videoLocalView.hidden = NO;
-    closeVideoBtn.hidden = NO;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -182,7 +175,6 @@ static int UID = 9999;
     [self addRomoteViewInViewWithUID:uid :self.videoRemoteView];
     self.videoRemoteView.hidden = NO;
     self.videoLocalView.hidden = NO;
-    closeVideoBtn.hidden = NO;
 }
 
 /**
@@ -199,14 +191,12 @@ static int UID = 9999;
         [self addRomoteViewInViewWithUID:uid :self.videoRemoteView];
         self.videoRemoteView.hidden = NO;
         self.videoLocalView.hidden = NO;
-        closeVideoBtn.hidden = NO;
     }
     else
     {
         [self.agoraKit disableVideo];
         self.videoLocalView.hidden = YES;
         self.videoRemoteView.hidden = YES;
-        closeVideoBtn.hidden = YES;
     }
 }
 
