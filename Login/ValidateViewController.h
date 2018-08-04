@@ -10,8 +10,9 @@
 #import "VerificationCodeViewDelegate.h"
 #import <AVOSCloud/AVOSCloud.h>
 #import "PathAPI.h"
+#import "MBProgressHUD.h"
 
-@interface ValidateViewController : UIViewController<VerificationCodeViewDelegate>
+@interface ValidateViewController : UIViewController<VerificationCodeViewDelegate,UITextFieldDelegate>
 {
     NSString *mPhoneNumber;
     UIButton *mResendBtn;
@@ -19,6 +20,7 @@
     NSTimer *mTimer;
     int mCountDownTime;
     NSString *strValidate;
+    VerificationCodeView *mVerificationCodeView;
 }
 - (id)initWithPhoneNumber:(NSString *)strPhoneNum;
 @end

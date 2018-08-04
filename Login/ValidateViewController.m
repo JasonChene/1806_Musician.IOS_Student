@@ -44,12 +44,13 @@
     
     mTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countDownTimer) userInfo:nil repeats:YES];
     
-    VerificationCodeView *view = [[VerificationCodeView alloc]initWithFrame:CGRectMake(0, 200, self.view.frame.size.width, 100)];
-    view.delegate = self;
-    [view setupUI];
-    [self.view addSubview:view];
+    mVerificationCodeView = [[VerificationCodeView alloc]initWithFrame:CGRectMake(0, 200, self.view.frame.size.width, 100)];
+    mVerificationCodeView.delegate = self;
+    [mVerificationCodeView setupUI];
+    [self.view addSubview:mVerificationCodeView];
     
 }
+#pragma mark - VerificationCodeViewDelegate
 - (void)verificationCodeDidFinishedInput :(VerificationCodeView *)verificationCodeView :(NSString *)code
 {
     NSLog(@"====:%@",code);
@@ -57,6 +58,17 @@
         strValidate = code;
     }
 }
+//#pragma mark - UITextFieldDelegate
+//// return NO to disallow editing.
+//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+//{
+//    return YES;
+//}
+//// became first responder
+//- (void)textFieldDidBeginEditing:(UITextField *)textField
+//{
+//    [textField becomeFirstResponder];
+//}
 - (void)countDownTimer
 {
     mCountDownTime --;
@@ -102,53 +114,73 @@
 - (void)loginWithStudent:(id)sender
 {
     [AVUser signUpOrLoginWithMobilePhoneNumberInBackground:mPhoneNumber smsCode:strValidate block:^(AVUser * _Nullable user, NSError * _Nullable error) {
-        if(error == nil)
-        {
+        if(error == nil){
             NSLog(@"====%@",user);
             if ([user objectForKey:@"netEaseUserInfo"] == nil)
             {
-                NSDictionary *dicParameters = [NSDictionary dictionaryWithObject:@"student"
-                                                                          forKey:@"role"];
-                // 调用指定名称的云函数 averageStars，并且传递参数
-                [AVCloud callFunctionInBackground:@"mobileSetRole"
-                                   withParameters:dicParameters
-                                            block:^(id object, NSError *error) {
-                                                if(error == nil && [[object objectForKey:@"status"]integerValue] == 200){
-                                                    // 处理结果
-                                                    NSLog(@"==============:%@",object);
-                                                    [self performSelectorOnMainThread:@selector(jumpToIndex:) withObject:user waitUntilDone:YES];
-                                                    [user setObject:[object objectForKey:@"data"] forKey:@"netEaseUserInfo"];
-                                                    [AVUser changeCurrentUser:user save:YES];
-                                                } else {
-                                                    // 处理报错
-                                                     NSLog(@"error:%@",error);
-                                                }
-                                            }];
-                
-            }else
-            {
-                NSArray *allRoles = [user getRoles:nil];
-                NSLog(@"%@",allRoles);
-                BOOL isCorrectRole = false;
-                for (int i = 0; i < allRoles.count; i ++) {
-                    AVRole *role = [allRoles objectAtIndex:i];
-                    if ([[role objectForKey:@"name"] isEqualToString:@"student"])
-                    {
-                        isCorrectRole = true;
-                        break;
-                    }
-                }
+                NSDictionary *dicParameters = [NSDictionary dictionaryWithObject:@"student" forKey:@"role"];
+                [self setRoleInMobile:dicParameters :user];
+            }else{
+                Boolean isCorrectRole = [self checkRoleIsStudent:user];
                 if (isCorrectRole) {
-                    //验证成功
-                    [self performSelectorOnMainThread:@selector(jumpToIndex:) withObject:user waitUntilDone:YES];
-                    
+                    [self performSelectorOnMainThread:@selector(jumpToIndex:) withObject:user waitUntilDone:YES];//验证成功
+                }
+                else{
+                    [self showAllTextDialog:@"请用学生账号登录" :1];
                 }
 
             }
+        }else{
+            [self showAllTextDialog:@"验证码输入错误" :1];
+            [mVerificationCodeView cleanVerificationCodeView];
         }
         
     }];
     
+}
+- (void)setRoleInMobile:(NSDictionary *)dicParameters :(AVUser *)user
+{
+    // 调用指定名称的云函数 averageStars，并且传递参数
+    [AVCloud callFunctionInBackground:@"mobileSetRole"
+                       withParameters:dicParameters
+                                block:^(id object, NSError *error) {
+                                    if(error == nil && [[object objectForKey:@"status"]integerValue] == 200){
+                                        // 处理结果
+                                        NSLog(@"==============:%@",object);
+                                        [self performSelectorOnMainThread:@selector(jumpToIndex:) withObject:user waitUntilDone:YES];
+                                        [user setObject:[object objectForKey:@"data"] forKey:@"netEaseUserInfo"];
+                                        [AVUser changeCurrentUser:user save:YES];
+                                    } else {
+                                        // 处理报错
+                                        NSLog(@"error:%@",error);
+                                    }
+                                }];
+}
+- (Boolean)checkRoleIsStudent:(AVUser *)user
+{
+    NSArray *allRoles = [user getRoles:nil];
+    NSLog(@"%@",allRoles);
+    BOOL isCorrectRole = false;
+    for (int i = 0; i < allRoles.count; i ++) {
+        AVRole *role = [allRoles objectAtIndex:i];
+        if ([[role objectForKey:@"name"] isEqualToString:@"student"])
+        {
+            isCorrectRole = true;
+            break;
+        }
+    }
+    return isCorrectRole;
+}
+#pragma mark -  提示弹框
+-(void)showAllTextDialog:(NSString *)info :(NSTimeInterval)delay{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.label.text = info;
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [hud hideAnimated:YES afterDelay:delay];
+        });
+    });
 }
 
 - (void)jumpToIndex:(AVUser*)user
