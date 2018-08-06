@@ -34,13 +34,9 @@
     
     //liguangsong123 e10adc3949ba59abbe56e057f20f883e  。122333444455555  3354045a397621cd92406f1f98cde292
     //登录网易云信
+    NSString *userID = [user objectForKey:@"objectId"];
     NSString *accountID = [[user objectForKey:@"netEaseUserInfo"]objectForKey:@"accid"];
     NSString *token = [[user objectForKey:@"netEaseUserInfo"]objectForKey:@"token"];
-//    NSString *strAccount = [[[NIMSDK sharedSDK] loginManager] currentAccount];
-//    if ([strAccount isEqualToString:@""]) {
-//         [[[NIMSDK sharedSDK] loginManager] autoLogin:accountID token:token];
-//    }
-   
     [[[NIMSDK sharedSDK] loginManager] login:accountID token:token completion:^(NSError * _Nullable error) {
         NSLog(@"err:%@",error);
         if (error == nil) {
@@ -51,6 +47,15 @@
         else{
         }
 
+    }];
+    
+    AVQuery *query = [AVQuery queryWithClassName:@"Course"];
+    [query whereKey:@"student" equalTo:[AVObject objectWithClassName:@"_User" objectId:userID]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        // objects 返回的就是有图片的 Todo 集合
+        NSDictionary *dicStudentInfo = [objects objectAtIndex:0];
+        NSString *teacherID = [[dicStudentInfo objectForKey:@"teacher"] objectForKey:@"objectId"];
+        NSLog(@"%@",teacherID);
     }];
 }
 - (void)dealloc

@@ -132,7 +132,7 @@
             }
         }else{
             [self showAllTextDialog:@"验证码输入错误" :1];
-            [mVerificationCodeView cleanVerificationCodeView];
+            [self->mVerificationCodeView cleanVerificationCodeView];
         }
         
     }];
