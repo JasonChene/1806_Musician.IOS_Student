@@ -15,7 +15,8 @@
 
 
 @interface ViewController : UIViewController
-
-
+{
+    NSString *mTeacherID;
+}
 @end
 

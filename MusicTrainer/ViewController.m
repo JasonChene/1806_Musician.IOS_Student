@@ -55,7 +55,7 @@
         // objects 返回的就是有图片的 Todo 集合
         NSDictionary *dicStudentInfo = [objects objectAtIndex:0];
         NSString *teacherID = [[dicStudentInfo objectForKey:@"teacher"] objectForKey:@"objectId"];
-        NSLog(@"%@",teacherID);
+        mTeacherID = teacherID;
     }];
 }
 - (void)dealloc

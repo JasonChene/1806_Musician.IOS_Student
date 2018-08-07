@@ -34,12 +34,13 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 @end
 
 @implementation NTESMeetingWhiteboardViewController
-- (instancetype)initWithImage :(UIImage *)musicImage musicSize :(CGSize)size
+- (instancetype)initWithImage :(UIImage *)musicImage musicSize :(CGSize)size andTeacherEastID :(NSString *)eastAccountID
 {
     self = [super init];
     if (self) {
         _musicImage = musicImage;
         mMusicImageSize = size;
+        mEastAccountID = eastAccountID;
     }
     return self;
 }
@@ -66,7 +67,7 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     
     [[NIMAVChatSDK sharedSDK].rtsManager addDelegate:self];
     //liguangsong的手机账号对应的accid   5b5ed006808ca4003c895580   5b5af3a82f301e00394c7c98(鲁昊)。5b67f74fee920a003bf2d560(储晟同事)
-    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[@"5b67f74fee920a003bf2d560"]
+    NSString *theSessionID = [[NIMAVChatSDK sharedSDK].rtsManager requestRTS:@[mEastAccountID]
                                                                     services:NIMRTSServiceReliableTransfer
                                                                       option:nil
                                                                   completion:^(NSError *error, NSString *sessionID, UInt64 channelID)

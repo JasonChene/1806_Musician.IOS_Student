@@ -20,10 +20,13 @@
 {
     int mNavBarAndStatusBarHeight;
     Boolean isJoinInRoom;
+    NSString *channelName;
+    NSString *mTeacherEastID;
 }
 @property (strong, nonatomic) AgoraRtcEngineKit *agoraKit;
 @property (strong, nonatomic) UIView *videoLocalView;
 @property (strong, nonatomic) UIView *videoRemoteView;
 @property (nonatomic, strong) NTESMeetingWhiteboardViewController *whiteboardVC;
 @property (nonatomic, copy)   NIMChatroom *chatroom;
+- (instancetype)initWithTeacherID :(NSString *)teacherID andWithStudentID :(NSString *)studentID;
 @end

@@ -14,6 +14,16 @@
 static int UID = 9999;
 @implementation TeachingViewController
 
+- (instancetype)initWithTeacherID :(NSString *)teacherID andWithStudentID :(NSString *)studentID
+{
+    self = [super init];
+    if (self) {
+        channelName = studentID;
+        mTeacherEastID = teacherID;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -27,7 +37,7 @@ static int UID = 9999;
     [self.agoraKit disableVideo];
     [self.agoraKit setEnableSpeakerphone:YES];
     //创建并加入频道
-    [self.agoraKit joinChannelByToken:nil channelId:@"demoChannel1" info:nil uid:UID joinSuccess:nil];
+    [self.agoraKit joinChannelByToken:nil channelId:channelName info:nil uid:UID joinSuccess:nil];
     
     //设置本地视频视图
     self.videoLocalView = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 85, mNavBarAndStatusBarHeight, 85, 136)];
@@ -129,14 +139,6 @@ static int UID = 9999;
     button.layer.cornerRadius = 5;
     return button;
 }
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    if (isFromWhiteBoard == YES)
-//    {
-//        [self showAllTextDialog:@"打开乐谱失败，请确认老师是否接受你的乐谱教学请求..." :2];
-//        isFromWhiteBoard = NO;
-//    }
-//}
 - (void)openMusicBook:(id)sender
 {
     if (isJoinInRoom == YES) {
@@ -160,8 +162,7 @@ static int UID = 9999;
 
 #pragma mark - Private
 - (void)setupChildViewController :(UIImage *)musicImage{
-    self.whiteboardVC = [[NTESMeetingWhiteboardViewController alloc] initWithImage :musicImage musicSize: CGSizeMake(self.view.frame.size.width, self.view.frame.size.height - mNavBarAndStatusBarHeight)];
-    
+    self.whiteboardVC = [[NTESMeetingWhiteboardViewController alloc] initWithImage :musicImage musicSize: CGSizeMake(self.view.frame.size.width, self.view.frame.size.height - mNavBarAndStatusBarHeight) andTeacherEastID:mTeacherEastID];
     [self.whiteboardVC.view setFrame:CGRectMake(0, mNavBarAndStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - mNavBarAndStatusBarHeight)];
     [self addChildViewController:self.whiteboardVC];
     [self.view addSubview:self.whiteboardVC.view];

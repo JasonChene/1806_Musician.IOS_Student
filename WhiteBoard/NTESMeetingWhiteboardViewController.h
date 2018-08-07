@@ -15,8 +15,9 @@
 {
     CGSize mMusicImageSize;
     UIAlertController *alertController ;
+    NSString *mEastAccountID;
 }
 - (instancetype)initWithSessionID:(NSString *)sessionID :(NSString *)peerID;
-- (instancetype)initWithImage :(UIImage *)musicImage musicSize :(CGSize)size;
+- (instancetype)initWithImage :(UIImage *)musicImage musicSize :(CGSize)size andTeacherEastID :(NSString *)eastAccountID;
 
 @end
