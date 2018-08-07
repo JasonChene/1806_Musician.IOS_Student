@@ -17,6 +17,9 @@
 @interface ViewController : UIViewController
 {
     NSString *mTeacherID;
+    NSString *mStudentID;
+    UILabel *mShowDateLabel;
+    
 }
 @end
 
