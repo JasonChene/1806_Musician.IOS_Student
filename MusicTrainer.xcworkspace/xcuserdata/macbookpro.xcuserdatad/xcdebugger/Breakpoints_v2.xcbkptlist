@@ -68,7 +68,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MusicTrainer/ViewController.m"
-            timestampString = "555414327.519127"
+            timestampString = "555414653.26605"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "72"
@@ -84,7 +84,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MusicTrainer/ViewController.m"
-            timestampString = "555414327.519592"
+            timestampString = "555414653.2663521"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
@@ -307,7 +307,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MusicTrainer/ViewController.m"
-            timestampString = "555414327.520209"
+            timestampString = "555414653.2666301"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
@@ -319,11 +319,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MusicTrainer/ViewController.m"
-            timestampString = "555414327.5212491"
+            timestampString = "555414653.266814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "79"
@@ -335,11 +335,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MusicTrainer/ViewController.m"
-            timestampString = "555414327.521632"
+            timestampString = "555414653.266989"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"

@@ -15,7 +15,7 @@
 @implementation ViewController
 - (void) getAllCoursesInfo :(NSDate *)date
 {
-    
+    [mAllStudentCourseInfo removeAllObjects];
     AVUser *user = [AVUser currentUser];
     //获取课程信息
     if (user != nil)
@@ -88,6 +88,8 @@
     
     AVUser *user = [AVUser currentUser];
     mAllStudentCourseInfo = [[NSMutableDictionary alloc]initWithCapacity:0];
+    mCourseTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 150, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    
     
     
     NSLog(@"====:%@",user);
