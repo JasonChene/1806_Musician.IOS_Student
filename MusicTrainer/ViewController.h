@@ -21,6 +21,8 @@
     UILabel *mShowDateLabel;
     UIView *mTopDateView;
     NSString *mWeekDay;
+    UITableView *mCourseTableview;
+    NSMutableDictionary *mAllStudentCourseInfo;
 }
 @end
 

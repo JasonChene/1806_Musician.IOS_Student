@@ -13,13 +13,82 @@
 @end
 
 @implementation ViewController
-
+- (void) getAllCoursesInfo :(NSDate *)date
+{
+    
+    AVUser *user = [AVUser currentUser];
+    //获取课程信息
+    if (user != nil)
+    {
+        NSString *strMinusDate = [self getFormatDateStringWithMinus:date];
+        NSDate *startDate = [self getDateFromStringWithMinus:[NSString stringWithFormat:@"%@ 00:00:00",strMinusDate]];
+        NSDate *endDate = [self getDateFromStringWithMinus:[NSString stringWithFormat:@"%@ 23:59:59",strMinusDate]];
+        
+        NSLog(@"startDate:%f",[endDate timeIntervalSinceDate:startDate]);
+        NSString *userID = [user objectForKey:@"objectId"];
+        
+        AVQuery *studentQuery = [AVQuery queryWithClassName:@"Course"];
+        [studentQuery whereKey:@"student" equalTo:[AVObject objectWithClassName:@"_User" objectId:userID]];
+        AVQuery *startTimeQuery = [AVQuery queryWithClassName:@"Course"];
+        [startTimeQuery whereKey:@"startTime" greaterThanOrEqualTo:startDate];
+        AVQuery *endTimeQuery = [AVQuery queryWithClassName:@"Course"];
+        [endTimeQuery whereKey:@"startTime" lessThanOrEqualTo:endDate];
+        
+        AVQuery *query = [AVQuery andQueryWithSubqueries:[NSArray arrayWithObjects:studentQuery,startTimeQuery,endTimeQuery,nil]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            // objects 返回的就是有图片的 Todo 集合
+//            NSDictionary *dicStudentInfo = [objects objectAtIndex:0];
+//            NSString *teacherID = [[dicStudentInfo objectForKey:@"teacher"] objectForKey:@"objectId"];
+//            NSString *studentID = [[dicStudentInfo objectForKey:@"student"] objectForKey:@"objectId"];
+//            self->mTeacherID = teacherID;
+//            self->mStudentID = studentID;
+            NSMutableArray *arrAMCourse = [[NSMutableArray alloc]initWithCapacity:0];
+            NSMutableArray *arrPMCourse = [[NSMutableArray alloc]initWithCapacity:0];
+            NSMutableArray *arrNightCourse = [[NSMutableArray alloc]initWithCapacity:0];
+            for (int i = 0; i < objects.count; i ++)
+            {
+                NSDictionary *dicStudentInfo = [objects objectAtIndex:i];
+                NSDate *noonTime = [self getDateFromStringWithMinus:[NSString stringWithFormat:@"%@ 12:00:00",strMinusDate]];
+                NSDate *nightTime = [self getDateFromStringWithMinus:[NSString stringWithFormat:@"%@ 18:00:00",strMinusDate]];
+                NSDate *startDateTime = [dicStudentInfo objectForKey:@"startTime"];
+                startDateTime = [startDateTime dateByAddingTimeInterval:8*60*60];
+                //上午的课
+                if ([startDateTime timeIntervalSince1970] < [noonTime timeIntervalSince1970])
+                {
+                    [arrAMCourse addObject:dicStudentInfo];
+                    continue;
+                }
+                else if ([startDateTime timeIntervalSince1970] > [nightTime timeIntervalSince1970])
+                {
+                    [arrNightCourse addObject:dicStudentInfo];
+                    continue;
+                }
+                else
+                {
+                    [arrPMCourse addObject:dicStudentInfo];
+                    continue;
+                }
+            }
+            if (arrAMCourse.count != 0)
+                [self->mAllStudentCourseInfo setObject:arrAMCourse forKey:@"AMCourse"];
+            if (arrPMCourse.count != 0)
+                [self->mAllStudentCourseInfo setObject:arrPMCourse forKey:@"PMCourse"];
+            if (arrNightCourse.count != 0)
+                [self->mAllStudentCourseInfo setObject:arrNightCourse forKey:@"NightCourse"];
+            
+            NSLog(@"============%@",self->mAllStudentCourseInfo);
+            
+        }];
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.title = @"学生课程表";
     
     AVUser *user = [AVUser currentUser];
+    mAllStudentCourseInfo = [[NSMutableDictionary alloc]initWithCapacity:0];
+    
     
     NSLog(@"====:%@",user);
     if ([AVUser currentUser] == nil)
@@ -48,20 +117,6 @@
         }
 
     }];
-    //获取课程信息
-    if ([AVUser currentUser] != nil)
-    {
-        AVQuery *query = [AVQuery queryWithClassName:@"Course"];
-        [query whereKey:@"student" equalTo:[AVObject objectWithClassName:@"_User" objectId:userID]];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            // objects 返回的就是有图片的 Todo 集合
-            NSDictionary *dicStudentInfo = [objects objectAtIndex:0];
-            NSString *teacherID = [[dicStudentInfo objectForKey:@"teacher"] objectForKey:@"objectId"];
-            NSString *studentID = [[dicStudentInfo objectForKey:@"student"] objectForKey:@"objectId"];
-            self->mTeacherID = teacherID;
-            self->mStudentID = studentID;
-        }];
-    }
     
     //创建日期条
     int navBarAndStatusBarHeight = self.navigationController.navigationBar.frame.origin.y+self.navigationController.navigationBar.frame.size.height;
@@ -84,6 +139,9 @@
     mShowDateLabel = [self createLabelWithFrame:CGRectMake(0, mTopDateView.frame.origin.y + mTopDateView.frame.size.height + 5 , self.view.frame.size.width, 23) :[self getFormatDateString:[NSDate date]]];
     [self setCurrentDayButtonLight:[self getWeekDayString:[NSDate date]]];
     
+    //获取课程信息
+    [self getAllCoursesInfo:[NSDate date]];
+    
 }
 - (void)setCurrentDayButtonLight:(NSString *)title
 {
@@ -102,6 +160,23 @@
         }
     }
 }
+- (NSString *)getFormatDateStringWithMinus :(NSDate *)date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"YYYY-MM-dd";
+    NSString *dateString = [formatter stringFromDate:date];
+    return dateString;
+}
+- (NSDate *)getDateFromStringWithMinus :(NSString *)strDate
+{
+    NSLog(@"strDate:%@",strDate);
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"YYYY-MM-dd HH:mm:ss";
+    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:8]];//解决8小时时间差问题
+    NSDate *date = [formatter dateFromString:strDate];
+    return date;
+}
+
 - (NSString *)getFormatDateString :(NSDate *)date
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -177,12 +252,12 @@
 {
     UIButton *weekBtn = (UIButton *)sender;
     NSLog(@"%@",weekBtn.titleLabel.text);
-    
     NSDate *currentDateLabel = [self getFormatDate:mShowDateLabel.text];
     NSDate *newDate = [NSDate dateWithTimeInterval:24*60*60*(-7) sinceDate:currentDateLabel];
     mShowDateLabel.text = [self getFormatDateString:newDate];
     [self getWeekDayString:newDate];
     [self setCurrentDayButtonLight:[self getWeekDayString:newDate]];
+    [self getAllCoursesInfo:newDate];
 }
 - (void)getNextWeekCourseData:(id)sender
 {
@@ -194,6 +269,7 @@
     mShowDateLabel.text = [self getFormatDateString:newDate];
     [self getWeekDayString:newDate];
     [self setCurrentDayButtonLight:[self getWeekDayString:newDate]];
+    [self getAllCoursesInfo:newDate];
     
 }
 - (void)getWeekCourseData:(id)sender
@@ -205,6 +281,7 @@
     mShowDateLabel.text = [self getFormatDateString:newDate];
     [self getWeekDayString:newDate];
     [self setCurrentDayButtonLight:[self getWeekDayString:newDate]];
+    [self getAllCoursesInfo:newDate];
 }
 - (int)getDateNumberWithWeekDay:(NSString *)weekDay
 {
