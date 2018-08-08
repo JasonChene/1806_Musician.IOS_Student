@@ -19,7 +19,8 @@
     NSString *mTeacherID;
     NSString *mStudentID;
     UILabel *mShowDateLabel;
-    
+    UIView *mTopDateView;
+    NSString *mWeekDay;
 }
 @end
 
