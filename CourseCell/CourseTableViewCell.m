@@ -66,6 +66,7 @@
     UIButton *button = [[UIButton alloc]initWithFrame:frame];
     button.layer.cornerRadius = 4;
     button.backgroundColor = [UIColor colorWithRed:151.0/255.0 green:151.0/255.0 blue:151.0/255.0 alpha:1.0];//灰色
+    [button setFont:[UIFont systemFontOfSize:14]];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self addSubview:button];
     return button;
