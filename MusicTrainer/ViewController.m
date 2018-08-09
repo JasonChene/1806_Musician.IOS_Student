@@ -77,6 +77,7 @@
                 [self->mAllStudentCourseInfo setObject:arrNightCourse forKey:@"NightCourse"];
             
             NSLog(@"============%@",self->mAllStudentCourseInfo);
+            [self->mCourseTableview reloadData];
             
         }];
     }
@@ -85,10 +86,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.title = @"学生课程表";
+    self.view.backgroundColor = [UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1.0];
+    int navBarAndStatusBarHeight = self.navigationController.navigationBar.frame.origin.y+self.navigationController.navigationBar.frame.size.height;
     
     AVUser *user = [AVUser currentUser];
     mAllStudentCourseInfo = [[NSMutableDictionary alloc]initWithCapacity:0];
-    mCourseTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 150, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    mCourseTableview = [[UITableView alloc]initWithFrame:CGRectMake(0,  150 - navBarAndStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - 150) style:UITableViewStyleGrouped];
+    mCourseTableview.delegate = self;
+    mCourseTableview.dataSource = self;
+    [self.view addSubview:mCourseTableview];
     
     
     
@@ -97,11 +103,11 @@
     {
         [self showLoginViewController];
     }
-    UIButton *login_button = [[UIButton alloc]initWithFrame:CGRectMake(0, 200, self.view.frame.size.width, 40)];
-    [login_button setTitle:@"进入教学页面" forState:UIControlStateNormal];
-    login_button.backgroundColor = [UIColor redColor];
-    [self.view addSubview:login_button];
-    [login_button addTarget:self action:@selector(showTeachViewControlle) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *login_button = [[UIButton alloc]initWithFrame:CGRectMake(0, 200, self.view.frame.size.width, 40)];
+//    [login_button setTitle:@"进入教学页面" forState:UIControlStateNormal];
+//    login_button.backgroundColor = [UIColor redColor];
+//    [self.view addSubview:login_button];
+//    [login_button addTarget:self action:@selector(showTeachViewControlle) forControlEvents:UIControlEventTouchUpInside];
     
     //liguangsong123 e10adc3949ba59abbe56e057f20f883e  。122333444455555  3354045a397621cd92406f1f98cde292
     //登录网易云信
@@ -121,7 +127,7 @@
     }];
     
     //创建日期条
-    int navBarAndStatusBarHeight = self.navigationController.navigationBar.frame.origin.y+self.navigationController.navigationBar.frame.size.height;
+    
     mTopDateView = [[UIView alloc]initWithFrame:CGRectMake(0, navBarAndStatusBarHeight, self.view.frame.size.width, 42)];
     mTopDateView.backgroundColor = [UIColor colorWithRed:42.0/255.0 green:40.0/255.0 blue:40.0/255.0 alpha:1.0];
     [self.view addSubview:mTopDateView];
@@ -171,7 +177,6 @@
 }
 - (NSDate *)getDateFromStringWithMinus :(NSString *)strDate
 {
-    NSLog(@"strDate:%@",strDate);
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"YYYY-MM-dd HH:mm:ss";
     [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:8]];//解决8小时时间差问题
@@ -198,6 +203,7 @@
 {
     UILabel *label = [[UILabel alloc]initWithFrame:frame];
     label.text = text;
+    label.backgroundColor = [UIColor clearColor];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:16.0/255.0 green:16.0/255.0 blue:16.0/255.0 alpha:1.0];
     [self.view addSubview:label];
@@ -324,8 +330,13 @@
 
     }];
 }
-- (void)showTeachViewControlle
+- (void)showTeachViewControlle:(id)sender
 {
+    CourseTableViewCell *cell = (CourseTableViewCell *)((UIButton *)sender).superview;
+//    mTeacherID = @"5b67f74fee920a003bf2d560";
+//    mStudentID = @"demoChannel1";
+    mTeacherID = cell.teacherID;
+    mStudentID = cell.studentID;
     TeachingViewController *teachingViewController = [[TeachingViewController alloc]initWithTeacherID:mTeacherID andWithStudentID:mStudentID];
     [self.navigationController pushViewController:teachingViewController animated:YES];
     
@@ -337,6 +348,108 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80.0f;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 24.0f;
+}
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSArray *arrSectionCourse = [mAllStudentCourseInfo objectForKey:[mAllStudentCourseInfo.allKeys objectAtIndex:section]];
+    return arrSectionCourse.count;
+}
+
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    NSInteger section = [indexPath section];
+    NSInteger row = [indexPath row];
+    CourseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[CourseTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier :CGSizeMake(self.view.frame.size.width, 80)];
+    }
+    NSDictionary *courseInfo = [[mAllStudentCourseInfo objectForKey:[mAllStudentCourseInfo.allKeys objectAtIndex:section]]objectAtIndex:row];
+    NSDate *startDateTime = [courseInfo objectForKey:@"startTime"];
+    NSDate *endDateTime = [self calculateEndTime:startDateTime :[[courseInfo objectForKey:@"duration"] intValue]];
+    NSString *strStartTime = [self getTimeInfoWithDate:startDateTime];
+    NSString *strEndTime =  [self getTimeInfoWithDate:endDateTime];
+    cell.startTimeLabel.text = strStartTime;
+    cell.endTimeLabel.text = strEndTime;
+    cell.commentLabel.text = [courseInfo objectForKey:@"comment"];
+    cell.courseNameLabel.text = [courseInfo objectForKey:@"name"];
+    NSString *teacherID = [[courseInfo objectForKey:@"teacher"]objectForKey:@"objectId"];
+    
+    AVQuery *query = [AVQuery queryWithClassName:@"_User"];
+    [query getObjectInBackgroundWithId:teacherID block:^(AVObject *object, NSError *error) {
+        cell.teacherNameLabel.text = [object objectForKey:@"username"];
+    }];
+    
+    if ([[NSDate date]timeIntervalSince1970] < [startDateTime timeIntervalSince1970]) {
+        //未开始
+        [cell.joinCourseButton setTitle:@"未开始" forState:UIControlStateNormal];
+        [cell.joinCourseButton setEnabled:NO];
+        [cell.joinCourseButton setBackgroundColor:[UIColor colorWithRed:151.0/255.0 green:151.0/255.0 blue:151.0/255.0 alpha:1.0]];
+        cell.teacherID = @"";
+        cell.studentID = @"";
+    }
+    else if ([[NSDate date]timeIntervalSince1970] > [endDateTime timeIntervalSince1970]){
+        //已结束
+        [cell.joinCourseButton setTitle:@"已结束" forState:UIControlStateNormal];
+        [cell.joinCourseButton setEnabled:NO];
+        [cell.joinCourseButton setBackgroundColor:[UIColor colorWithRed:151.0/255.0 green:151.0/255.0 blue:151.0/255.0 alpha:1.0]];
+        cell.teacherID = @"";
+        cell.studentID = @"";
+    }
+    else{
+        //上课中
+        [cell.joinCourseButton setTitle:@"上课中" forState:UIControlStateNormal];
+        [cell.joinCourseButton setEnabled:YES];
+        [cell.joinCourseButton addTarget:self action:@selector(showTeachViewControlle:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.joinCourseButton setBackgroundColor:[UIColor colorWithRed:247.0/255.0 green:98.0/255.0 blue:98.0/255.0 alpha:1.0]];
+        cell.teacherID = [[courseInfo objectForKey:@"teacher"]objectForKey:@"objectId"];
+        cell.studentID = [[courseInfo objectForKey:@"student"]objectForKey:@"objectId"];
+    }
+    
+    if (section == 0) {
+        cell.timeStatusColorView.backgroundColor = [UIColor colorWithRed:223.0/255.0 green:137.0/255.0 blue:49.0/255.0 alpha:1.0];
+    }
+    else if (section == 1){
+        cell.timeStatusColorView.backgroundColor = [UIColor colorWithRed:13.0/255.0 green:126.0/255.0 blue:131.0/255.0 alpha:1.0];
+    }
+    else if (section == 2){
+        cell.timeStatusColorView.backgroundColor = [UIColor colorWithRed:19.0/255.0 green:41.0/255.0 blue:61.0/255.0 alpha:1.0];
+    }
+    
+    return cell;
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return mAllStudentCourseInfo.allKeys.count;
+}
+- (NSString *)getTimeInfoWithDate :(NSDate *)date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"HH:mm";
+    NSString *dateString = [formatter stringFromDate:date];
+    return dateString;
+}
+- (NSDate *)calculateEndTime :(NSDate *)date :(int)duration
+{
+    NSDate *endDate = [NSDate dateWithTimeInterval:duration/1000 sinceDate:date];
+    return endDate;
+    
 }
 
 

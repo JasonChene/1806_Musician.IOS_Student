@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		20B620858777214DED06E76B /* libPods-MusicTrainer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D82745FF57B233BD4DBCB6 /* libPods-MusicTrainer.a */; };
+		5261F130211BE95D00139D15 /* CourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5261F12F211BE95D00139D15 /* CourseTableViewCell.m */; };
 		5288A01E20E1EF45005741B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288A01D20E1EF45005741B1 /* AppDelegate.m */; };
 		5288A02120E1EF45005741B1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288A02020E1EF45005741B1 /* ViewController.m */; };
 		5288A02420E1EF45005741B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5288A02220E1EF45005741B1 /* Main.storyboard */; };
@@ -155,6 +156,8 @@
 /* Begin PBXFileReference section */
 		11221248BC3DCBD95E8B00D4 /* Pods-MusicTrainer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicTrainer.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusicTrainer/Pods-MusicTrainer.release.xcconfig"; sourceTree = "<group>"; };
 		3C5097D075B0BAC31DCA6CAF /* Pods-MusicTrainer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicTrainer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicTrainer/Pods-MusicTrainer.debug.xcconfig"; sourceTree = "<group>"; };
+		5261F12E211BE95D00139D15 /* CourseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseTableViewCell.h; sourceTree = "<group>"; };
+		5261F12F211BE95D00139D15 /* CourseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CourseTableViewCell.m; sourceTree = "<group>"; };
 		5288A01920E1EF45005741B1 /* MusicTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5288A01C20E1EF45005741B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5288A01D20E1EF45005741B1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -298,9 +301,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		5261F12D211BE72600139D15 /* CourseCell */ = {
+			isa = PBXGroup;
+			children = (
+				5261F12E211BE95D00139D15 /* CourseTableViewCell.h */,
+				5261F12F211BE95D00139D15 /* CourseTableViewCell.m */,
+			);
+			path = CourseCell;
+			sourceTree = "<group>";
+		};
 		5288A01020E1EF45005741B1 = {
 			isa = PBXGroup;
 			children = (
+				5261F12D211BE72600139D15 /* CourseCell */,
 				52D72171210AE8C700D2BDC3 /* AVOS.xcodeproj */,
 				52E173462108107800DA33DC /* WhiteBoard */,
 				52E172B72107203500DA33DC /* Category */,
@@ -747,6 +760,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5261F130211BE95D00139D15 /* CourseTableViewCell.m in Sources */,
 				52E17352210837B600DA33DC /* NTESWhiteboardDrawView.m in Sources */,
 				5288A02120E1EF45005741B1 /* ViewController.m in Sources */,
 				52E1735821083A2F00DA33DC /* NTESDevice.m in Sources */,

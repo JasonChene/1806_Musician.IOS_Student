@@ -12,9 +12,10 @@
 #import <AgoraRtcEngineKit/AgoraRtcEngineKit.h>
 #import "TeachingViewController.h"
 #import <NIMSDK/NIMSDK.h>
+#import "CourseTableViewCell.h"
 
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 {
     NSString *mTeacherID;
     NSString *mStudentID;
