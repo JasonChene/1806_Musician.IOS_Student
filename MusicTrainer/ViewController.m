@@ -358,6 +358,22 @@
 {
     return 24.0f;
 }
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    NSString *strHeader = [mAllStudentCourseInfo.allKeys objectAtIndex:section];
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 0, 24, 24)];
+    if ([strHeader isEqualToString:@"AMCourse"]) {
+        imageView.image = [UIImage imageNamed:@"class_morining"];
+    }else if ([strHeader isEqualToString:@"PMCourse"]){
+        imageView.image = [UIImage imageNamed:@"class_noon"];
+    }else if ([strHeader isEqualToString:@"NightCourse"]){
+        imageView.image = [UIImage imageNamed:@"class_night"];
+    }
+    UIView *headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 24)];
+    [headView addSubview:imageView];
+    return headView;
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -365,8 +381,6 @@
     return arrSectionCourse.count;
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -378,7 +392,8 @@
     {
         cell = [[CourseTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier :CGSizeMake(self.view.frame.size.width, 80)];
     }
-    NSDictionary *courseInfo = [[mAllStudentCourseInfo objectForKey:[mAllStudentCourseInfo.allKeys objectAtIndex:section]]objectAtIndex:row];
+    NSString *statusAPMN = [mAllStudentCourseInfo.allKeys objectAtIndex:section];
+    NSDictionary *courseInfo = [[mAllStudentCourseInfo objectForKey:statusAPMN]objectAtIndex:row];
     NSDate *startDateTime = [courseInfo objectForKey:@"startTime"];
     NSDate *endDateTime = [self calculateEndTime:startDateTime :[[courseInfo objectForKey:@"duration"] intValue]];
     NSString *strStartTime = [self getTimeInfoWithDate:startDateTime];
@@ -420,15 +435,16 @@
         cell.studentID = [[courseInfo objectForKey:@"student"]objectForKey:@"objectId"];
     }
     
-    if (section == 0) {
+    if ([statusAPMN isEqualToString:@"AMCourse"]) {
         cell.timeStatusColorView.backgroundColor = [UIColor colorWithRed:223.0/255.0 green:137.0/255.0 blue:49.0/255.0 alpha:1.0];
     }
-    else if (section == 1){
+    else if ([statusAPMN isEqualToString:@"PMCourse"]){
         cell.timeStatusColorView.backgroundColor = [UIColor colorWithRed:13.0/255.0 green:126.0/255.0 blue:131.0/255.0 alpha:1.0];
     }
-    else if (section == 2){
+    else if ([statusAPMN isEqualToString:@"NightCourse"]){
         cell.timeStatusColorView.backgroundColor = [UIColor colorWithRed:19.0/255.0 green:41.0/255.0 blue:61.0/255.0 alpha:1.0];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
