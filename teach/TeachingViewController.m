@@ -14,12 +14,13 @@
 static int UID = 9999;
 @implementation TeachingViewController
 
-- (instancetype)initWithTeacherID :(NSString *)teacherID andWithStudentID :(NSString *)studentID
+- (instancetype)initWithTeacherID :(NSString *)teacherID andWithStudentID :(NSString *)studentID andTeacherName :(NSString *)teacherName
 {
     self = [super init];
     if (self) {
         channelName = studentID;
         mTeacherEastID = teacherID;
+        mTeacherName = teacherName;
     }
     return self;
 }
@@ -28,7 +29,7 @@ static int UID = 9999;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     mNavBarAndStatusBarHeight = self.navigationController.navigationBar.frame.origin.y+self.navigationController.navigationBar.frame.size.height;
-    self.title = @"张老师";
+    self.title = mTeacherName;
     self.view.backgroundColor = [UIColor whiteColor];
     [self layoutView];
     
@@ -52,7 +53,7 @@ static int UID = 9999;
     [self.view insertSubview:self.videoRemoteView belowSubview:self.videoLocalView];
     
     UITextView *titleDescription = [[UITextView alloc]initWithFrame:CGRectMake(10, 0, self.view.frame.size.width - 20, 40)];
-    titleDescription.text = @"张老师正在和你视频教学";
+    titleDescription.text = [NSString stringWithFormat:@"%@正在和你视频教学",mTeacherName];
     titleDescription.font = [UIFont systemFontOfSize:18];
     [self.videoRemoteView addSubview:titleDescription];
     
@@ -118,7 +119,7 @@ static int UID = 9999;
     
     //添加“张老师正在和你乐谱教学”
     UITextView *titleDescription = [[UITextView alloc]initWithFrame:CGRectMake(10, mNavBarAndStatusBarHeight, self.view.frame.size.width - 20, 40)];
-    titleDescription.text = @"张老师正在和你乐谱教学";
+    titleDescription.text = [NSString stringWithFormat:@"%@正在和你乐谱教学",mTeacherName];
     [titleDescription setEditable:NO];
     titleDescription.font = [UIFont systemFontOfSize:18];
     [self.view addSubview:titleDescription];
@@ -126,7 +127,7 @@ static int UID = 9999;
     
     UIButton *openMusicBtn = [self createButtonWithFrame:CGRectMake((self.view.frame.size.width - 200 - 12)/2, self.view.frame.size.height - 30 - 7, 100, 30) :@"打开乐谱" :@selector(openMusicBook:)];
     [self.view addSubview:openMusicBtn];
-    UIButton *handupBtn = [self createButtonWithFrame:CGRectMake(openMusicBtn.frame.origin.x + 100 + 12, openMusicBtn.frame.origin.y, 100, 30) :@"举手（视频）" :@selector(handup:)];
+    UIButton *handupBtn = [self createButtonWithFrame:CGRectMake(openMusicBtn.frame.origin.x + 100 + 12, openMusicBtn.frame.origin.y, 100, 30) :@"举手" :@selector(handup:)];
     [self.view addSubview:handupBtn];
 }
 - (UIButton *)createButtonWithFrame:(CGRect)frame :(NSString *)title :(SEL)event
@@ -170,10 +171,17 @@ static int UID = 9999;
 
 - (void)handup:(id)sender
 {
-    NSLog(@"handup");
-    [self setUpLocalVideoInScreen:self.videoLocalView :UID];
-    self.videoRemoteView.hidden = NO;
-    self.videoLocalView.hidden = NO;
+    AVUser *user = [AVUser currentUser];
+    //发送消息
+    AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
+    [app.client createConversationWithName:@"举手" clientIds:@[mTeacherName] callback:^(AVIMConversation *conversation, NSError *error) {
+        // Tom 发了一条消息给 Jerry
+        [conversation sendMessage:[AVIMTextMessage messageWithText:@"HandUp" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                NSLog(@"举手成功！");
+            }
+        }];
+    }];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

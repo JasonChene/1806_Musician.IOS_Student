@@ -37,11 +37,6 @@
         AVQuery *query = [AVQuery andQueryWithSubqueries:[NSArray arrayWithObjects:studentQuery,startTimeQuery,endTimeQuery,nil]];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             // objects 返回的就是有图片的 Todo 集合
-//            NSDictionary *dicStudentInfo = [objects objectAtIndex:0];
-//            NSString *teacherID = [[dicStudentInfo objectForKey:@"teacher"] objectForKey:@"objectId"];
-//            NSString *studentID = [[dicStudentInfo objectForKey:@"student"] objectForKey:@"objectId"];
-//            self->mTeacherID = teacherID;
-//            self->mStudentID = studentID;
             NSMutableArray *arrAMCourse = [[NSMutableArray alloc]initWithCapacity:0];
             NSMutableArray *arrPMCourse = [[NSMutableArray alloc]initWithCapacity:0];
             NSMutableArray *arrNightCourse = [[NSMutableArray alloc]initWithCapacity:0];
@@ -82,20 +77,20 @@
         }];
     }
 }
-- (void)sendMessageToTeacher:(id)sender
-{
-    AVUser *user = [AVUser currentUser];
-    //发送消息
-    AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
-    [app.client createConversationWithName:@"举手" clientIds:@[@"15630487355"] callback:^(AVIMConversation *conversation, NSError *error) {
-        // Tom 发了一条消息给 Jerry
-        [conversation sendMessage:[AVIMTextMessage messageWithText:@"耗子，起床！" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-                NSLog(@"发送成功！");
-            }
-        }];
-    }];
-}
+//- (void)sendMessageToTeacher:(id)sender
+//{
+//    AVUser *user = [AVUser currentUser];
+//    //发送消息
+//    AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
+//    [app.client createConversationWithName:@"举手" clientIds:@[@"15630487355"] callback:^(AVIMConversation *conversation, NSError *error) {
+//        // Tom 发了一条消息给 Jerry
+//        [conversation sendMessage:[AVIMTextMessage messageWithText:@"HandUp" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
+//            if (succeeded) {
+//                NSLog(@"发送成功！");
+//            }
+//        }];
+//    }];
+//}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -140,8 +135,8 @@
     //获取课程信息
     [self getAllCoursesInfo:[NSDate date]];
     
-    UIButton *sendBtn = [self createButtonWithFrame:CGRectMake(100, 200, 73, 30) :@" 发送消息" :@selector(sendMessageToTeacher:)];
-    [self.view addSubview:sendBtn];
+//    UIButton *sendBtn = [self createButtonWithFrame:CGRectMake(100, 200, 73, 30) :@" 发送消息" :@selector(sendMessageToTeacher:)];
+//    [self.view addSubview:sendBtn];
 }
 
 
@@ -372,11 +367,11 @@
 - (void)showTeachViewControlle:(id)sender
 {
     CourseTableViewCell *cell = (CourseTableViewCell *)((UIButton *)sender).superview;
-//    mTeacherID = @"5b67f74fee920a003bf2d560";
-//    mStudentID = @"demoChannel1";
     mTeacherID = cell.teacherID;
     mStudentID = cell.studentID;
-    TeachingViewController *teachingViewController = [[TeachingViewController alloc]initWithTeacherID:mTeacherID andWithStudentID:mStudentID];
+    NSString *teacherName = cell.teacherNameLabel.text;
+    
+    TeachingViewController *teachingViewController = [[TeachingViewController alloc]initWithTeacherID:mTeacherID andWithStudentID:mStudentID andTeacherName:teacherName];
     [self.navigationController pushViewController:teachingViewController animated:YES];
     
     //修改导航栏的返回按钮的颜色和内容
