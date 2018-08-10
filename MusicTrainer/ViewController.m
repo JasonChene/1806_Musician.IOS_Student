@@ -96,36 +96,13 @@
     mCourseTableview.dataSource = self;
     [self.view addSubview:mCourseTableview];
     
-    
-    
-    NSLog(@"====:%@",user);
     if ([AVUser currentUser] == nil)
     {
         [self showLoginViewController];
     }
-//    UIButton *login_button = [[UIButton alloc]initWithFrame:CGRectMake(0, 200, self.view.frame.size.width, 40)];
-//    [login_button setTitle:@"进入教学页面" forState:UIControlStateNormal];
-//    login_button.backgroundColor = [UIColor redColor];
-//    [self.view addSubview:login_button];
-//    [login_button addTarget:self action:@selector(showTeachViewControlle) forControlEvents:UIControlEventTouchUpInside];
     
-    //liguangsong123 e10adc3949ba59abbe56e057f20f883e  。122333444455555  3354045a397621cd92406f1f98cde292
     //登录网易云信
-    NSString *userID = [user objectForKey:@"objectId"];
-    NSString *accountID = [[user objectForKey:@"netEaseUserInfo"]objectForKey:@"accid"];
-    NSString *token = [[user objectForKey:@"netEaseUserInfo"]objectForKey:@"token"];
-    [[[NIMSDK sharedSDK] loginManager] login:accountID token:token completion:^(NSError * _Nullable error) {
-        NSLog(@"err:%@",error);
-        if (error == nil) {
-            //打开乐谱
-            NSLog(@"成功登录网易云信");
-
-        }
-        else{
-        }
-
-    }];
-    
+    [self loginWithEastAccount];
     //创建日期条
     
     mTopDateView = [[UIView alloc]initWithFrame:CGRectMake(0, navBarAndStatusBarHeight, self.view.frame.size.width, 42)];
@@ -150,6 +127,31 @@
     //获取课程信息
     [self getAllCoursesInfo:[NSDate date]];
     
+}
+- (void)loginWithEastAccount
+{
+    AVUser *user = [AVUser currentUser];
+    if (![[[NIMSDK sharedSDK] loginManager]isLogined]) {
+        //登录网易云信
+        NSString *accountID = [[user objectForKey:@"netEaseUserInfo"]objectForKey:@"accid"];
+        NSString *token = [[user objectForKey:@"netEaseUserInfo"]objectForKey:@"token"];
+        [[[NIMSDK sharedSDK] loginManager] login:accountID token:token completion:^(NSError * _Nullable error) {
+            NSLog(@"err:%@",error);
+            if (error == nil) {
+                //打开乐谱
+                NSLog(@"成功登录网易云信");
+            }
+            else{
+            }
+            
+        }];
+    }
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    //获取课程信息
+    [self getAllCoursesInfo:[NSDate date]];
+    [self loginWithEastAccount];
 }
 - (void)setCurrentDayButtonLight:(NSString *)title
 {
