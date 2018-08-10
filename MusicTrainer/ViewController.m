@@ -82,6 +82,20 @@
         }];
     }
 }
+- (void)sendMessageToTeacher:(id)sender
+{
+    AVUser *user = [AVUser currentUser];
+    //发送消息
+    AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
+    [app.client createConversationWithName:@"举手" clientIds:@[@"15630487355"] callback:^(AVIMConversation *conversation, NSError *error) {
+        // Tom 发了一条消息给 Jerry
+        [conversation sendMessage:[AVIMTextMessage messageWithText:@"耗子，起床！" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                NSLog(@"发送成功！");
+            }
+        }];
+    }];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -89,7 +103,6 @@
     self.view.backgroundColor = [UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1.0];
     int navBarAndStatusBarHeight = self.navigationController.navigationBar.frame.origin.y+self.navigationController.navigationBar.frame.size.height;
     
-    AVUser *user = [AVUser currentUser];
     mAllStudentCourseInfo = [[NSMutableDictionary alloc]initWithCapacity:0];
     mCourseTableview = [[UITableView alloc]initWithFrame:CGRectMake(0,  150 - navBarAndStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - 150) style:UITableViewStyleGrouped];
     mCourseTableview.delegate = self;
@@ -127,7 +140,31 @@
     //获取课程信息
     [self getAllCoursesInfo:[NSDate date]];
     
+    UIButton *sendBtn = [self createButtonWithFrame:CGRectMake(100, 200, 73, 30) :@" 发送消息" :@selector(sendMessageToTeacher:)];
+    [self.view addSubview:sendBtn];
 }
+
+
+//- (void)tomSendMessageToJerry {
+//    // Tom 创建了一个 client，用自己的名字作为 clientId
+//    self.client = [[AVIMClient alloc] initWithClientId:@"Tom"];
+//    AVIMConversation *conversation ;
+//    
+//    // Tom 打开 client
+//    [self.client openWithCallback:^(BOOL succeeded, NSError *error) {
+//        // Tom 建立了与 Jerry 的会话
+//        [self.client createConversationWithName:@"猫和老鼠" clientIds:@[@"Jerry"] callback:^(AVIMConversation *conversation, NSError *error) {
+//        // Tom 发了一条消息给 Jerry
+//            [conversation sendMessage:[AVIMTextMessage messageWithText:@"耗子，起床！" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
+//                if (succeeded) {
+//                    NSLog(@"发送成功！");
+//                }
+//            }];
+//        }];
+//    }];
+//}
+
+
 - (void)loginWithEastAccount
 {
     AVUser *user = [AVUser currentUser];

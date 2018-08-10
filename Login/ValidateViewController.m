@@ -185,6 +185,17 @@
 
 - (void)jumpToIndex:(AVUser*)user
 {
+    // 以 AVUser 实例创建了一个 client
+    AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
+    app.client = [[AVIMClient alloc] initWithUser:user];
+    // 打开 client，与云端进行连接
+    [app.client openWithCallback:^(BOOL succeeded, NSError * _Nullable error) {
+        // Do something you like.
+        NSLog(@"即时消息登录%d",succeeded);
+        if (succeeded) {
+            app.isOpenIM = true;
+        }
+    }];
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
     }];
 }

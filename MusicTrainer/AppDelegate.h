@@ -20,6 +20,9 @@
 
 @property (readonly, strong) NSPersistentContainer *persistentContainer;
 
+@property (retain, nonatomic) AVIMClient *client;
+@property (assign ,nonatomic) Boolean  isOpenIM;
+
 - (void)saveContext;
 
 

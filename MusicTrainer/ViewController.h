@@ -14,6 +14,10 @@
 #import <NIMSDK/NIMSDK.h>
 #import "CourseTableViewCell.h"
 
+#import <AVOSCloudIM/AVIMClient.h>
+#import <AVOSCloudIM/AVIMTextMessage.h>
+#import <AVOSCloudIM/AVIMConversation.h>
+
 
 @interface ViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 {
@@ -25,5 +29,6 @@
     UITableView *mCourseTableview;
     NSMutableDictionary *mAllStudentCourseInfo;
 }
+@property (nonatomic, strong) AVIMClient *client;
 @end
 

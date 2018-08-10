@@ -29,6 +29,21 @@
     
     [AVOSCloud setApplicationId:@"dqozOWhkl50Xh5HQyfeFkDxV-gzGzoHsz" clientKey:@"S6kknLSdUpaztxebGuLUMDUT"];
     [AVOSCloud setAllLogsEnabled:YES];
+    self.isOpenIM = false;
+    
+    AVUser *user = [AVUser currentUser];
+    if (user != nil) {
+        self.client = [[AVIMClient alloc] initWithUser:user];
+        // 打开 client，与云端进行连接
+        [self.client openWithCallback:^(BOOL succeeded, NSError * _Nullable error) {
+            // Do something you like.
+            NSLog(@"即时消息登录%d",succeeded);
+            if (succeeded) {
+                self.isOpenIM = true;
+            }
+        }];
+    }
+    
     
     //推荐在程序启动的时候初始化 NIMSDK
     NSString *appKey = @"34b421cf05779d2ddcfe1a1ae66035d1";

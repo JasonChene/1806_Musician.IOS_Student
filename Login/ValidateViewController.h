@@ -11,6 +11,8 @@
 #import <AVOSCloud/AVOSCloud.h>
 #import "PathAPI.h"
 #import "MBProgressHUD.h"
+#import <AVOSCloudIM/AVIMClient.h>
+#import "AppDelegate.h"
 
 @interface ValidateViewController : UIViewController<VerificationCodeViewDelegate,UITextFieldDelegate>
 {
