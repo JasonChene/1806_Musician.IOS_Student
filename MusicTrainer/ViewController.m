@@ -77,20 +77,7 @@
         }];
     }
 }
-//- (void)sendMessageToTeacher:(id)sender
-//{
-//    AVUser *user = [AVUser currentUser];
-//    //发送消息
-//    AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
-//    [app.client createConversationWithName:@"举手" clientIds:@[@"15630487355"] callback:^(AVIMConversation *conversation, NSError *error) {
-//        // Tom 发了一条消息给 Jerry
-//        [conversation sendMessage:[AVIMTextMessage messageWithText:@"HandUp" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
-//            if (succeeded) {
-//                NSLog(@"发送成功！");
-//            }
-//        }];
-//    }];
-//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -99,6 +86,7 @@
     int navBarAndStatusBarHeight = self.navigationController.navigationBar.frame.origin.y+self.navigationController.navigationBar.frame.size.height;
     
     mAllStudentCourseInfo = [[NSMutableDictionary alloc]initWithCapacity:0];
+    mCorrectKey = [[NSMutableArray alloc]initWithCapacity:0];
     mCourseTableview = [[UITableView alloc]initWithFrame:CGRectMake(0,  150 - navBarAndStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - 150) style:UITableViewStyleGrouped];
     mCourseTableview.delegate = self;
     mCourseTableview.dataSource = self;
@@ -394,7 +382,7 @@
 }
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    NSString *strHeader = [mAllStudentCourseInfo.allKeys objectAtIndex:section];
+    NSString *strHeader = [mCorrectKey objectAtIndex:section];
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 0, 24, 24)];
     if ([strHeader isEqualToString:@"AMCourse"]) {
         imageView.image = [UIImage imageNamed:@"class_morining"];
@@ -408,10 +396,12 @@
     return headView;
 }
 
+
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *arrSectionCourse = [mAllStudentCourseInfo objectForKey:[mAllStudentCourseInfo.allKeys objectAtIndex:section]];
+    NSArray *arrSectionCourse = [mAllStudentCourseInfo objectForKey:[mCorrectKey objectAtIndex:section]];
     return arrSectionCourse.count;
 }
 
@@ -426,7 +416,7 @@
     {
         cell = [[CourseTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier :CGSizeMake(self.view.frame.size.width, 80)];
     }
-    NSString *statusAPMN = [mAllStudentCourseInfo.allKeys objectAtIndex:section];
+    NSString *statusAPMN = [mCorrectKey objectAtIndex:section];
     NSDictionary *courseInfo = [[mAllStudentCourseInfo objectForKey:statusAPMN]objectAtIndex:row];
     NSDate *startDateTime = [courseInfo objectForKey:@"startTime"];
     NSDate *endDateTime = [self calculateEndTime:startDateTime :[[courseInfo objectForKey:@"duration"] intValue]];
@@ -486,7 +476,19 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return mAllStudentCourseInfo.allKeys.count;
+    [mCorrectKey removeAllObjects];
+    NSArray *originallkeys = mAllStudentCourseInfo.allKeys;
+    
+    if ([originallkeys containsObject:@"AMCourse"] == TRUE) {
+        [mCorrectKey addObject:@"AMCourse"];
+    }
+    if ([originallkeys containsObject:@"PMCourse"] == TRUE) {
+        [mCorrectKey addObject:@"PMCourse"];
+    }
+    if ([originallkeys containsObject:@"NightCourse"] == TRUE) {
+        [mCorrectKey addObject:@"NightCourse"];
+    }
+    return originallkeys.count;
 }
 - (NSString *)getTimeInfoWithDate :(NSDate *)date
 {

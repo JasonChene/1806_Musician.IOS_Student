@@ -28,6 +28,7 @@
     NSString *mWeekDay;
     UITableView *mCourseTableview;
     NSMutableDictionary *mAllStudentCourseInfo;
+    NSMutableArray *mCorrectKey;
 }
 @property (nonatomic, strong) AVIMClient *client;
 @end
