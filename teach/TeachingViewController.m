@@ -125,7 +125,7 @@ static int UID = 9999;
     
     //添加“张老师正在和你乐谱教学”
     mTitleDescription = [[UITextView alloc]initWithFrame:CGRectMake(10, mNavBarAndStatusBarHeight, self.view.frame.size.width - 20, 40)];
-    mTitleDescription.text = @"老师还未进入教学房间";
+    mTitleDescription.text = [NSString stringWithFormat:@"%@正在和你乐谱教学",mTeacherName];
     [mTitleDescription setEditable:NO];
     mTitleDescription.font = [UIFont systemFontOfSize:18];
     [self.view addSubview:mTitleDescription];
@@ -288,23 +288,18 @@ static int UID = 9999;
      [self dismissViewControllerAnimated:YES completion:nil];
  }
 
-//#pragma mark - AVIMClientDelegate
-
-//// 接收消息的回调函数
-//- (void)conversation:(AVIMConversation *)conversation didReceiveTypedMessage:(AVIMTypedMessage *)message {
-//    NSLog(@"%@", message.text); // 耗子，起床！
-//}
-
-
 #pragma mark - AVIMClientDelegate
-- (void)conversation:(AVIMConversation *)conversation didReceiveCommonMessage:(AVIMMessage *)message
-{
-    NSLog(@"%@", message.content);
-    if ([message.content isEqualToString:@"老师上线"])
+// 接收消息的回调函数
+- (void)conversation:(AVIMConversation *)conversation didReceiveTypedMessage:(AVIMTypedMessage *)message {
+    NSLog(@"%@", message.text); // 耗子，起床！
+    if ([message.text isEqualToString:@"老师上线"])
     {
         [self showAllTextDialog:@"老师已上线" :1];
-        mTitleDescription.text = [NSString stringWithFormat:@"%@正在和你乐谱教学",mTeacherName];
+//        mTitleDescription.text = [NSString stringWithFormat:@"%@正在和你乐谱教学",mTeacherName];
     }
 }
+
+
+
 
 @end
