@@ -39,6 +39,8 @@ static int UID = 9999;
     [self.agoraKit setEnableSpeakerphone:YES];
     //创建并加入频道
     [self.agoraKit joinChannelByToken:nil channelId:channelName info:nil uid:UID joinSuccess:nil];
+    [self.agoraKit setDefaultAudioRouteToSpeakerphone:YES];
+    
     
     //设置本地视频视图
     self.videoLocalView = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 85, mNavBarAndStatusBarHeight, 85, 136)];
