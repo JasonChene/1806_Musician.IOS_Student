@@ -122,30 +122,7 @@
     
     //获取课程信息
     [self getAllCoursesInfo:[NSDate date]];
-    
-//    UIButton *sendBtn = [self createButtonWithFrame:CGRectMake(100, 200, 73, 30) :@" 发送消息" :@selector(sendMessageToTeacher:)];
-//    [self.view addSubview:sendBtn];
 }
-
-
-//- (void)tomSendMessageToJerry {
-//    // Tom 创建了一个 client，用自己的名字作为 clientId
-//    self.client = [[AVIMClient alloc] initWithClientId:@"Tom"];
-//    AVIMConversation *conversation ;
-//    
-//    // Tom 打开 client
-//    [self.client openWithCallback:^(BOOL succeeded, NSError *error) {
-//        // Tom 建立了与 Jerry 的会话
-//        [self.client createConversationWithName:@"猫和老鼠" clientIds:@[@"Jerry"] callback:^(AVIMConversation *conversation, NSError *error) {
-//        // Tom 发了一条消息给 Jerry
-//            [conversation sendMessage:[AVIMTextMessage messageWithText:@"耗子，起床！" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
-//                if (succeeded) {
-//                    NSLog(@"发送成功！");
-//                }
-//            }];
-//        }];
-//    }];
-//}
 
 
 - (void)loginWithEastAccount

@@ -33,6 +33,10 @@ static int UID = 9999;
     self.view.backgroundColor = [UIColor whiteColor];
     [self layoutView];
     
+    //接受即时消息通知
+    AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
+    [app.client setDelegate:self];
+    
     //初始化 AgoraRtcEngineKit
     self.agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:@"fa60d121c1c2452389543dbaf2ffb01e" delegate:self];
     [self.agoraKit disableVideo];
@@ -120,11 +124,11 @@ static int UID = 9999;
     [self.view addSubview:audioImageView];
     
     //添加“张老师正在和你乐谱教学”
-    UITextView *titleDescription = [[UITextView alloc]initWithFrame:CGRectMake(10, mNavBarAndStatusBarHeight, self.view.frame.size.width - 20, 40)];
-    titleDescription.text = [NSString stringWithFormat:@"%@正在和你乐谱教学",mTeacherName];
-    [titleDescription setEditable:NO];
-    titleDescription.font = [UIFont systemFontOfSize:18];
-    [self.view addSubview:titleDescription];
+    mTitleDescription = [[UITextView alloc]initWithFrame:CGRectMake(10, mNavBarAndStatusBarHeight, self.view.frame.size.width - 20, 40)];
+    mTitleDescription.text = @"老师还未进入教学房间";
+    [mTitleDescription setEditable:NO];
+    mTitleDescription.font = [UIFont systemFontOfSize:18];
+    [self.view addSubview:mTitleDescription];
     
     
     UIButton *openMusicBtn = [self createButtonWithFrame:CGRectMake((self.view.frame.size.width - 200 - 12)/2, self.view.frame.size.height - 30 - 7, 100, 30) :@"打开乐谱" :@selector(openMusicBook:)];
@@ -284,5 +288,23 @@ static int UID = 9999;
      [self dismissViewControllerAnimated:YES completion:nil];
  }
 
+//#pragma mark - AVIMClientDelegate
+
+//// 接收消息的回调函数
+//- (void)conversation:(AVIMConversation *)conversation didReceiveTypedMessage:(AVIMTypedMessage *)message {
+//    NSLog(@"%@", message.text); // 耗子，起床！
+//}
+
+
+#pragma mark - AVIMClientDelegate
+- (void)conversation:(AVIMConversation *)conversation didReceiveCommonMessage:(AVIMMessage *)message
+{
+    NSLog(@"%@", message.content);
+    if ([message.content isEqualToString:@"老师上线"])
+    {
+        [self showAllTextDialog:@"老师已上线" :1];
+        mTitleDescription.text = [NSString stringWithFormat:@"%@正在和你乐谱教学",mTeacherName];
+    }
+}
 
 @end

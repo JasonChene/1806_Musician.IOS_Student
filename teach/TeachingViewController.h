@@ -19,13 +19,14 @@
 #import "AppDelegate.h"
 
 
-@interface TeachingViewController : UIViewController<AgoraRtcEngineDelegate,UIImagePickerControllerDelegate>
+@interface TeachingViewController : UIViewController<AgoraRtcEngineDelegate,UIImagePickerControllerDelegate,AVIMClientDelegate>
 {
     int mNavBarAndStatusBarHeight;
     Boolean isJoinInRoom;
     NSString *channelName;
     NSString *mTeacherEastID;
     NSString *mTeacherName;
+    UITextView *mTitleDescription;
 }
 @property (strong, nonatomic) AgoraRtcEngineKit *agoraKit;
 @property (strong, nonatomic) UIView *videoLocalView;
