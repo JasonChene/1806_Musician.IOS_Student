@@ -336,7 +336,7 @@
     mStudentID = cell.studentID;
     NSString *teacherName = cell.teacherNameLabel.text;
     
-    TeachingViewController *teachingViewController = [[TeachingViewController alloc]initWithTeacherID:mTeacherID andWithStudentID:mStudentID andTeacherName:teacherName];
+    TeachingViewController *teachingViewController = [[TeachingViewController alloc]initWithTeacherID:mTeacherID andWithStudentID:mStudentID andTeacherName:teacherName andTeacherLeanCloudUserName:cell.leancloudUserName];
     [self.navigationController pushViewController:teachingViewController animated:YES];
     
     //修改导航栏的返回按钮的颜色和内容
@@ -408,6 +408,7 @@
     AVQuery *query = [AVQuery queryWithClassName:@"_User"];
     [query getObjectInBackgroundWithId:teacherID block:^(AVObject *object, NSError *error) {
         cell.teacherNameLabel.text = [object objectForKey:@"username"];
+        cell.leancloudUserName = [object objectForKey:@"mobilePhoneNumber"];
     }];
     
     if ([[NSDate date]timeIntervalSince1970] < [startDateTime timeIntervalSince1970]) {

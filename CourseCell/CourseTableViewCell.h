@@ -18,6 +18,8 @@
 @property (nonatomic, retain)UIView *timeStatusColorView;
 @property (nonatomic, retain)NSString *teacherID;
 @property (nonatomic, retain)NSString *studentID;
+@property (nonatomic, retain)NSString *leancloudUserName;
+
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier :(CGSize)size;
 @end

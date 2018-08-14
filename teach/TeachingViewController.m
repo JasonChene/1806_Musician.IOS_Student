@@ -14,13 +14,14 @@
 static int UID = 9999;
 @implementation TeachingViewController
 
-- (instancetype)initWithTeacherID :(NSString *)teacherID andWithStudentID :(NSString *)studentID andTeacherName :(NSString *)teacherName
+- (instancetype)initWithTeacherID :(NSString *)teacherID andWithStudentID :(NSString *)studentID andTeacherName :(NSString *)teacherName andTeacherLeanCloudUserName :(NSString *)teacherLCUserName
 {
     self = [super init];
     if (self) {
         channelName = studentID;
         mTeacherEastID = teacherID;
         mTeacherName = teacherName;
+        mTeacherLCUserName = teacherLCUserName;
     }
     return self;
 }
@@ -64,6 +65,8 @@ static int UID = 9999;
     [self.videoRemoteView addSubview:titleDescription];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<返回" style:UIBarButtonItemStylePlain target:self action:@selector(leaveChannel)];
+    
+    [self sendStudentOnlineMessage];
 }
 
 - (void)leaveChannel
@@ -82,6 +85,15 @@ static int UID = 9999;
     {
         [self showAllTextDialog:@"正在跟老师进行乐谱指导教学..." :1];
     }
+    AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
+    [app.client createConversationWithName:@"学生下线" clientIds:@[mTeacherLCUserName] callback:^(AVIMConversation *conversation, NSError *error) {
+        // Tom 发了一条消息给 Jerry
+        [conversation sendMessage:[AVIMTextMessage messageWithText:@"studentOffline" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                NSLog(@"学生下线提醒！");
+            }
+        }];
+    }];
 }
 
 -(void)showAllTextDialog:(NSString *)info :(NSTimeInterval)delay{
@@ -180,11 +192,23 @@ static int UID = 9999;
     AVUser *user = [AVUser currentUser];
     //发送消息
     AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
-    [app.client createConversationWithName:@"举手" clientIds:@[mTeacherName] callback:^(AVIMConversation *conversation, NSError *error) {
+    [app.client createConversationWithName:@"举手" clientIds:@[mTeacherLCUserName] callback:^(AVIMConversation *conversation, NSError *error) {
         // Tom 发了一条消息给 Jerry
         [conversation sendMessage:[AVIMTextMessage messageWithText:@"HandUp" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
                 NSLog(@"举手成功！");
+            }
+        }];
+    }];
+}
+- (void)sendStudentOnlineMessage
+{
+    AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
+    [app.client createConversationWithName:@"学生上线" clientIds:@[mTeacherLCUserName] callback:^(AVIMConversation *conversation, NSError *error) {
+        // Tom 发了一条消息给 Jerry
+        [conversation sendMessage:[AVIMTextMessage messageWithText:@"studentOnline" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                NSLog(@"学生上线提醒！");
             }
         }];
     }];
@@ -295,7 +319,12 @@ static int UID = 9999;
     if ([message.text isEqualToString:@"老师上线"])
     {
         [self showAllTextDialog:@"老师已上线" :1];
-//        mTitleDescription.text = [NSString stringWithFormat:@"%@正在和你乐谱教学",mTeacherName];
+        AVIMTextMessage *reply = [AVIMTextMessage messageWithText:@"成功收到老师上线通知" attributes:nil];
+        [conversation sendMessage:reply callback:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                NSLog(@"回复成功！");
+            }
+        }];
     }
 }
 

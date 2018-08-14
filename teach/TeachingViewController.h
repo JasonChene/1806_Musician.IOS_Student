@@ -27,11 +27,12 @@
     NSString *mTeacherEastID;
     NSString *mTeacherName;
     UITextView *mTitleDescription;
+    NSString *mTeacherLCUserName;
 }
 @property (strong, nonatomic) AgoraRtcEngineKit *agoraKit;
 @property (strong, nonatomic) UIView *videoLocalView;
 @property (strong, nonatomic) UIView *videoRemoteView;
 @property (nonatomic, strong) NTESMeetingWhiteboardViewController *whiteboardVC;
 @property (nonatomic, copy)   NIMChatroom *chatroom;
-- (instancetype)initWithTeacherID :(NSString *)teacherID andWithStudentID :(NSString *)studentID andTeacherName :(NSString *)teacherName;
+- (instancetype)initWithTeacherID :(NSString *)teacherID andWithStudentID :(NSString *)studentID andTeacherName :(NSString *)teacherName andTeacherLeanCloudUserName :(NSString *)teacherLCUserName;
 @end
