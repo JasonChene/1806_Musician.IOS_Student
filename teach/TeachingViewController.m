@@ -137,7 +137,7 @@ static int UID = 9999;
     
     //添加“张老师正在和你乐谱教学”
     mTitleDescription = [[UITextView alloc]initWithFrame:CGRectMake(10, mNavBarAndStatusBarHeight, self.view.frame.size.width - 20, 40)];
-    mTitleDescription.text = [NSString stringWithFormat:@"%@正在和你乐谱教学",mTeacherName];
+    mTitleDescription.text = @"老师未上线";
     [mTitleDescription setEditable:NO];
     mTitleDescription.font = [UIFont systemFontOfSize:18];
     [self.view addSubview:mTitleDescription];
@@ -319,12 +319,17 @@ static int UID = 9999;
     if ([message.text isEqualToString:@"老师上线"])
     {
         [self showAllTextDialog:@"老师已上线" :1];
+        mTitleDescription.text = [NSString stringWithFormat:@"%@正在和你乐谱教学",mTeacherName];
         AVIMTextMessage *reply = [AVIMTextMessage messageWithText:@"成功收到老师上线通知" attributes:nil];
         [conversation sendMessage:reply callback:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
                 NSLog(@"回复成功！");
             }
         }];
+    }
+    else if ([message.text isEqualToString:@"收到学生上线通知"])
+    {
+        mTitleDescription.text = [NSString stringWithFormat:@"%@正在和你乐谱教学",mTeacherName];
     }
 }
 

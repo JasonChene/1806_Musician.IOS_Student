@@ -78,6 +78,13 @@
     }
 }
 
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    mCourseTableview.contentInset = UIEdgeInsetsZero;
+    mCourseTableview.scrollIndicatorInsets = UIEdgeInsetsZero;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -87,7 +94,7 @@
     
     mAllStudentCourseInfo = [[NSMutableDictionary alloc]initWithCapacity:0];
     mCorrectKey = [[NSMutableArray alloc]initWithCapacity:0];
-    mCourseTableview = [[UITableView alloc]initWithFrame:CGRectMake(0,  150 - navBarAndStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - 150) style:UITableViewStyleGrouped];
+    mCourseTableview = [[UITableView alloc]initWithFrame:CGRectMake(0,  160, self.view.frame.size.width, self.view.frame.size.height - 160) style:UITableViewStyleGrouped];
     mCourseTableview.delegate = self;
     mCourseTableview.dataSource = self;
     [self.view addSubview:mCourseTableview];
