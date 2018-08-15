@@ -127,12 +127,17 @@
                 }
                 else{
                     [self showAllTextDialog:@"请用学生账号登录" :1];
+                    [AVUser logOut];
+//                    [self.navigationController popViewControllerAnimated:YES];
                 }
 
             }
         }else{
-            [self showAllTextDialog:@"验证码输入错误" :1];
-            [self->mVerificationCodeView cleanVerificationCodeView];
+            if ([error code] == 603)
+            {
+                [self showAllTextDialog:@"验证码已过期" :1];
+                [self->mVerificationCodeView cleanVerificationCodeView];
+            }
         }
         
     }];
