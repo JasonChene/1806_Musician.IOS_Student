@@ -86,7 +86,7 @@ static int UID = 9999;
         [self showAllTextDialog:@"正在跟老师进行乐谱指导教学..." :1];
     }
     AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
-    [app.client createConversationWithName:@"学生下线" clientIds:@[mTeacherLCUserName] callback:^(AVIMConversation *conversation, NSError *error) {
+    [app.client createConversationWithName:@"学生下线" clientIds:@[mTeacherEastID] callback:^(AVIMConversation *conversation, NSError *error) {
         // Tom 发了一条消息给 Jerry
         [conversation sendMessage:[AVIMTextMessage messageWithText:@"studentOffline" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
@@ -192,7 +192,7 @@ static int UID = 9999;
     AVUser *user = [AVUser currentUser];
     //发送消息
     AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
-    [app.client createConversationWithName:@"举手" clientIds:@[mTeacherLCUserName] callback:^(AVIMConversation *conversation, NSError *error) {
+    [app.client createConversationWithName:@"举手" clientIds:@[mTeacherEastID] callback:^(AVIMConversation *conversation, NSError *error) {
         // Tom 发了一条消息给 Jerry
         [conversation sendMessage:[AVIMTextMessage messageWithText:@"HandUp" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
@@ -204,7 +204,7 @@ static int UID = 9999;
 - (void)sendStudentOnlineMessage
 {
     AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
-    [app.client createConversationWithName:@"学生上线" clientIds:@[mTeacherLCUserName] callback:^(AVIMConversation *conversation, NSError *error) {
+    [app.client createConversationWithName:@"学生上线" clientIds:@[mTeacherEastID] callback:^(AVIMConversation *conversation, NSError *error) {
         // Tom 发了一条消息给 Jerry
         [conversation sendMessage:[AVIMTextMessage messageWithText:@"studentOnline" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
@@ -330,6 +330,10 @@ static int UID = 9999;
     else if ([message.text isEqualToString:@"收到学生上线通知"])
     {
         mTitleDescription.text = [NSString stringWithFormat:@"%@正在和你乐谱教学",mTeacherName];
+    }
+    else if ([message.text isEqualToString:@"老师下线"])
+    {
+        mTitleDescription.text = @"老师已下线";
     }
 }
 
