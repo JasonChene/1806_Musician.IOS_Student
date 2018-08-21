@@ -63,7 +63,6 @@
     if (![textField hasText]) {
         // tag 对应数组下标
         int index = (int)textField.tag;
-        [textField resignFirstResponder];
         CodeTextField * tv = [textfieldarray objectAtIndex:index];
         if (index == numOfRect -1) {
             tv.text = string;
@@ -78,14 +77,17 @@
         tv.text = string;
         int nextIndex = index + 1;
         [[textfieldarray objectAtIndex:nextIndex] becomeFirstResponder];
-        
     }
-    return false;
+    return NO;
+}
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
 }
 -(void) didClickBackWard{
     for (int i = 0; i < numOfRect; i ++)
     {
-        if (![[textfieldarray objectAtIndex:i] isFirstResponder]) {
+        if (![[textfieldarray objectAtIndex:i] isFirstResponder] || i == 0 ) {
             continue;
         }
         [[textfieldarray objectAtIndex:i] resignFirstResponder];
@@ -104,6 +106,8 @@
     CodeTextField *firstTV = [textfieldarray objectAtIndex:0];
     [firstTV becomeFirstResponder];
 }
+
+
 
 
 /*

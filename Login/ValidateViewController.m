@@ -28,6 +28,11 @@
     // Do any additional setup after loading the view.
     self.title = @"手机验证码登陆";
     [self initViewLayout];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(applicationWillEnterForeground:) name:@"applicationWillEnterForeground" object:nil];
+}
+- (void)applicationWillEnterForeground:(NSNotification *)notification
+{
+    [self->mVerificationCodeView cleanVerificationCodeView];
 }
 - (void)initViewLayout
 {

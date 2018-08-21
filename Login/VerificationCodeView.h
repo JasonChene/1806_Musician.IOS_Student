@@ -24,6 +24,7 @@
 @property(nonatomic, retain) id <VerificationCodeViewDelegate> delegate;
 - (void)cleanVerificationCodeView;
 - (void)setupUI;
+
 @end
 
 @protocol VerificationCodeViewDelegate
