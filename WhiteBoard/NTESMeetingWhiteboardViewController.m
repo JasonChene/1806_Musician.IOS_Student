@@ -284,6 +284,7 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
                                                                from:_sessionID
                                                                  to:_peerID //单播和广播发送示例
                                                                with:NIMRTSServiceReliableTransfer];
+    NSLog(@"%@",data);
     if (!success) {
         NSLog(@"======数据发送失败=======");
     }else

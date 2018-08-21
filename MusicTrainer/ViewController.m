@@ -129,9 +129,14 @@
     
     //获取课程信息
     [self getAllCoursesInfo:[NSDate date]];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"退出登录" style:UIBarButtonItemStylePlain target:self action:@selector(logoutCurrentUser)];
 }
-
-
+- (void)logoutCurrentUser
+{
+    [AVUser logOut];
+    [self showLoginViewController];
+}
 - (void)loginWithEastAccount
 {
     AVUser *user = [AVUser currentUser];
@@ -234,6 +239,7 @@
     comps = [calendar components:unitFlags fromDate:date];
     NSString *strWeek = @"一";
     int week = [comps weekday];
+    NSLog(@"%d",week);
     switch (week) {
         case 7:
             strWeek = @"六";

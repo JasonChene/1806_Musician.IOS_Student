@@ -138,6 +138,10 @@
                 [self showAllTextDialog:@"验证码已过期" :1];
                 [self->mVerificationCodeView cleanVerificationCodeView];
             }
+            else
+            {
+                [self showAllTextDialog:[[error userInfo] valueForKey:@"NSLocalizedFailureReason"]  :2];
+            }
         }
         
     }];

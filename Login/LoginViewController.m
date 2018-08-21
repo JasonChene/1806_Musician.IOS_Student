@@ -58,7 +58,22 @@
             ValidateViewController *validate = [[ValidateViewController alloc]initWithPhoneNumber:self->mUserTextField.text];
             [self.navigationController pushViewController:validate animated:YES];
         }
+        else
+        {
+            [self showAllTextDialog:[[error userInfo] valueForKey:@"NSLocalizedFailureReason"]  :2];
+        }
     }];
+}
+#pragma mark -  提示弹框
+-(void)showAllTextDialog:(NSString *)info :(NSTimeInterval)delay{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.label.text = info;
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [hud hideAnimated:YES afterDelay:delay];
+        });
+    });
 }
 
 - (void)didReceiveMemoryWarning {
