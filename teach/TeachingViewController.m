@@ -319,7 +319,7 @@ static int UID = 9999;
     if ([message.text isEqualToString:@"老师上线"])
     {
         [self showAllTextDialog:@"老师已上线" :1];
-        mTitleDescription.text = [NSString stringWithFormat:@"%@正在和你乐谱教学",mTeacherName];
+        mTitleDescription.text = [NSString stringWithFormat:@"%@正在和你语音教学",mTeacherName];
         AVIMTextMessage *reply = [AVIMTextMessage messageWithText:@"成功收到老师上线通知" attributes:nil];
         [conversation sendMessage:reply callback:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
@@ -329,7 +329,7 @@ static int UID = 9999;
     }
     else if ([message.text isEqualToString:@"收到学生上线通知"])
     {
-        mTitleDescription.text = [NSString stringWithFormat:@"%@正在和你乐谱教学",mTeacherName];
+        mTitleDescription.text = [NSString stringWithFormat:@"%@正在和你语音教学",mTeacherName];
     }
     else if ([message.text isEqualToString:@"老师下线"])
     {
