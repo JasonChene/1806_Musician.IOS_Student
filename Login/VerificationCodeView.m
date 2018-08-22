@@ -64,6 +64,8 @@
         // tag 对应数组下标
         int index = (int)textField.tag;
         CodeTextField * tv = [textfieldarray objectAtIndex:index];
+        tv.text = string;
+        [tv resignFirstResponder];
         if (index == numOfRect -1) {
             tv.text = string;
             NSString *code = @"";
@@ -72,11 +74,12 @@
                 code = [NSString stringWithFormat:@"%@%@",code,codeTV.text];
             }
             [self.delegate verificationCodeDidFinishedInput:self :code];
-            return false;
+            return NO;
         }
         tv.text = string;
         int nextIndex = index + 1;
-        [[textfieldarray objectAtIndex:nextIndex] becomeFirstResponder];
+        CodeTextField *tvNext = [textfieldarray objectAtIndex:nextIndex];
+        [tvNext becomeFirstResponder];
     }
     return NO;
 }
@@ -84,9 +87,14 @@
 {
     return YES;
 }
+-(void)textFieldDidBeginEditing:(UITextField*)textField
+{
+    [textField becomeFirstResponder];
+}
 -(void) didClickBackWard{
     for (int i = 0; i < numOfRect; i ++)
     {
+        //![[textfieldarray objectAtIndex:i] isFirstResponder]
         if (![[textfieldarray objectAtIndex:i] isFirstResponder] || i == 0 ) {
             continue;
         }
