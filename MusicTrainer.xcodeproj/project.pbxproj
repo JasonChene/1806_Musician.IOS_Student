@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		20B620858777214DED06E76B /* libPods-MusicTrainer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D82745FF57B233BD4DBCB6 /* libPods-MusicTrainer.a */; };
 		5261F130211BE95D00139D15 /* CourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5261F12F211BE95D00139D15 /* CourseTableViewCell.m */; };
+		52625B69212D3BDE00168C93 /* MQVerCodeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52625B5B212D3BDD00168C93 /* MQVerCodeInputView.m */; };
+		52625B6A212D3BDE00168C93 /* UIView+MQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 52625B5C212D3BDD00168C93 /* UIView+MQ.m */; };
 		5288A01E20E1EF45005741B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288A01D20E1EF45005741B1 /* AppDelegate.m */; };
 		5288A02120E1EF45005741B1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288A02020E1EF45005741B1 /* ViewController.m */; };
 		5288A02420E1EF45005741B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5288A02220E1EF45005741B1 /* Main.storyboard */; };
@@ -21,8 +23,6 @@
 		5288A05420E1F0D8005741B1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288A05320E1F0D7005741B1 /* LoginViewController.m */; };
 		5288A05720E210D0005741B1 /* LoginNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288A05620E210D0005741B1 /* LoginNavigationController.m */; };
 		5288A05A20F073F5005741B1 /* ValidateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288A05920F073F5005741B1 /* ValidateViewController.m */; };
-		5288A05D20F0B415005741B1 /* CodeTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288A05C20F0B415005741B1 /* CodeTextField.m */; };
-		5288A06120F0B675005741B1 /* VerificationCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288A06020F0B675005741B1 /* VerificationCodeView.m */; };
 		5288A06720F3665F005741B1 /* PathAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288A06620F3665F005741B1 /* PathAPI.m */; };
 		5288A06A20F3681D005741B1 /* TeachingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288A06920F3681D005741B1 /* TeachingViewController.m */; };
 		5288A56A20FAD6CD005741B1 /* AgoraRtcEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5288A56920FAD6CD005741B1 /* AgoraRtcEngineKit.framework */; };
@@ -158,6 +158,10 @@
 		3C5097D075B0BAC31DCA6CAF /* Pods-MusicTrainer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicTrainer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicTrainer/Pods-MusicTrainer.debug.xcconfig"; sourceTree = "<group>"; };
 		5261F12E211BE95D00139D15 /* CourseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseTableViewCell.h; sourceTree = "<group>"; };
 		5261F12F211BE95D00139D15 /* CourseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CourseTableViewCell.m; sourceTree = "<group>"; };
+		52625B59212D3BDD00168C93 /* MQVerCodeInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQVerCodeInputView.h; sourceTree = "<group>"; };
+		52625B5A212D3BDD00168C93 /* UIView+MQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MQ.h"; sourceTree = "<group>"; };
+		52625B5B212D3BDD00168C93 /* MQVerCodeInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQVerCodeInputView.m; sourceTree = "<group>"; };
+		52625B5C212D3BDD00168C93 /* UIView+MQ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MQ.m"; sourceTree = "<group>"; };
 		5288A01920E1EF45005741B1 /* MusicTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5288A01C20E1EF45005741B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5288A01D20E1EF45005741B1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -181,12 +185,6 @@
 		5288A05620E210D0005741B1 /* LoginNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginNavigationController.m; sourceTree = "<group>"; };
 		5288A05820F073F5005741B1 /* ValidateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ValidateViewController.h; sourceTree = "<group>"; };
 		5288A05920F073F5005741B1 /* ValidateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ValidateViewController.m; sourceTree = "<group>"; };
-		5288A05B20F0B415005741B1 /* CodeTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeTextField.h; sourceTree = "<group>"; };
-		5288A05C20F0B415005741B1 /* CodeTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CodeTextField.m; sourceTree = "<group>"; };
-		5288A05E20F0B4C6005741B1 /* CodeTextFieldDeleteDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeTextFieldDeleteDelegate.h; sourceTree = "<group>"; };
-		5288A05F20F0B675005741B1 /* VerificationCodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerificationCodeView.h; sourceTree = "<group>"; };
-		5288A06020F0B675005741B1 /* VerificationCodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VerificationCodeView.m; sourceTree = "<group>"; };
-		5288A06220F0B6B4005741B1 /* VerificationCodeViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerificationCodeViewDelegate.h; sourceTree = "<group>"; };
 		5288A06520F3665F005741B1 /* PathAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathAPI.h; sourceTree = "<group>"; };
 		5288A06620F3665F005741B1 /* PathAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathAPI.m; sourceTree = "<group>"; };
 		5288A06820F3681D005741B1 /* TeachingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeachingViewController.h; sourceTree = "<group>"; };
@@ -310,9 +308,21 @@
 			path = CourseCell;
 			sourceTree = "<group>";
 		};
+		52625B58212D3BDD00168C93 /* MQVerViewInputView */ = {
+			isa = PBXGroup;
+			children = (
+				52625B59212D3BDD00168C93 /* MQVerCodeInputView.h */,
+				52625B5A212D3BDD00168C93 /* UIView+MQ.h */,
+				52625B5B212D3BDD00168C93 /* MQVerCodeInputView.m */,
+				52625B5C212D3BDD00168C93 /* UIView+MQ.m */,
+			);
+			path = MQVerViewInputView;
+			sourceTree = "<group>";
+		};
 		5288A01020E1EF45005741B1 = {
 			isa = PBXGroup;
 			children = (
+				52625B58212D3BDD00168C93 /* MQVerViewInputView */,
 				5261F12D211BE72600139D15 /* CourseCell */,
 				52D72171210AE8C700D2BDC3 /* AVOS.xcodeproj */,
 				52E173462108107800DA33DC /* WhiteBoard */,
@@ -383,12 +393,6 @@
 				5288A05620E210D0005741B1 /* LoginNavigationController.m */,
 				5288A05820F073F5005741B1 /* ValidateViewController.h */,
 				5288A05920F073F5005741B1 /* ValidateViewController.m */,
-				5288A05B20F0B415005741B1 /* CodeTextField.h */,
-				5288A05C20F0B415005741B1 /* CodeTextField.m */,
-				5288A05E20F0B4C6005741B1 /* CodeTextFieldDeleteDelegate.h */,
-				5288A05F20F0B675005741B1 /* VerificationCodeView.h */,
-				5288A06020F0B675005741B1 /* VerificationCodeView.m */,
-				5288A06220F0B6B4005741B1 /* VerificationCodeViewDelegate.h */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -770,14 +774,14 @@
 				5288A05A20F073F5005741B1 /* ValidateViewController.m in Sources */,
 				5288A06720F3665F005741B1 /* PathAPI.m in Sources */,
 				5288A06A20F3681D005741B1 /* TeachingViewController.m in Sources */,
-				5288A06120F0B675005741B1 /* VerificationCodeView.m in Sources */,
 				5288A02F20E1EF46005741B1 /* main.m in Sources */,
 				52E173552108390200DA33DC /* UIActionSheet+NTESBlock.m in Sources */,
 				5288A01E20E1EF45005741B1 /* AppDelegate.m in Sources */,
 				52E173612108542600DA33DC /* NTESTimerHolder.m in Sources */,
 				52E173492108109F00DA33DC /* NTESMeetingWhiteboardViewController.m in Sources */,
 				5288A05420E1F0D8005741B1 /* LoginViewController.m in Sources */,
-				5288A05D20F0B415005741B1 /* CodeTextField.m in Sources */,
+				52625B69212D3BDE00168C93 /* MQVerCodeInputView.m in Sources */,
+				52625B6A212D3BDE00168C93 /* UIView+MQ.m in Sources */,
 				5288A05720E210D0005741B1 /* LoginNavigationController.m in Sources */,
 				52E1735E21083B0F00DA33DC /* NTESBundleSetting.m in Sources */,
 			);

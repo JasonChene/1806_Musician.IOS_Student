@@ -21,6 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - FLKAutoLayout (0.2.1)
+  - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
   - NIMSDK (5.4.0)
   - ORStackView (3.0.1):
@@ -30,6 +31,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.6)
+  - Masonry
   - MBProgressHUD (~> 1.1.0)
   - NIMSDK (~> 5.4.0)
   - ORStackView (~> 3.0)
@@ -40,6 +42,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
     - FLKAutoLayout
+    - Masonry
     - MBProgressHUD
     - NIMSDK
     - ORStackView
@@ -49,12 +52,13 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   NIMSDK: b96577d4f892a606e644eeba55837ab5cf5de071
   ORStackView: a1bb52748cd0ae29891c140baf22ff8972fb363c
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Toast: 14a93686d6c8bfe2727afd342414e35660a8a1f3
 
-PODFILE CHECKSUM: f384a9ccbeb0deb6df07c4aa9a65dd80a0f0dbe7
+PODFILE CHECKSUM: 1ea87faa85fce9e4e7fef2639b058d08f597e6db
 
 COCOAPODS: 1.5.3

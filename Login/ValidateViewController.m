@@ -32,7 +32,7 @@
 }
 - (void)applicationWillEnterForeground:(NSNotification *)notification
 {
-    [self->mVerificationCodeView cleanVerificationCodeView];
+//    [self->mVerificationCodeView cleanVerificationCodeView];
 }
 - (void)initViewLayout
 {
@@ -49,31 +49,18 @@
     
     mTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countDownTimer) userInfo:nil repeats:YES];
     
-    mVerificationCodeView = [[VerificationCodeView alloc]initWithFrame:CGRectMake(0, 200, self.view.frame.size.width, 100)];
-    mVerificationCodeView.delegate = self;
-    [mVerificationCodeView setupUI];
+    mVerificationCodeView = [[MQVerCodeInputView alloc]initWithFrame:CGRectMake(25, 200, self.view.frame.size.width-50, 50)];
+    mVerificationCodeView.maxLenght = 6;//最大长度
+    mVerificationCodeView.keyBoardType = UIKeyboardTypeNumberPad;
+    [mVerificationCodeView mq_verCodeViewWithMaxLenght];
+    mVerificationCodeView.block = ^(NSString *text){
+        if (text.length == 6) {
+            self->strValidate = text;
+        }
+    };
     [self.view addSubview:mVerificationCodeView];
     
 }
-#pragma mark - VerificationCodeViewDelegate
-- (void)verificationCodeDidFinishedInput :(VerificationCodeView *)verificationCodeView :(NSString *)code
-{
-    NSLog(@"====:%@",code);
-    if (code.length == 6) {
-        strValidate = code;
-    }
-}
-//#pragma mark - UITextFieldDelegate
-//// return NO to disallow editing.
-//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-//{
-//    return YES;
-//}
-//// became first responder
-//- (void)textFieldDidBeginEditing:(UITextField *)textField
-//{
-//    [textField becomeFirstResponder];
-//}
 - (void)countDownTimer
 {
     mCountDownTime --;
@@ -141,7 +128,6 @@
             if ([error code] == 603)
             {
                 [self showAllTextDialog:@"验证码已过期" :1];
-                [self->mVerificationCodeView cleanVerificationCodeView];
             }
             else
             {

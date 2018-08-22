@@ -10,6 +10,7 @@ def pods
   pod 'Toast', '~> 3.0'
   pod 'Reachability', '~> 3.2'
   pod 'MBProgressHUD', '~> 1.1.0'
+  pod 'Masonry'
   
 end
 target 'MusicTrainer' do

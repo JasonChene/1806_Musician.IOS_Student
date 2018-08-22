@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "VerificationCodeViewDelegate.h"
 #import <AVOSCloud/AVOSCloud.h>
 #import "PathAPI.h"
 #import "MBProgressHUD.h"
 #import <AVOSCloudIM/AVIMClient.h>
 #import "AppDelegate.h"
+#import "MQVerCodeInputView.h"
 
-@interface ValidateViewController : UIViewController<VerificationCodeViewDelegate,UITextFieldDelegate>
+@interface ValidateViewController : UIViewController
 {
     NSString *mPhoneNumber;
     UIButton *mResendBtn;
@@ -22,7 +22,7 @@
     NSTimer *mTimer;
     int mCountDownTime;
     NSString *strValidate;
-    VerificationCodeView *mVerificationCodeView;
+    MQVerCodeInputView *mVerificationCodeView;
 }
 - (id)initWithPhoneNumber:(NSString *)strPhoneNum;
 @end
