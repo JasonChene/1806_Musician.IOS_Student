@@ -28,6 +28,9 @@
     NSString *mTeacherName;
     UITextView *mTitleDescription;
     NSString *mTeacherLCUserName;
+    NSMutableArray *mArrOriginDatas;
+    NSMutableArray *mArrOriginPeerDatas;
+    NSString *mStrImagePath;
 }
 @property (strong, nonatomic) AgoraRtcEngineKit *agoraKit;
 @property (strong, nonatomic) UIView *videoLocalView;

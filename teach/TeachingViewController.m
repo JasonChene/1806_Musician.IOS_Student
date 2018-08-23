@@ -25,7 +25,11 @@ static int UID = 9999;
     }
     return self;
 }
-
+- (void)closeMusicTeaching:(NSNotification *)notifation
+{
+    mArrOriginDatas = self.whiteboardVC.mOriginDatas;
+    mArrOriginPeerDatas = self.whiteboardVC.mOriginPeerDatas;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -33,6 +37,10 @@ static int UID = 9999;
     self.title = mTeacherName;
     self.view.backgroundColor = [UIColor whiteColor];
     [self layoutView];
+    
+    mArrOriginDatas = [[NSMutableArray alloc]initWithCapacity:0];
+    mArrOriginPeerDatas = [[NSMutableArray alloc]initWithCapacity:0];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(closeMusicTeaching:) name:@"closeMusicTeaching" object:nil];
     
     //接受即时消息通知
     AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
@@ -180,8 +188,14 @@ static int UID = 9999;
 }
 
 #pragma mark - Private
-- (void)setupChildViewController :(UIImage *)musicImage{
-    self.whiteboardVC = [[NTESMeetingWhiteboardViewController alloc] initWithImage :musicImage musicSize: CGSizeMake(self.view.frame.size.width, self.view.frame.size.height - mNavBarAndStatusBarHeight) andTeacherEastID:mTeacherEastID];
+- (void)setupChildViewController :(UIImage *)musicImage :(NSString *)imgPath
+{
+    if (![mStrImagePath isEqual:imgPath] ) {
+        mArrOriginDatas = [[NSMutableArray alloc]initWithCapacity:0];
+        mArrOriginPeerDatas = [[NSMutableArray alloc]initWithCapacity:0];
+    }
+    mStrImagePath = imgPath;
+    self.whiteboardVC = [[NTESMeetingWhiteboardViewController alloc] initWithImage :musicImage musicImagePath: imgPath musicSize: CGSizeMake(self.view.frame.size.width, self.view.frame.size.height - mNavBarAndStatusBarHeight) andTeacherEastID:mTeacherEastID :mArrOriginDatas :mArrOriginPeerDatas];
     [self.whiteboardVC.view setFrame:CGRectMake(0, mNavBarAndStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - mNavBarAndStatusBarHeight)];
     [self addChildViewController:self.whiteboardVC];
     [self.view addSubview:self.whiteboardVC.view];
@@ -303,7 +317,8 @@ static int UID = 9999;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     //获取图片
     UIImage *image = info[UIImagePickerControllerOriginalImage];
-    [self setupChildViewController :image];
+    NSString *imgPath = info[UIImagePickerControllerReferenceURL];
+    [self setupChildViewController :image :imgPath];
     [self dismissViewControllerAnimated:YES completion:nil];
 //    myImageView.image = image;
 }

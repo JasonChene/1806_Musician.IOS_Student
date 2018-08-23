@@ -7,8 +7,7 @@
 //
 
 #import "NTESMeetingWhiteboardViewController.h"
-#import "NTESWhiteboardDrawView.h"
-#import <AVOSCloud/AVOSCloud.h>
+
 
 typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     WhiteBoardCmdTypePointStart    = 1,
@@ -22,25 +21,22 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 };
 
 @interface NTESMeetingWhiteboardViewController ()
-@property (strong, nonatomic) NTESWhiteboardDrawView *myDrawView;
-@property (strong, nonatomic) NTESWhiteboardDrawView *peerDrawView;
-@property (strong, nonatomic) NSLock *cmdsLock;
-@property (strong, nonatomic) NSMutableString *cmds;
-@property (assign, nonatomic) UInt64 refPacketID;
-@property (copy, nonatomic) NSString *sessionID;
-@property (copy, nonatomic) NSString *peerID;
-@property (copy, nonatomic) UIImage *musicImage;
-@property (assign, nonatomic) Boolean isSendImage;
+
 @end
 
 @implementation NTESMeetingWhiteboardViewController
-- (instancetype)initWithImage :(UIImage *)musicImage musicSize :(CGSize)size andTeacherEastID :(NSString *)eastAccountID
+- (instancetype)initWithImage :(UIImage *)musicImage musicImagePath:(NSString *)imgPath musicSize :(CGSize)size andTeacherEastID :(NSString *)eastAccountID :(NSMutableArray *)originDatas :(NSMutableArray *)originPeerDatas
 {
     self = [super init];
     if (self) {
         _musicImage = musicImage;
         mMusicImageSize = size;
         mEastAccountID = eastAccountID;
+        mImagePath = imgPath;
+        self.mOriginDatas = originDatas;
+//        [self.mOriginDatas addObjectsFromArray:originDatas];
+        self.mOriginPeerDatas = originPeerDatas;
+//        [self.mOriginPeerDatas addObjectsFromArray:originPeerDatas];
     }
     return self;
 }
@@ -62,8 +58,36 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     UIButton *closeMusicBtn = [self createButtonWithFrame:CGRectMake((self.view.frame.size.width - 100)/2, self.view.frame.size.height - 150 - 7, 100, 30) :@"关闭乐谱" :@selector(closeMusicPress)];
     [self.view addSubview:closeMusicBtn];
     
+    
     NIMRTSOption *option = [[NIMRTSOption alloc] init];
     option.extendMessage = @"ext msg example";
+    
+    NSArray *arrOriginPeerDatas = [[NSArray alloc]initWithArray:self.mOriginPeerDatas];;
+    NSArray *arrOriginDatas = [[NSArray alloc]initWithArray:self.mOriginDatas];;
+    
+    self.mOriginPeerDatas = [[NSMutableArray alloc]initWithCapacity:0];
+    self.mOriginDatas = [[NSMutableArray alloc]initWithCapacity:0];
+    if (arrOriginPeerDatas.count > 0) {
+        if (![self.mOriginPeerDatas.class isKindOfClass:NSMutableArray.class]) {
+            self.mOriginPeerDatas = [[NSMutableArray alloc]initWithArray:arrOriginPeerDatas];
+        }else{
+            [self.mOriginPeerDatas addObjectsFromArray:arrOriginPeerDatas];
+        }
+        
+    }
+    if (arrOriginDatas.count > 0) {
+        if (![self.mOriginDatas.class isKindOfClass:NSMutableArray.class]) {
+            self.mOriginDatas = [[NSMutableArray alloc]initWithArray:arrOriginDatas];
+        }
+        else
+        {
+            [self.mOriginDatas addObjectsFromArray:arrOriginDatas];
+        }
+        
+    }
+    
+    
+    
     
     [[NIMAVChatSDK sharedSDK].rtsManager addDelegate:self];
     //liguangsong的手机账号对应的accid   5b5ed006808ca4003c895580   5b5af3a82f301e00394c7c98(鲁昊)。5b67f74fee920a003bf2d560(储晟同事)
@@ -82,6 +106,22 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     NSLog(@"theSessionID:%@",theSessionID);
     
     [self showDrawView:closeMusicBtn];
+    
+    
+    for (int i = 0; i < _mOriginDatas.count; i ++)
+    {
+        NSDictionary *dicInfo = [_mOriginDatas objectAtIndex:i];
+        NSArray *point = [dicInfo objectForKey:@"point"];
+        BOOL isStart = [[dicInfo objectForKey:@"type"] boolValue];
+        [_myDrawView addPoints:[NSMutableArray arrayWithObjects:point, nil] isNewLine:isStart];
+    }
+    for (int i = 0; i < _mOriginPeerDatas.count; i ++)
+    {
+        NSDictionary *dicInfo = [_mOriginPeerDatas objectAtIndex:i];
+        NSMutableArray *points = [dicInfo objectForKey:@"point"];
+        BOOL isStart = [[dicInfo objectForKey:@"type"] boolValue];
+        [_peerDrawView addPoints:points isNewLine:isStart];
+    }
     
     alertController = [UIAlertController alertControllerWithTitle:@"提示框" message:@"消息" preferredStyle:UIAlertControllerStyleAlert];
     alertController.view.backgroundColor = [UIColor purpleColor];
@@ -107,7 +147,7 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     
     _peerDrawView = [[NTESWhiteboardDrawView alloc] initWithFrame:frame];
     _peerDrawView.backgroundColor = [UIColor clearColor];
-    [_peerDrawView setLineColor:[UIColor greenColor]];
+    [_peerDrawView setLineColor:[UIColor redColor]];
     [self.view insertSubview:_peerDrawView belowSubview:closeMusicBtn];
 }
 
@@ -123,6 +163,7 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 }
 - (void)closeMusicPress
 {
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"closeMusicTeaching" object:_mOriginDatas];
     [[NIMAVChatSDK sharedSDK].rtsManager terminateRTS:_sessionID];
     [self.view removeFromSuperview];
     [[NIMAVChatSDK sharedSDK].rtsManager removeDelegate:self];
@@ -253,6 +294,13 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     NSArray *point = [NSArray arrayWithObjects:@(p.x), @(p.y), nil];
     [_myDrawView addPoints:[NSMutableArray arrayWithObjects:point, nil]
                  isNewLine:(type == WhiteBoardCmdTypePointStart)];
+    
+    //本地存储绘画数据点
+    if (![[_mOriginDatas class]isKindOfClass:NSMutableArray.class]) {
+        _mOriginDatas = [[NSMutableArray alloc]initWithArray:_mOriginDatas];
+    }
+    NSDictionary *dataInfo = [[NSDictionary alloc]initWithObjectsAndKeys:point,@"point",[NSString stringWithFormat:@"%d",type==WhiteBoardCmdTypePointStart],@"type", nil];
+    [_mOriginDatas addObject:dataInfo];
 }
 - (void)addCmd:(NSString *)aCmd
 {
@@ -300,7 +348,7 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
         if (succeeded) {
             NSLog(@"返回一个唯一的 Url 地址:%@", file.url);//返回一个唯一的 Url 地址
 //            self->_myDrawView.backgroundColor = [UIColor colorWithPatternImage:[self compressOriginalImage:[UIImage imageWithContentsOfFile:file.url] toSize:self->_myDrawView.frame.size]];
-            NSString *strImageUrl = [NSString stringWithFormat:@"0:%@",file.url];
+            NSString *strImageUrl = [NSString stringWithFormat:@"0:%@:%@",file.url,self->mImagePath];
             [self sendRTSData:strImageUrl];
             
         }
@@ -346,6 +394,13 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
             switch (c) {
                 case WhiteBoardCmdTypePointStart:
                     if ([points count] > 0) {
+                        
+                        NSDictionary *dataInfo = [[NSDictionary alloc]initWithObjectsAndKeys:points,@"point",[NSString stringWithFormat:@"%d",newLine],@"type", nil];
+                        if (![_mOriginPeerDatas.class isKindOfClass:NSMutableArray.class]) {
+                            _mOriginPeerDatas = [[NSMutableArray alloc]initWithArray:_mOriginPeerDatas];
+                        }
+                        [_mOriginPeerDatas addObject:dataInfo];
+                        
                         [_peerDrawView addPoints:points isNewLine:newLine];
                         points = [[NSMutableArray alloc] init];
                     }
@@ -369,6 +424,13 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
             }
         }
         if ([points count] > 0) {
+            
+            NSDictionary *dataInfo = [[NSDictionary alloc]initWithObjectsAndKeys:points,@"point",[NSString stringWithFormat:@"%d",newLine],@"type", nil];
+            if (![[_mOriginPeerDatas class]isKindOfClass:NSMutableArray.class]) {
+                _mOriginPeerDatas = [[NSMutableArray alloc]initWithArray:_mOriginPeerDatas];
+            }
+            [_mOriginPeerDatas addObject:dataInfo];
+            
             [_peerDrawView addPoints:points isNewLine:newLine];
         }
 
@@ -378,6 +440,8 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 {
     [_myDrawView clear];
     [_peerDrawView clear];
+    _mOriginPeerDatas = [[NSMutableArray alloc]initWithCapacity:0];
+    _mOriginDatas = [[NSMutableArray alloc]initWithCapacity:0];
 }
 - (void)sendWhiteboardCmd:(WhiteBoardCmdType)cmd
 {
