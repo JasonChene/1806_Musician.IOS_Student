@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		20B620858777214DED06E76B /* libPods-MusicTrainer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D82745FF57B233BD4DBCB6 /* libPods-MusicTrainer.a */; };
+		5209F68F21300F100016958D /* ImageOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 5209F68E21300F100016958D /* ImageOption.m */; };
 		5261F130211BE95D00139D15 /* CourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5261F12F211BE95D00139D15 /* CourseTableViewCell.m */; };
 		52625B69212D3BDE00168C93 /* MQVerCodeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52625B5B212D3BDD00168C93 /* MQVerCodeInputView.m */; };
 		52625B6A212D3BDE00168C93 /* UIView+MQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 52625B5C212D3BDD00168C93 /* UIView+MQ.m */; };
@@ -156,6 +157,8 @@
 /* Begin PBXFileReference section */
 		11221248BC3DCBD95E8B00D4 /* Pods-MusicTrainer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicTrainer.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusicTrainer/Pods-MusicTrainer.release.xcconfig"; sourceTree = "<group>"; };
 		3C5097D075B0BAC31DCA6CAF /* Pods-MusicTrainer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicTrainer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicTrainer/Pods-MusicTrainer.debug.xcconfig"; sourceTree = "<group>"; };
+		5209F68D21300F100016958D /* ImageOption.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageOption.h; path = View/ImageOption.h; sourceTree = "<group>"; };
+		5209F68E21300F100016958D /* ImageOption.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ImageOption.m; path = View/ImageOption.m; sourceTree = "<group>"; };
 		5261F12E211BE95D00139D15 /* CourseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseTableViewCell.h; sourceTree = "<group>"; };
 		5261F12F211BE95D00139D15 /* CourseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CourseTableViewCell.m; sourceTree = "<group>"; };
 		52625B59212D3BDD00168C93 /* MQVerCodeInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQVerCodeInputView.h; sourceTree = "<group>"; };
@@ -459,6 +462,8 @@
 				52E1734D210837B600DA33DC /* View */,
 				52E173472108109F00DA33DC /* NTESMeetingWhiteboardViewController.h */,
 				52E173482108109F00DA33DC /* NTESMeetingWhiteboardViewController.m */,
+				5209F68D21300F100016958D /* ImageOption.h */,
+				5209F68E21300F100016958D /* ImageOption.m */,
 			);
 			path = WhiteBoard;
 			sourceTree = "<group>";
@@ -782,6 +787,7 @@
 				5288A05420E1F0D8005741B1 /* LoginViewController.m in Sources */,
 				52625B69212D3BDE00168C93 /* MQVerCodeInputView.m in Sources */,
 				52625B6A212D3BDE00168C93 /* UIView+MQ.m in Sources */,
+				5209F68F21300F100016958D /* ImageOption.m in Sources */,
 				5288A05720E210D0005741B1 /* LoginNavigationController.m in Sources */,
 				52E1735E21083B0F00DA33DC /* NTESBundleSetting.m in Sources */,
 			);
@@ -953,7 +959,7 @@
 			baseConfigurationReference = 3C5097D075B0BAC31DCA6CAF /* Pods-MusicTrainer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2YNXV35PZJ;
 				ENABLE_BITCODE = NO;
@@ -969,8 +975,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bigegg.com.MusicTrainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "87d20908-e4de-413f-89b2-82e05cd5dc89";
-				PROVISIONING_PROFILE_SPECIFIER = "music-trainer-develop";
+				PROVISIONING_PROFILE = "eaf1bdf9-794d-4fc7-b35a-498f154afeea";
+				PROVISIONING_PROFILE_SPECIFIER = musictrainerdis;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;

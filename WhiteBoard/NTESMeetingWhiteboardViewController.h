@@ -11,6 +11,7 @@
 #import "MBProgressHUD.h"
 #import "NTESWhiteboardDrawView.h"
 #import <AVOSCloud/AVOSCloud.h>
+#import "ImageOption.h"
 
 
 @interface NTESMeetingWhiteboardViewController : UIViewController<NIMRTSManagerDelegate>

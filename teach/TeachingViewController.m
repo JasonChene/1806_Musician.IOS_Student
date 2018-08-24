@@ -319,6 +319,7 @@ static int UID = 9999;
     UIImage *image = info[UIImagePickerControllerOriginalImage];
     NSString *imgPath = info[UIImagePickerControllerReferenceURL];
     [self setupChildViewController :image :imgPath];
+    NSLog(@"%@",image);
     [self dismissViewControllerAnimated:YES completion:nil];
 //    myImageView.image = image;
 }

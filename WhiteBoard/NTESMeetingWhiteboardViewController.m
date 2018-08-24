@@ -96,38 +96,30 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
                                                                       option:nil
                                                                   completion:^(NSError *error, NSString *sessionID, UInt64 channelID)
                               {
-                                  NSLog(@"=========+==========%@,\n=====:%@",error,sessionID);
                                   self.sessionID = sessionID;
-                                  
                                   if (!error) {
                                       self->_myDrawView.backgroundColor = [UIColor colorWithPatternImage:[self compressOriginalImage:self->_musicImage toSize:self->_myDrawView.frame.size]];
+                                      
                                   }
                               }];
     NSLog(@"theSessionID:%@",theSessionID);
-    
     [self showDrawView:closeMusicBtn];
-    
-    
-    for (int i = 0; i < _mOriginDatas.count; i ++)
+    for (int i = 0; i < self->_mOriginDatas.count; i ++)
     {
-        NSDictionary *dicInfo = [_mOriginDatas objectAtIndex:i];
+        NSDictionary *dicInfo = [self->_mOriginDatas objectAtIndex:i];
         NSArray *point = [dicInfo objectForKey:@"point"];
         BOOL isStart = [[dicInfo objectForKey:@"type"] boolValue];
-        [_myDrawView addPoints:[NSMutableArray arrayWithObjects:point, nil] isNewLine:isStart];
+        [self->_myDrawView addPoints:[NSMutableArray arrayWithObjects:point, nil] isNewLine:isStart];
     }
-    for (int i = 0; i < _mOriginPeerDatas.count; i ++)
+    for (int i = 0; i < self->_mOriginPeerDatas.count; i ++)
     {
-        NSDictionary *dicInfo = [_mOriginPeerDatas objectAtIndex:i];
+        NSDictionary *dicInfo = [self->_mOriginPeerDatas objectAtIndex:i];
         NSMutableArray *points = [dicInfo objectForKey:@"point"];
         BOOL isStart = [[dicInfo objectForKey:@"type"] boolValue];
-        [_peerDrawView addPoints:points isNewLine:isStart];
+        [self->_peerDrawView addPoints:points isNewLine:isStart];
     }
     
-    alertController = [UIAlertController alertControllerWithTitle:@"提示框" message:@"消息" preferredStyle:UIAlertControllerStyleAlert];
-    alertController.view.backgroundColor = [UIColor purpleColor];
-    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
-    [alertController addAction:confirmAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+    
 }
 -(UIImage *)compressOriginalImage:(UIImage *)image toSize:(CGSize)size{
     UIGraphicsBeginImageContext(size);
@@ -223,7 +215,7 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     
     if (accepted) {
         NSLog(@"====是否接听:%d",accepted);
-        [self sendRTSImageData:UIImagePNGRepresentation(self->_musicImage)];
+        [self sendRTSImageData:self->_musicImage];
     }
     else
     {
@@ -332,7 +324,7 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
                                                                from:_sessionID
                                                                  to:_peerID //单播和广播发送示例
                                                                with:NIMRTSServiceReliableTransfer];
-    NSLog(@"%@",data);
+//    NSLog(@"%@",data);
     if (!success) {
         NSLog(@"======数据发送失败=======");
     }else
@@ -340,14 +332,15 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
         _isSendImage = NO;
     }
 }
-- (void)sendRTSImageData:(NSData *)data
+
+- (void)sendRTSImageData:(UIImage *)image
 {
-    
+    UIImage *uploadImage = [ImageOption compressImageQuality:image toByte:30000];
+    NSData *data = UIImagePNGRepresentation(uploadImage);
     AVFile * file = [AVFile fileWithData:data name:@"music.png"];
     [file uploadWithCompletionHandler:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"返回一个唯一的 Url 地址:%@", file.url);//返回一个唯一的 Url 地址
-//            self->_myDrawView.backgroundColor = [UIColor colorWithPatternImage:[self compressOriginalImage:[UIImage imageWithContentsOfFile:file.url] toSize:self->_myDrawView.frame.size]];
             NSString *strImageUrl = [NSString stringWithFormat:@"0:%@:%@",file.url,self->mImagePath];
             [self sendRTSData:strImageUrl];
             
