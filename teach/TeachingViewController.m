@@ -38,6 +38,8 @@ static int UID = 9999;
     self.view.backgroundColor = [UIColor whiteColor];
     [self layoutView];
     
+    [[UIApplication sharedApplication] setIdleTimerDisabled: YES];
+    
     mArrOriginDatas = [[NSMutableArray alloc]initWithCapacity:0];
     mArrOriginPeerDatas = [[NSMutableArray alloc]initWithCapacity:0];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(closeMusicTeaching:) name:@"closeMusicTeaching" object:nil];
@@ -203,14 +205,13 @@ static int UID = 9999;
 
 - (void)handup:(id)sender
 {
-    AVUser *user = [AVUser currentUser];
     //发送消息
     AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
     [app.client createConversationWithName:@"举手" clientIds:@[mTeacherEastID] callback:^(AVIMConversation *conversation, NSError *error) {
         // Tom 发了一条消息给 Jerry
         [conversation sendMessage:[AVIMTextMessage messageWithText:@"HandUp" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
-                NSLog(@"举手成功！");
+                [self showAllTextDialog:@"举手成功！" :1];
             }
         }];
     }];

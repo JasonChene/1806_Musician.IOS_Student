@@ -959,7 +959,7 @@
 			baseConfigurationReference = 3C5097D075B0BAC31DCA6CAF /* Pods-MusicTrainer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2YNXV35PZJ;
 				ENABLE_BITCODE = NO;
@@ -975,8 +975,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bigegg.com.MusicTrainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "eaf1bdf9-794d-4fc7-b35a-498f154afeea";
-				PROVISIONING_PROFILE_SPECIFIER = musictrainerdis;
+				PROVISIONING_PROFILE = "87d20908-e4de-413f-89b2-82e05cd5dc89";
+				PROVISIONING_PROFILE_SPECIFIER = "music-trainer-develop";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
