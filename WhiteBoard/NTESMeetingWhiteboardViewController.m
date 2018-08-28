@@ -55,7 +55,7 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    UIButton *closeMusicBtn = [self createButtonWithFrame:CGRectMake((self.view.frame.size.width - 100)/2, self.view.frame.size.height - 150 - 7, 100, 30) :@"关闭乐谱" :@selector(closeMusicPress)];
+    UIButton *closeMusicBtn = [self createButtonWithFrame:CGRectMake((self.view.frame.size.width - 100)/2, self.view.frame.size.height - 170 - 7, 100, 50) :@"关闭乐谱" :@selector(closeMusicPress)];
     [self.view addSubview:closeMusicBtn];
     
     

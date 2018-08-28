@@ -153,9 +153,9 @@ static int UID = 9999;
     [self.view addSubview:mTitleDescription];
     
     
-    UIButton *openMusicBtn = [self createButtonWithFrame:CGRectMake((self.view.frame.size.width - 200 - 12)/2, self.view.frame.size.height - 30 - 7, 100, 30) :@"打开乐谱" :@selector(openMusicBook:)];
+    UIButton *openMusicBtn = [self createButtonWithFrame:CGRectMake((self.view.frame.size.width - 200 - 12)/2, self.view.frame.size.height - 50 - 10, 100, 50) :@"打开乐谱" :@selector(openMusicBook:)];
     [self.view addSubview:openMusicBtn];
-    UIButton *handupBtn = [self createButtonWithFrame:CGRectMake(openMusicBtn.frame.origin.x + 100 + 12, openMusicBtn.frame.origin.y, 100, 30) :@"举手" :@selector(handup:)];
+    UIButton *handupBtn = [self createButtonWithFrame:CGRectMake(openMusicBtn.frame.origin.x + 100 + 12, openMusicBtn.frame.origin.y, 100, 50) :@"举手" :@selector(handup:)];
     [self.view addSubview:handupBtn];
 }
 - (UIButton *)createButtonWithFrame:(CGRect)frame :(NSString *)title :(SEL)event
