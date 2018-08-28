@@ -71,7 +71,7 @@
             if (arrNightCourse.count != 0)
                 [self->mAllStudentCourseInfo setObject:arrNightCourse forKey:@"NightCourse"];
             
-            NSLog(@"============%@",self->mAllStudentCourseInfo);
+//            NSLog(@"============%@",self->mAllStudentCourseInfo);
             [self->mCourseTableview reloadData];
             
         }];

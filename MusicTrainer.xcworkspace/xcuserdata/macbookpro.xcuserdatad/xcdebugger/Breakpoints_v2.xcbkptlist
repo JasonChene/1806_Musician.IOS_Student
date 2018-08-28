@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.571259"
+            timestampString = "557116751.732288"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
+            startingLineNumber = "246"
+            endingLineNumber = "246"
             landmarkName = "NTESMeetingWhiteboardViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.571916"
+            timestampString = "557116751.732595"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
             landmarkName = "NTESMeetingWhiteboardViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -52,7 +52,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MusicTrainer/ViewController.m"
-            timestampString = "556537638.548604"
+            timestampString = "557116751.732708"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "67"
@@ -68,7 +68,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MusicTrainer/ViewController.m"
-            timestampString = "556537638.548651"
+            timestampString = "557116751.732887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "65"
@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.572212"
+            timestampString = "557116751.732929"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "312"
-            endingLineNumber = "312"
+            startingLineNumber = "319"
+            endingLineNumber = "319"
             landmarkName = "-sendCmds"
             landmarkType = "7">
          </BreakpointContent>
@@ -100,11 +100,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.5724649"
+            timestampString = "557116751.733021"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "311"
-            endingLineNumber = "311"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
             landmarkName = "-sendCmds"
             landmarkType = "7">
          </BreakpointContent>
@@ -116,11 +116,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.57271"
+            timestampString = "557116751.73314"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "320"
+            endingLineNumber = "320"
             landmarkName = "-sendCmds"
             landmarkType = "7">
          </BreakpointContent>
@@ -132,7 +132,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "teach/TeachingViewController.m"
-            timestampString = "557065007.572958"
+            timestampString = "557116751.7332439"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "157"
@@ -148,11 +148,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.573155"
+            timestampString = "557116751.733664"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "NTESMeetingWhiteboardViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -163,24 +163,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "teach/TeachingViewController.m"
-            timestampString = "557065007.573438"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MusicTrainer/ViewController.m"
-            timestampString = "556537638.5490251"
+            timestampString = "557116751.7337461"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "40"
@@ -196,11 +180,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MusicTrainer/ViewController.m"
-            timestampString = "556537638.54907"
+            timestampString = "557116751.733785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "-getAllCoursesInfo:"
             landmarkType = "7">
          </BreakpointContent>
@@ -212,7 +196,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MusicTrainer/ViewController.m"
-            timestampString = "556537638.549114"
+            timestampString = "557116751.733821"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "51"
@@ -227,24 +211,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "teach/TeachingViewController.m"
-            timestampString = "557065007.573532"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "-initWithTeacherID:andWithStudentID:andTeacherName:andTeacherLeanCloudUserName:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MusicTrainer/ViewController.m"
-            timestampString = "556537638.549181"
+            timestampString = "557116751.733855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "397"
@@ -260,23 +228,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "teach/TeachingViewController.m"
-            timestampString = "557065007.573585"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "teach/TeachingViewController.m"
-            timestampString = "557065007.573625"
+            timestampString = "557116751.733891"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "293"
@@ -292,7 +244,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "teach/TeachingViewController.m"
-            timestampString = "557065007.573665"
+            timestampString = "557116751.734103"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "199"
@@ -308,7 +260,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MusicTrainer/ViewController.m"
-            timestampString = "556537638.549258"
+            timestampString = "557116751.734293"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "410"
@@ -388,11 +340,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.573751"
+            timestampString = "557116751.73438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -404,11 +356,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.5740089"
+            timestampString = "557116751.734471"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
             landmarkName = "-onPointCollected:type:"
             landmarkType = "7">
          </BreakpointContent>
@@ -419,24 +371,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "teach/TeachingViewController.m"
-            timestampString = "557065007.574267"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "-closeMusicTeaching:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.5743099"
+            timestampString = "557116751.7345541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "69"
@@ -452,7 +388,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.574548"
+            timestampString = "557116751.734637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "65"
@@ -468,11 +404,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.5747859"
+            timestampString = "557116751.7347161"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340"
+            startingLineNumber = "347"
+            endingLineNumber = "347"
             landmarkName = "-sendRTSImageData:"
             landmarkType = "7">
             <Locations>
@@ -531,7 +467,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.57503"
+            timestampString = "557116751.734796"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
@@ -547,11 +483,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.575269"
+            timestampString = "557116751.734861"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -563,39 +499,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.575479"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "375"
-            endingLineNumber = "375"
-            landmarkName = "-onRTSReceive:data:from:withIn:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "teach/TeachingViewController.m"
-            timestampString = "557065007.575699"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "-closeMusicTeaching:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.575738"
+            timestampString = "557116751.73493"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "40"
@@ -611,7 +515,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.575931"
+            timestampString = "557116751.7350039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
@@ -627,7 +531,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.57612"
+            timestampString = "557116751.73505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"
@@ -643,12 +547,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
-            timestampString = "557065007.5763021"
+            timestampString = "557116751.735092"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "75"
             endingLineNumber = "75"
             landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
+            timestampString = "557116751.735132"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
+            timestampString = "557116751.735168"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
+            landmarkName = "-onRTSReceive:data:from:withIn:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WhiteBoard/NTESMeetingWhiteboardViewController.m"
+            timestampString = "557116751.73522"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "465"
+            endingLineNumber = "465"
+            landmarkName = "-onRTSReceive:data:from:withIn:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -102,17 +102,24 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
     [self showDrawView:closeMusicBtn];
     for (int i = 0; i < self.mOriginDatas.count; i ++)
     {
-        NSDictionary *dicInfo = [self->_mOriginDatas objectAtIndex:i];
+        NSDictionary *dicInfo = [_mOriginDatas objectAtIndex:i];
         NSArray *point = [dicInfo objectForKey:@"point"];
         BOOL isStart = [[dicInfo objectForKey:@"type"] boolValue];
-        [self->_myDrawView addPoints:[NSMutableArray arrayWithObjects:point, nil] isNewLine:isStart];
+        [_myDrawView addPoints:[NSMutableArray arrayWithObjects:point, nil] isNewLine:isStart];
+//        NSLog(@"===mOriginDatas isNewLine:%d",isStart);
+//        NSLog(@"===mOriginDatas point:%@",point);
     }
     for (int i = 0; i < self.mOriginPeerDatas.count; i ++)
     {
-        NSDictionary *dicInfo = [self->_mOriginPeerDatas objectAtIndex:i];
-        NSMutableArray *point = [[NSMutableArray alloc]initWithArray:[dicInfo objectForKey:@"point"]];
+        NSDictionary *dicInfo = [_mOriginPeerDatas objectAtIndex:i];
+        NSMutableArray *point = [dicInfo objectForKey:@"point"];
         BOOL isStart = [[dicInfo objectForKey:@"type"] boolValue];
-        [self->_peerDrawView addPoints:point isNewLine:isStart];
+        if (isStart == true) {
+            point = [[NSMutableArray alloc]initWithObjects:[point objectAtIndex:0], nil];
+        }
+        [_peerDrawView addPoints:point isNewLine:isStart];
+//        NSLog(@"===isNewLine:%d",isStart);
+//        NSLog(@"===mOriginPeerDatas point:%@",point);
     }
     
     
@@ -386,7 +393,6 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 
         BOOL newLine = NO;
         NSMutableArray *points = [[NSMutableArray alloc] init];
-    NSLog(@"=====count:%d",cmds.count);
         for (NSString *cmdString in cmds) {
             if ([cmdString rangeOfString:@":"].length == 0) {
                 continue;
@@ -400,36 +406,35 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
                               @([cmd[2] floatValue] * self.view.bounds.size.height), nil];
             switch (c) {
                 case WhiteBoardCmdTypePointStart:
-                    newLine = YES;
                     if ([points count] > 0) {
                         points = [[NSMutableArray alloc] init];
                     }
                     [points addObject:point];
-                    if (points.count > 0) {
+                    newLine = YES;
+                    if ([points count] > 0) {
+                        
+                        NSDictionary *dataInfo = [[NSDictionary alloc]initWithObjectsAndKeys:points,@"point",[NSString stringWithFormat:@"%d",newLine],@"type", nil];
                         if (![[_mOriginPeerDatas class]isKindOfClass:NSMutableArray.class]) {
                             _mOriginPeerDatas = [[NSMutableArray alloc]initWithArray:_mOriginPeerDatas];
                         }
-                        NSDictionary *dataInfo = [[NSDictionary alloc]initWithObjectsAndKeys:points,@"point",@"1",@"type", nil];
                         [_mOriginPeerDatas addObject:dataInfo];
+                        
                         [_peerDrawView addPoints:points isNewLine:newLine];
                     }
                     break;
                 case WhiteBoardCmdTypePointMove:
                 case WhiteBoardCmdTypePointEnd:
-                    if ([points count] > 0) {
-                        points = [[NSMutableArray alloc] init];
-                    }
                     [points addObject:point];
-                    if (points.count > 0) {
+                    if ([points count] > 0) {
+                        
+                        NSDictionary *dataInfo = [[NSDictionary alloc]initWithObjectsAndKeys:points,@"point",[NSString stringWithFormat:@"%d",newLine],@"type", nil];
                         if (![[_mOriginPeerDatas class]isKindOfClass:NSMutableArray.class]) {
                             _mOriginPeerDatas = [[NSMutableArray alloc]initWithArray:_mOriginPeerDatas];
                         }
-                        NSDictionary *dataInfo = [[NSDictionary alloc]initWithObjectsAndKeys:points,@"point",@"0",@"type", nil];
                         [_mOriginPeerDatas addObject:dataInfo];
+                        
                         [_peerDrawView addPoints:points isNewLine:newLine];
                     }
-                    
-                    
                     break;
                 case WhiteBoardCmdTypeCancelLine:
                     [_peerDrawView deleteLastLine];
@@ -445,14 +450,17 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
                     break;
             }
         }
-//    if (points.count > 0) {
+//    if ([points count] > 0) {
+//
+//        NSDictionary *dataInfo = [[NSDictionary alloc]initWithObjectsAndKeys:points,@"point",[NSString stringWithFormat:@"%d",newLine],@"type", nil];
 //        if (![[_mOriginPeerDatas class]isKindOfClass:NSMutableArray.class]) {
 //            _mOriginPeerDatas = [[NSMutableArray alloc]initWithArray:_mOriginPeerDatas];
 //        }
-//        NSDictionary *dataInfo = [[NSDictionary alloc]initWithObjectsAndKeys:points,@"point",[NSString stringWithFormat:@"%d",newLine],@"type", nil];
 //        [_mOriginPeerDatas addObject:dataInfo];
+//
 //        [_peerDrawView addPoints:points isNewLine:newLine];
 //    }
+
 
 }
 

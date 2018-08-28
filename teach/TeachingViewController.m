@@ -81,13 +81,7 @@ static int UID = 9999;
 
 - (void)leaveChannel
 {
-    if (self.videoRemoteView.hidden == YES && [self.whiteboardVC.view.superview isEqual:self.view] == NO) {
-        
-        [self.agoraKit leaveChannel:^(AgoraChannelStats * _Nonnull stat) {
-        }];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    else if(self.videoRemoteView.hidden == NO)
+    if(self.videoRemoteView.hidden == NO)
     {
         [self showAllTextDialog:@"正在跟老师远程视频..." :1];
     }
@@ -95,15 +89,21 @@ static int UID = 9999;
     {
         [self showAllTextDialog:@"正在跟老师进行乐谱指导教学..." :1];
     }
-    AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
-    [app.client createConversationWithName:@"学生下线" clientIds:@[mTeacherEastID] callback:^(AVIMConversation *conversation, NSError *error) {
-        // Tom 发了一条消息给 Jerry
-        [conversation sendMessage:[AVIMTextMessage messageWithText:@"studentOffline" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-                NSLog(@"学生下线提醒！");
-            }
+    else
+    {
+        [self.agoraKit leaveChannel:^(AgoraChannelStats * _Nonnull stat) {
         }];
-    }];
+        AppDelegate *app = (AppDelegate *)[[UIApplication  sharedApplication] delegate];
+        [app.client createConversationWithName:@"学生下线" clientIds:@[mTeacherEastID] callback:^(AVIMConversation *conversation, NSError *error) {
+            // Tom 发了一条消息给 Jerry
+            [conversation sendMessage:[AVIMTextMessage messageWithText:@"studentOffline" attributes:nil] callback:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    NSLog(@"学生下线提醒！");
+                }
+            }];
+        }];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 -(void)showAllTextDialog:(NSString *)info :(NSTimeInterval)delay{

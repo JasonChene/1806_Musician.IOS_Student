@@ -146,7 +146,7 @@
                                 block:^(id object, NSError *error) {
                                     if(error == nil && [[object objectForKey:@"status"]integerValue] == 200){
                                         // 处理结果
-                                        NSLog(@"==============:%@",object);
+//                                        NSLog(@"==============:%@",object);
                                         [self performSelectorOnMainThread:@selector(jumpToIndex:) withObject:user waitUntilDone:YES];
                                         [user setObject:[object objectForKey:@"data"] forKey:@"netEaseUserInfo"];
                                         [AVUser changeCurrentUser:user save:YES];
