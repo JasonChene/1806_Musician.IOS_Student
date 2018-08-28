@@ -254,6 +254,11 @@ static int UID = 9999;
 - (void)rtcEngine:(AgoraRtcEngineKit * _Nonnull)engine didOfflineOfUid:(NSUInteger)uid reason:(AgoraUserOfflineReason)reason
 {
     isJoinInRoom = NO;
+    if (self.videoRemoteView.hidden == NO) {
+        self.videoRemoteView.hidden = YES;
+        self.videoLocalView.hidden = YES;
+        mTitleDescription.text = @"老师已下线";
+    }
 }
 /**
  *  Event of the first audio frame from remote user is received.
