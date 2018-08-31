@@ -11,4 +11,6 @@
 
 @interface ImageOption : NSObject
 + (UIImage *)compressImageQuality:(UIImage *)image toByte:(NSInteger)maxLength;
++ (NSData *)compressQualityWithMaxLength:(NSInteger)maxLength :(UIImage *)image;
++ (UIImage *)normalizedImage:(UIImage *)image;
 @end

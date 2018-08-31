@@ -46,7 +46,7 @@
 - (void)next:(id)sender
 {
     [AVSMS requestShortMessageForPhoneNumber:mUserTextField.text options:nil callback:^(BOOL succeeded, NSError * _Nullable error) {
-        // 发送失败可以查看 error 里面提供的信息
+//         发送失败可以查看 error 里面提供的信息
         if (succeeded) {
             ValidateViewController *validate = [[ValidateViewController alloc]initWithPhoneNumber:self->mUserTextField.text];
             [self.navigationController pushViewController:validate animated:YES];
