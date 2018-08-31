@@ -147,6 +147,7 @@ static int UID = 9999;
     
     //添加“张老师正在和你乐谱教学”
     mTitleDescription = [[UITextView alloc]initWithFrame:CGRectMake(10, mNavBarAndStatusBarHeight, self.view.frame.size.width - 20, 40)];
+    mTitleDescription.backgroundColor = [UIColor clearColor];
     mTitleDescription.text = @"老师未上线";
     [mTitleDescription setEditable:NO];
     mTitleDescription.font = [UIFont systemFontOfSize:18];
@@ -357,9 +358,15 @@ static int UID = 9999;
     {
         mTitleDescription.text = @"老师已下线";
     }
+    else if ([message.text isEqualToString:@"pausePlaying"]){
+        self.view.backgroundColor = [UIColor colorWithRed:233.0/255.0 green:137.0/255.0 blue:49.0/255.0 alpha:1.0];
+    }
 }
 
-
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    self.view.backgroundColor = [UIColor whiteColor];
+}
 
 
 @end
