@@ -341,8 +341,6 @@ typedef NS_ENUM(NSUInteger, WhiteBoardCmdType){
 
 - (void)sendRTSImageData:(UIImage *)image
 {
-//    UIImage *uploadImage = [ImageOption compressImageQuality:image toByte:30000];
-//    NSData *data = UIImagePNGRepresentation(image);
     UIImage *normalImage = [ImageOption normalizedImage:image];
     NSData *data = [ImageOption compressQualityWithMaxLength:500000 :normalImage];
     
