@@ -153,6 +153,13 @@ static int UID = 9999;
     mTitleDescription.font = [UIFont systemFontOfSize:18];
     [self.view addSubview:mTitleDescription];
     
+    mTeacherPause = [[UITextView alloc]initWithFrame:CGRectMake(10, mNavBarAndStatusBarHeight + 40, self.view.frame.size.width - 20, 40)];
+    mTeacherPause.backgroundColor = [UIColor clearColor];
+    mTeacherPause.text = @"老师正在要求暂停";
+    [mTeacherPause setEditable:NO];
+    mTeacherPause.font = [UIFont systemFontOfSize:18];
+    [self.view addSubview:mTeacherPause];
+    mTeacherPause.hidden = YES;
     
     UIButton *openMusicBtn = [self createButtonWithFrame:CGRectMake((self.view.frame.size.width - 200 - 12)/2, self.view.frame.size.height - 50 - 10, 100, 50) :@"打开乐谱" :@selector(openMusicBook:)];
     [self.view addSubview:openMusicBtn];
@@ -360,12 +367,14 @@ static int UID = 9999;
     }
     else if ([message.text isEqualToString:@"pausePlaying"]){
         self.view.backgroundColor = [UIColor colorWithRed:233.0/255.0 green:137.0/255.0 blue:49.0/255.0 alpha:1.0];
+        mTeacherPause.hidden = NO;
     }
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     self.view.backgroundColor = [UIColor whiteColor];
+    mTeacherPause.hidden = YES;
 }
 
 

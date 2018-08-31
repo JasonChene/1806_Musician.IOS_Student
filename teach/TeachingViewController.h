@@ -27,10 +27,12 @@
     NSString *mTeacherEastID;
     NSString *mTeacherName;
     UITextView *mTitleDescription;
+    UITextView *mTeacherPause;
     NSString *mTeacherLCUserName;
     NSMutableArray *mArrOriginDatas;
     NSMutableArray *mArrOriginPeerDatas;
     NSString *mStrImagePath;
+    
 }
 @property (strong, nonatomic) AgoraRtcEngineKit *agoraKit;
 @property (strong, nonatomic) UIView *videoLocalView;
