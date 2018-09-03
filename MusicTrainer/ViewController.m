@@ -130,7 +130,7 @@
     //获取课程信息
     [self getAllCoursesInfo:[NSDate date]];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"退出登录" style:UIBarButtonItemStylePlain target:self action:@selector(logoutCurrentUser)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"退出登录" style:UIBarButtonItemStylePlain target:self action:@selector(logoutCurrentUser)];
 }
 - (void)logoutCurrentUser
 {
