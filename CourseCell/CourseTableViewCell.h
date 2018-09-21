@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustumLabel.h"
 
 @interface CourseTableViewCell : UITableViewCell
 @property (nonatomic, retain)UILabel *startTimeLabel;
 @property (nonatomic, retain)UILabel *endTimeLabel;
 @property (nonatomic, retain)UILabel *courseNameLabel;
 @property (nonatomic, retain)UILabel *teacherNameLabel;
-@property (nonatomic, retain)UILabel *commentLabel;
+@property (nonatomic, retain)CustumLabel *commentLabel;
 @property (nonatomic, retain)UIButton *joinCourseButton;
 @property (nonatomic, retain)UIView *timeStatusColorView;
 @property (nonatomic, retain)NSString *teacherID;

@@ -34,17 +34,20 @@
         self.endTimeLabel = [self createLabelWithFrame:CGRectMake(4, 48, 75, 26) :NSTextAlignmentCenter : 16.0 :[UIColor whiteColor]];
 
         //课程名字
-        self.courseNameLabel = [self createLabelWithFrame:CGRectMake(98, 6,self.frame.size.width - 98 - 70 - 9 , 29) :NSTextAlignmentLeft : 18.0 :[UIColor colorWithRed:16.0/255.0 green:16.0/255.0 blue:16.0/255.0 alpha:1.0]];
+        self.courseNameLabel = [self createLabelWithFrame:CGRectMake(90, 6,self.frame.size.width - 98 - 70 - 9 , 29) :NSTextAlignmentLeft : 18.0 :[UIColor colorWithRed:16.0/255.0 green:16.0/255.0 blue:16.0/255.0 alpha:1.0]];
 
         //老师名字
-        self.teacherNameLabel = [self createLabelWithFrame:CGRectMake(98, 40, 55, 25) :NSTextAlignmentLeft : 12.0 :[UIColor colorWithRed:16.0/255.0 green:16.0/255.0 blue:16.0/255.0 alpha:1.0]];
+        self.teacherNameLabel = [self createLabelWithFrame:CGRectMake(90, 40, 55, 25) :NSTextAlignmentLeft : 12.0 :[UIColor colorWithRed:16.0/255.0 green:16.0/255.0 blue:16.0/255.0 alpha:1.0]];
 
         //评论
-        self.commentLabel = [self createLabelWithFrame:CGRectMake(145, 41, self.frame.size.width - 145 - 70 - 9, 34) :NSTextAlignmentLeft :11.0 :[UIColor colorWithRed:151.0/255.0 green:151.0/255.0 blue:151.0/255.0 alpha:1.0]];
+        self.commentLabel = [self createCustomLabelWithFrame:CGRectMake(145, 41, self.frame.size.width - 145 - 70 - 9, 34) :NSTextAlignmentLeft :11.0 :[UIColor colorWithRed:151.0/255.0 green:151.0/255.0 blue:151.0/255.0 alpha:1.0]];
         self.commentLabel.layer.cornerRadius = 4;
         self.commentLabel.layer.borderWidth = 1;
         self.commentLabel.layer.borderColor = [UIColor colorWithRed:151.0/255.0 green:151.0/255.0 blue:151.0/255.0 alpha:1.0].CGColor;
-
+        self.commentLabel.textColor = [UIColor colorWithRed:247.0/255.0 green:98.0/255.0 blue:98.0/255.0 alpha:1.0];
+        self.commentLabel.numberOfLines = 2;
+        self.commentLabel.textInsets = UIEdgeInsetsMake(0.f, 5.f, 0.f, 0.f);
+        
         //状态按钮
         self.joinCourseButton = [self createButtonWithFrame:CGRectMake(self.frame.size.width - 9 - 70, 8, 70, 25)];
     }
@@ -53,6 +56,17 @@
 - (UILabel *)createLabelWithFrame:(CGRect)frame :(NSTextAlignment)textAlignment :(double)fontSize :(UIColor *)fontColor
 {
     UILabel *label = [[UILabel alloc]initWithFrame:frame];
+    label.backgroundColor = [UIColor clearColor];
+    label.textAlignment = textAlignment;
+    label.font = [UIFont systemFontOfSize:fontSize];
+    label.text = @"test";
+    label.textColor = fontColor;
+    [self addSubview:label];
+    return label;
+}
+- (CustumLabel *)createCustomLabelWithFrame:(CGRect)frame :(NSTextAlignment)textAlignment :(double)fontSize :(UIColor *)fontColor
+{
+    CustumLabel *label = [[CustumLabel alloc]initWithFrame:frame];
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = textAlignment;
     label.font = [UIFont systemFontOfSize:fontSize];
