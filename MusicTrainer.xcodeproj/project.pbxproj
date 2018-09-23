@@ -981,7 +981,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bigegg.com.MusicTrainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "933698cd-f4a9-4bbb-85c7-5b97437b5c73";
+				PROVISIONING_PROFILE = "86cc6a9c-4ff3-4ffc-a845-fc10a8cc9a9b";
 				PROVISIONING_PROFILE_SPECIFIER = musictrainerdis;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
