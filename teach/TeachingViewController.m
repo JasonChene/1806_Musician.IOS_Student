@@ -52,7 +52,7 @@ static int UID = 9999;
     self.agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:@"fa60d121c1c2452389543dbaf2ffb01e" delegate:self];
     [self.agoraKit disableVideo];
     [self.agoraKit setEnableSpeakerphone:YES];
-     [self.agoraKit setAudioProfile:AgoraAudioProfileMusicHighQuality scenario:AgoraAudioScenarioEducation];
+    [self.agoraKit setAudioProfile:AgoraAudioProfileMusicHighQualityStereo scenario:AgoraAudioScenarioShowRoom];
     //创建并加入频道
     [self.agoraKit joinChannelByToken:nil channelId:channelName info:nil uid:UID joinSuccess:nil];
     [self.agoraKit setDefaultAudioRouteToSpeakerphone:YES];
